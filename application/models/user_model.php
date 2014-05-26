@@ -9,10 +9,11 @@ class User_model extends CI_Model {
 	}
 	
 	public function getUser($account,$password){
-		$this->db->select("Account");
-		$query = $this->db->get_where("zookeeper", Array(
-				"Account" => $account,
-				"Password" => $password ));
+		$this->db->select("account");
+		$query = $this->db->get_where("user", Array(
+				"account" => $account,
+				"password" => $password ));
+		
 		/* If there are tuples */
 		if ($query->num_rows() > 0){
 			return $query->row();	// return first tuple  
@@ -20,5 +21,9 @@ class User_model extends CI_Model {
 		else{
 			return null;
 		}
+	}
+	
+	public function newUser($info){
+		$this->db->insert_string('user', $info);
 	}
 }
