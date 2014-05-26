@@ -2,15 +2,11 @@
 
 class Welcome extends CI_Controller {
 	
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
-		$this->load->library('session');
 	}
 	
-	public function index()
-	{
-		$this->load->helper('url');
+	public function index(){
 		$this->load->view('homepage', Array(
 				"pageTitle" => "Welcome to testoverwhelm" ));
 	}

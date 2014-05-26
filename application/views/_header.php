@@ -8,7 +8,7 @@
         	echo $pageTitle ; // set by the variable
         } 
         else{
-        	echo "Taipei City Zoo" ; // default page title
+        	echo "Testoverwhelm" ; // default page title
         }
     ?>
     </title>
