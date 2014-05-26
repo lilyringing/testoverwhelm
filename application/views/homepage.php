@@ -1,5 +1,4 @@
 <?php include ("_header.php"); 
-	  include ("_navbar.php");
 	  if(!isset($_SESSION)){
 	  	session_start();
 	  }?>
@@ -14,25 +13,7 @@
 </head>
 
 <body>
-	<div class="hero-unit">
-		<h1 class="text-center">歡迎蒞臨</h1>
-	</div>
-	
-	<div class="container-fluid">
-		<div class="row-fluid">
-				
-				<div class="span3">
-				</div>
-				
-				<div class="span6">
-					<img src="<?php echo base_url('image/TaipeiCityZoo.jpg');?>" alt="Zoo" class="img-circle">
-				</div>
-			
-				<div class="span3">
-				</div>
-			
-		</div>
-	</div>
+	首頁
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
