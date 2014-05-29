@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: 127.0.0.1
--- 產生日期: 2014 年 05 月 26 日 19:20
+-- 產生日期: 2014 年 05 月 29 日 11:36
 -- 伺服器版本: 5.5.32
 -- PHP 版本: 5.4.16
 
@@ -95,12 +95,20 @@ CREATE TABLE IF NOT EXISTS `question` (
 
 CREATE TABLE IF NOT EXISTS `user` (
   `userid` int(11) NOT NULL AUTO_INCREMENT,
-  `account` int(11) NOT NULL,
-  `password` int(11) NOT NULL,
+  `account` varchar(25) NOT NULL,
+  `password` varchar(25) NOT NULL,
   PRIMARY KEY (`userid`),
   KEY `userid` (`userid`),
   KEY `userid_2` (`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- 轉存資料表中的資料 `user`
+--
+
+INSERT INTO `user` (`userid`, `account`, `password`) VALUES
+(1, 'Lily', '0000'),
+(2, 'Johnny', 'johnny');
 
 --
 -- 匯出資料表的 Constraints
@@ -110,15 +118,15 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- 資料表的 Constraints `answer`
 --
 ALTER TABLE `answer`
-  ADD CONSTRAINT `user_id` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `question_id` FOREIGN KEY (`questionid`) REFERENCES `question` (`questionid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `question_id` FOREIGN KEY (`questionid`) REFERENCES `question` (`questionid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_id` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- 資料表的 Constraints `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `user_id2` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `file_id` FOREIGN KEY (`fileid`) REFERENCES `file` (`fileid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `file_id` FOREIGN KEY (`fileid`) REFERENCES `file` (`fileid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_id2` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- 資料表的 Constraints `file`
