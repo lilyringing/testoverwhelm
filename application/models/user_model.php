@@ -24,6 +24,17 @@ class User_model extends CI_Model {
 	}
 	
 	public function newUser($info){
-		$this->db->insert_string('user', $info);
+		$this->db->insert('user', $info);
+	}
+	
+	public function checkUser($account){
+		$this->db->select("account");
+		$query = $this->db->get_where("user", Array(
+								"account" => $account));
+		if ($query->num_rows() > 0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

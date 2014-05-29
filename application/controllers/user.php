@@ -41,10 +41,20 @@ class User extends CI_Controller {
 	public function createUser(){
 		$account = trim($this->input->post("userID"));
 		$password = trim($this->input->post("password"));
-		$info = Array('account' => $account, 'password' => $password);
 		
 		$this->load->model('user_model');
-		$this->user_model->newUser($info);
+		$answer =  $this->user_model->checkUser($account);
+		
+		if($answer == true){
+			$this->load->view('register', Array(
+							"pageTitle" => "Regist a new account",
+							"alert" => $account." has been registerd"));
+		}else{
+			$info = Array('account' => $account, 'password' => $password);
+		
+			$this->user_model->newUser($info);
+			redirect(site_url("/"));	// redirect to homepage
+		}
 	}
 }
 
