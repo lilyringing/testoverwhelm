@@ -27,7 +27,7 @@ if(!isset($_SESSION)){
 			</tr>	
 			<?php foreach ( $files as $element ):?>
 			<tr>
-				<td><?php echo $element->fileid?></td>
+				<td><a href="<?=site_url("/test/testing")?>/<?php echo $element->fileid?>"><?php echo $element->fileid?></a></td>
 				<td><?php echo $element->timeid?></td>
 				<td><?php echo $element->subject?></td>
 				<td><?php echo $element->professor?></td>
