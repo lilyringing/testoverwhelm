@@ -9,7 +9,7 @@
     <link href="<?php echo base_url('css/bootstrap-responsive.css');?>" rel="stylesheet" media="screen">
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="http://silviomoreto.github.io/bootstrap-select/stylesheets/bootstrap-select.css">
-    
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- JS -->
 
     <script src="https://code.jquery.com/jquery.js"></script>
