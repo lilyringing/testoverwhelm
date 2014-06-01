@@ -3,18 +3,22 @@
 <head>
     <meta charset="utf-8">
 <!-- CSS -->
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/">
-    <link href="<?php echo base_url('css/bootstrap.min.css');?>" rel="stylesheet" media="screen">
-    <link href="<?php echo base_url('css/bootstrap-responsive.css');?>" rel="stylesheet" media="screen">
-    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="screen" href="http://silviomoreto.github.io/bootstrap-select/stylesheets/bootstrap-select.css">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-<!-- JS -->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="<?php echo base_url('js/jquery.js'); ?>"></script>
-    <script src="<?php echo base_url('js/bootstrap.min.js'); ?>"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        
+   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> 
+
+ 
+    
     
     <title>
     <?php
