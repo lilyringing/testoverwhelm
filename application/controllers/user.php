@@ -12,23 +12,25 @@ class User extends CI_Controller {
 	
 	public function logout(){
 		$this->session->unset_userdata('user');
-		redirect(site_url("/"));	// redirect to homepage
+		$this->load->view('_navbar');
 	}
 	
 	public function authenticate(){
+		$wrong = 0;//init => account and password are not wrong
 		$account = trim($this->input->post("userID"));
 		$password = trim($this->input->post("password"));
 		
 		$this->load->model('user_model');
 		$user = $this->user_model->getUser($account, $password);
-		
 		if($user != NULL){
 			$this->session->set_userdata('user', $user);
-			redirect(site_url("/"));	// redirect to homepage
+			$this->load->view('_navbar');
 		}else{
-			$this->load->view('login', Array(
-						"pageTitle" => "Login",
-						"userID" => $account));
+			$wrong = 1; //In view: _navbar, tell user something wrong 
+			$this->load->view('_navbar', Array(
+						'userID' => $account,
+						"wrong" => $wrong));
+
 		}
 		
 	}

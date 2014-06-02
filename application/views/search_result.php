@@ -14,7 +14,9 @@ if(!isset($_SESSION)){
 </head>
 
 <body>
-	<div >
+
+	<div class="search-result"><?php 
+	// Don't change this class 'search-result' unless you understand what it means ?>
 		<?php if( isset($files) ) {?>
 			<?php if( $files != -1 ){?>
 		<table>
