@@ -16,4 +16,8 @@ class Answer_model extends CI_Model{
 		}
 		
 	}
+	
+	public function upload($questionID, $answer){
+		$this->db->insert('answer', $data);
+	}
 }

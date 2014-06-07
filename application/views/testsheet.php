@@ -3,23 +3,36 @@
 	  }?>
 <!DOCTYPE html>
 <body>
-	<table border=1>
 		<?php foreach($quest as $rows){?>
-		<tr>
-			<td><?php echo $rows->number;?></td>
-			<td><?php echo $rows->question;?></td>
-			<td>
+		<ul>
+			<li><?php echo $rows->number;?></li>
+			<li><?php echo $rows->question;?></li>
+			
+			<!-- print the answers of this question -->
 			<?php if($answer[$rows->questionid] != null){
-				    foreach($answer[$rows->questionid] as $ans){
-				       echo "A:";?>
-				    
-				  		<?php echo $ans->answer;?>
-				  	
-				  		<?php echo "good".$ans->good;?>
-						<?php echo "bad".$ans->bad;?><br>
+					echo "Answer:";
+				    foreach($answer[$rows->questionid] as $ans){?>
+				  		<li><?php echo $ans->answer;?><br>
+				  			<?php echo "good: ".$ans->good;?>
+							<?php echo "bad: ".$ans->bad;?></li>
 			<?php   }
 				  }?>
-		<?php }?></td>
-		</tr>
-	</table>
+		</ul>
+		
+			<!-- a form for upload answer with text -->
+			<form action="<?=site_url("test/upload_text_ans")?>" method="post">
+				<input type="radio" name="id" 
+					   value="<?php echo $rows->questionid;?>">我想要提交我的此題答案
+				<textarea name="content"></textarea>
+				<button type="submit">Send answer</button>
+			</form>		
+			
+			<!-- a form for upload answer with picture -->
+			<?php echo form_open_multipart('test/upload_picture_ans');
+		  		  echo form_upload('userfile');?>
+		  		<input type="submit" value="upload" />
+			<?php echo form_close();?>
+			
+		<?php }?>
+	
 </body>

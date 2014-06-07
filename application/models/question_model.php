@@ -29,4 +29,15 @@ class Question_model extends CI_Model {
 			return null;
 		}
 	}
+	
+	public function getFileID($questionID){
+		$this->db->select('fileid');
+		$query = $this->db->get_where('question', Array('questionid' => $questionID));
+		
+		if($query->num_rows >0){
+			return $query->row();
+		}else{
+			return null;
+		}
+	}
 }
