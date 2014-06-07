@@ -20,9 +20,7 @@
 		</ul>
 		
 			<!-- a form for upload answer with text -->
-			<form action="<?=site_url("test/upload_text_ans")?>" method="post">
-				<input type="radio" name="id" 
-					   value="<?php echo $rows->questionid;?>">我想要提交我的此題答案
+			<form action="<?=site_url("test/upload_text_ans")?>/<?php echo $rows->questionid?>" method="post">
 				<textarea name="content"></textarea>
 				<button type="submit">Send answer</button>
 			</form>		

@@ -26,7 +26,7 @@ class Test extends CI_Controller{
 	
 	public function upload_text_ans(){
 		$session_account = $this->session->userdata('user');
-		$questionID = trim($this->input->post("qid"));
+		$questionID = trim($this->uri->segment(3));
 		$answer = trim($this->input->post("content"));
 		$data = Array('questionid' => $questionID, 'answer' => $answer,
 					  'userid' => $session_account->userid);
