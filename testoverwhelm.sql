@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: 127.0.0.1
--- 產生日期: 2014 年 05 月 29 日 11:36
+-- 產生日期: 2014 年 06 月 05 日 10:05
 -- 伺服器版本: 5.5.32
 -- PHP 版本: 5.4.16
 
@@ -32,13 +32,21 @@ CREATE TABLE IF NOT EXISTS `answer` (
   `answerid` int(11) NOT NULL AUTO_INCREMENT,
   `questionid` int(11) NOT NULL,
   `answer` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `good` int(10) unsigned DEFAULT NULL,
-  `bad` int(10) unsigned DEFAULT NULL,
+  `good` int(10) unsigned NOT NULL DEFAULT '0',
+  `bad` int(10) unsigned NOT NULL DEFAULT '0',
   `userid` int(11) NOT NULL,
   PRIMARY KEY (`answerid`),
   KEY `question_id` (`questionid`),
   KEY `userid` (`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- 轉存資料表中的資料 `answer`
+--
+
+INSERT INTO `answer` (`answerid`, `questionid`, `answer`, `good`, `bad`, `userid`) VALUES
+(2, 3, 'R0 → ε | 0R1 | 1R2\r\nR1 → ε | 0R1 | 1R3\r\nR2 → ε | 0R4 | 1R2\r\nR3 → ε | 1R4\r\nR4 → ε | 0R3\r\n(Note: useless production rules have been removed.)', 0, 0, 1),
+(3, 3, 'test', 0, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -71,7 +79,14 @@ CREATE TABLE IF NOT EXISTS `file` (
   PRIMARY KEY (`fileid`),
   KEY `fileid` (`fileid`),
   KEY `userid` (`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- 轉存資料表中的資料 `file`
+--
+
+INSERT INTO `file` (`fileid`, `timeid`, `subject`, `professor`, `userid`) VALUES
+(1, 10221, '計算理論', '蔡益坤', 1);
 
 -- --------------------------------------------------------
 
@@ -82,10 +97,20 @@ CREATE TABLE IF NOT EXISTS `file` (
 CREATE TABLE IF NOT EXISTS `question` (
   `questionid` int(11) NOT NULL AUTO_INCREMENT,
   `fileid` int(11) NOT NULL,
-  `question` text NOT NULL,
+  `question` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `number` int(11) NOT NULL,
   PRIMARY KEY (`questionid`),
   KEY `fileid` (`fileid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- 轉存資料表中的資料 `question`
+--
+
+INSERT INTO `question` (`questionid`, `fileid`, `question`, `number`) VALUES
+(1, 1, 'Let A = {a, b, c, d, e, f} and R = {(a, c), (b, c), (d, e)} (which is a binary relation on A).\r\n(a) Give a symmetric and transitive but not reﬂexive binary relation on A that includes\r\nR. Please present the relation using a directed graph.\r\n(b) Find the smallest equivalence relation on A that includes R. Please present the\r\nrelation using a directed graph.', 1),
+(2, 1, 'Let L = {w ∈ {0, 1}∗ | w contains 011 as a substring or ends with a 0}.\n(a) Draw the state diagram of an NFA, with as few states as possible, that recognizes\nL. The fewer states your NFA has, the more points you will be credited for this\nproblem.\n(b) Convert the preceding NFA systematically into an equivalent DFA (using the proce-\ndure discussed in class). Do not attempt to optimize the number of states, though\nyou may omit the unreachable states.', 2),
+(3, 1, 'Let L = {w ∈ {0, 1}∗ | w does not contain 011 or 100 as a substring}.\r\n(a) Draw the state diagram of a DFA, with as few states as possible, that recognizes\r\nL. The fewer states your DFA has, the more points you will be credited for this\r\nproblem.\r\n(b) Translate the DFA in (a) systematically to an equivalent context-free grammar (using\r\nthe procedure discussed in class).', 3);
 
 -- --------------------------------------------------------
 

@@ -27,16 +27,28 @@ class File_model extends CI_Model {
 			$timeid = $data["year"] * 100;
 			$this->db->where('file.timeid >', $timeid);
 			$this->db->where('file.timeid <', ($timeid+100));
-			echo "hi3";
 		}
 		
 		$query = $this->db->get();
 		if($query->num_rows() > 0){
-			echo "hihi";
 			return $query->result();
 		}
 		else{
 			return -1;
+		}
+	}
+	
+	public function getAllFiles(){
+		$this->db->select('timeid, subject, professor');
+		$this->db->from('file');
+		$this->db->order_by('subject', 'asc');
+		$this->db->order_by('timeid', 'asc');
+		$query = $this->db->get();
+		
+		if($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return null;
 		}
 	}
 	

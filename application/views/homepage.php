@@ -87,17 +87,23 @@
 		opacity: 0.5;
 	}
 
-</style>
 
-<script>
-	$(".action-archive").click()
-</script>
+	.search-result{
+		position: absolute;
+		width: inherit;
+		height: inherit;
+		z-index: 999;
+		opacity: 0.7;
+		background-color: white;
+		display: none;
+	}
+</style>
 
 <div class="action_set">
 	<div class="ac_child ac-search">
 		
 		<div class="ac-search-div">
-			<form action="<?=site_url("search/searching")?>" method="post">
+			<form method="post">
 
 				<div class="search search-icon"><i class="fa fa-search" ></i></div>
 				<div class="search" ><input type="text" class="search-input" name="subject" placeholder="Subject" ></div>
@@ -105,7 +111,7 @@
 				<div class="search" ><input type="text" class="search-input" name="year" placeholder="Year"></div>
 				
 				<div class="search">
-					<button type="submit" class="search-input btn btn-default btn-lg">搜尋</button>
+					<input id="searchBtn" type="button" class="search-input btn btn-default btn-lg" value="搜尋"></input>
 				</div>
 				
 			
@@ -119,6 +125,7 @@
 
 
 	<div class="ac_child ac-other">
+		<div class="search-result"></div>
 		<div class="action action-archive"><i class="icon fa fa-archive"></i></div>
 
 		<div class="action action-upload"><i class="icon fa fa-upload"></i></div>
@@ -127,6 +134,52 @@
 	</div>
 
 </div>
+
+
+<script>
+	var lock = 0;//unlocked
+	$(".action-archive").click()
+	$("#searchBtn").bind("click", function(){
+		if(lock == 0)
+		{
+			lock = 1;//locked to defend against crazy clicking
+		var subject = $(".search-input")[0].value;
+		var teacher = $(".search-input")[1].value;
+		var year = $(".search-input")[2].value;
+		var oldResult = $(".search-result");
+
+		oldResult.fadeOut(0);
+		//var oldNav = $(".navbar");
+
+		$.ajax({
+         url: '<?=site_url("search/searching")?>',
+         cache: true,
+         dataType: 'html',
+             type:'POST',
+         data: {subject: subject, teacher: teacher, year: year},
+         error: function(xhr) {
+           //alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
+			oldResult.html("connection fail");
+			oldResult.fadeIn(0).show(400, function(){lock = 0;});//unlocked after 400 ms
+         },
+         success: function(response) {
+           //alert("與伺服器連線成功");//the same with 'error' block above
+           //create a new node to be responese's parent node
+            var newResult = document.createElement("div");
+            newResult.innerHTML = response;
+            //update search result content
+			oldResult.html($(newResult).children(".search-result").html());
+			oldResult.fadeIn(0).show(400, function(){lock = 0;});//unlocked after 400 ms
+/*//////////////////////////////////////////////////////////////////////////////////////
+			don't change the class in view:search_result.php
+//////////////////////////////////////////////////////////////////////////////////////*/
+
+         }
+        });//end ajax
+
+		}//end if lock
+	})//end bind searchBtn
+</script>
 
 
 <?php include ("_footer.php"); ?>
