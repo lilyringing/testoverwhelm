@@ -59,14 +59,19 @@ class Test extends CI_Controller{
 			
 			
 		}else{
+			$session_account = $this->session->userdata('user');
 			$picture = $this->upload->data();
-			
-			$data = Array('questionid' => $questionID, 'answer' => $picture->file_path,
+			$questionID = trim($this->uri->segment(3));
+			$data = Array('questionid' => $questionID, 'answer' => $picture["full_path"],
 								  'userid' => $session_account->userid);
 			
 			$this->load->model('answer_model');
 			$this->answer_model->upload($data);
 			
+			$this->load->model('question_model');
+			$fileID = $this->question_model->getFileID($questionID);
+			
+			redirect(site_url("test/testing/".$fileID->fileid));
 		}	
 	}
 }
