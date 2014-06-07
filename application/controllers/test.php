@@ -52,17 +52,21 @@ class Test extends CI_Controller{
 		
 		if (!$this->upload->do_upload()){
 			$error = $this->upload->display_errors();
-			//$error = array('error' => $this->upload->display_errors());
-			echo $error;
-			//testing($error);
-			//$this->load->view('testsheet',$error);
+			$this->load->view('_header', Array(
+									'pageTitle' => "Upload error"));
+			$this->load->view('_navbar');
+			$this->load->view('testsheet', $error);
+			
 			
 		}else{
-			$data = $this->upload->data();
-			echo $data;
+			$picture = $this->upload->data();
 			
-			//testing();
-			//$this->load->view('upload_success'，$data);
+			$data = Array('questionid' => $questionID, 'answer' => $picture->file_path,
+								  'userid' => $session_account->userid);
+			
+			$this->load->model('answer_model');
+			$this->answer_model->upload($data);
+			
 		}	
 	}
 }
