@@ -6,9 +6,10 @@
 <style type="text/css">
 	
 	body{
-		background-image: url(<?= base_url("images/frontface.jpg") ?>);
+		background-image: url(<?= base_url("images/TSAY.png") ?>);
 		background-position: top left;
-		background-size: 100%;
+		background-repeat: no-repeat;
+		
 
 	}
 	.icon{
@@ -26,7 +27,7 @@
 		border-top-left-radius: 5px;
 		border-bottom-left-radius: 5px;
 		overflow: hidden;
-		background: rgba(154, 227,159 , 0.7);	
+		background: rgba(255, 200,141 , 0.5);	
 
 
 	}
