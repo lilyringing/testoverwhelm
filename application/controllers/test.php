@@ -99,7 +99,7 @@ class Test extends CI_Controller{
 			$this->question_model->uploadQuestion(array( 'fileid' => $fileid, 'question' => $question, 'number' => $number ));
 			$i++;
 		}
-		//$this->load->view('testing');
+		redirect(site_url("test/testing/".$fileid));
 	}
 	
 	public function upload_text_ans(){
