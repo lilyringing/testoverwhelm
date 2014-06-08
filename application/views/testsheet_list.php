@@ -1,36 +1,78 @@
 <?php if(!isset($_SESSION)){
 		session_start();
-		include("_header.php");
-		include("_navbar.php");
+
 	  }?>
 
+<style type="text/css">
+.subject{
+	margin: 20px auto; 
+}
+.list{
+	margin-top:10%;
+}
+</style>
 <body>
-	<div>
+	<div class="container list">
+		<div class="row">
 	<?php $cur = NULL;?>
 	<?php for($i=0, $size = count($info); $i<$size; $i++){ ?>
+
+	
 	<?php if( $cur != $info[$i]->subject ) { ?>
-		</div>
-		<div>
-		<div><?php echo ($cur = $info[$i]->subject);?></div>
-		<div>
-			<div><?php echo "學年度"?></div>
-			<div><?php echo "學期"?></div>
-			<div><?php echo "第幾次段考"?></div>
-			<div><?php echo "教授"?></div>
-		</div>
-		<?php }?>
+	
+
+
+	
+		
+			<!--  -->
+			<div class="panel panel-default col-xs-3 col-xs-offset-1">
+			  <div class="panel-heading">
+			    <h3 class="panel-title"><?php echo ($cur = $info[$i]->subject);?></h3>
+			  </div>
+			  <table class="table">
+				<thead>
+					<tr>
+						<th><?php echo "學年度"?></th>
+						<th><?php echo "學期"?></th>
+						<th><?php echo "第幾次段考"?></th>
+						<th><?php echo "教授"?></th>
+					</tr>
+					
+				</thead>
+
+	<?php }?>
+
 		<?php  
 			$year = floor($info[$i]->timeid/ 100);
 			$semester = floor($info[$i]->timeid / 10 - $year*10);
 			$times = floor($info[$i]->timeid - $year*100 - $semester * 10 );?>
-			<div>
-				<div><?php echo $year?></div>
-				<div><?php echo $semester?></div>
-				<div><?php echo $times?></div>
-				<div><?php echo $info[$i]->professor?></div>
+			
+			<tr>
+				<td><?php echo $year?></td>
+				<td><?php echo $semester?></td>
+				<td><?php echo $times?></td>
+				<td><?php echo $info[$i]->professor?></td>
 				
-			</div>
+			</tr>
+
+			<?php if($i+1 != $size && ($cur != $info[$i+1]->subject)){ ?>	
+			</table>
+						</div>
+
+			<?php } ?>
+
 		<?php  
 		}?>
+		</div>
+			
+		</div>
+		
+	</div>		
+
+
+			<!--  -->
+		
+		
+		
 	</div>
 </body>

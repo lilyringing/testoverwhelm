@@ -236,6 +236,14 @@
 
 		}//end if lock
 	})//end bind searchBtn
+
+
+
+//////icon link click js
+
+$(".action-archive").click(function(event){
+    window.location.href = '<?php echo site_url("/search/search_all") ; ?>';
+});
 </script>
 
 
