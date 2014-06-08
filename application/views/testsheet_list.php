@@ -10,6 +10,10 @@
 .list{
 	margin-top:10%;
 }
+
+tr:hover{
+	background:rgba(150,150,150,0.2);
+}
 </style>
 <body>
 	<div class="container list">
@@ -25,7 +29,7 @@
 	
 		
 			<!--  -->
-			<div class="panel panel-default col-xs-3 col-xs-offset-1">
+			<div class="panel panel-default col-lg-3 col-lg-offset-1">
 			  <div class="panel-heading">
 			    <h3 class="panel-title"><?php echo ($cur = $info[$i]->subject);?></h3>
 			  </div>
@@ -47,11 +51,14 @@
 			$semester = floor($info[$i]->timeid / 10 - $year*10);
 			$times = floor($info[$i]->timeid - $year*100 - $semester * 10 );?>
 			
-			<tr>
-				<td><?php echo $year?></td>
-				<td><?php echo $semester?></td>
-				<td><?php echo $times?></td>
-				<td><?php echo $info[$i]->professor?></td>
+			<tr onclick="document.location = '<?php echo site_url('/test/testing/'.$info[$i]->fileid) ?>';">
+
+
+				
+					<td><?php echo $year?></td>
+					<td><?php echo $semester?></td>
+					<td><?php echo $times?></td>
+					<td><?php echo $info[$i]->professor?></td>
 				
 			</tr>
 

@@ -39,7 +39,7 @@ class File_model extends CI_Model {
 	}
 	
 	public function getAllFiles(){
-		$this->db->select('timeid, subject, professor');
+		$this->db->select('fileid, timeid, subject, professor');
 		$this->db->from('file');
 		$this->db->order_by('subject', 'asc');
 		$this->db->order_by('timeid', 'asc');
