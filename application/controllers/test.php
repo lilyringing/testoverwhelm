@@ -17,7 +17,7 @@ class Test extends CI_Controller{
 		foreach($id as $rows){
 			$qid = $rows->questionid;
 			$data['answer'][$qid] = $this->answer_model->getAnswer($qid);
-			$data['vote'][$qid] = $this->vote_model->checkVote($session_account->userid, $qid);
+			@$data['vote'][$qid] = $this->vote_model->checkVote($session_account->userid, $qid);
 		}
 
 		$this->load->model('comment_model');

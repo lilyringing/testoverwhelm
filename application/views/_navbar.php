@@ -84,16 +84,16 @@
 .left-inner-submit input{
 	width: 100px;
 
-	height: 34px; 
-	padding: 6px 30px; 
-	font-size: 14px; 
-	line-height: 1.42857143; 
-	color: #555; 
+	height: 34px;
+	padding: 6px 30px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
 	background-color: #fff;
-	background-image: none; 
-	border: 1px solid #ccc; 
- 	border-radius: 4px; 
- 	
+	background-image: none;
+	border: 1px solid #ccc;
+ 	border-radius: 4px;
+
 
 }
 </style>
@@ -112,14 +112,14 @@
 <?php }else{?>
 <div class="navbar-a">
 	<div class="navbar-link"><a href="#" class="loginBut">登入</a></div>
-	
+
 	<div class="navbar-link"><a href="<?=site_url("user/register")?>">註冊</a></div>
 </div>
 
 
 	<div class="loginDiv">
 		<form id="loginForm" method="post">
-			<?php if(isset($wrong)) {echo "帳號或密碼錯誤";} ?>
+			<?php if(isset($wrong)) {?><script>alert("一定是密碼錯誤")</script><?php } ?>
 			<div class="left-inner-addon">
 				<i class="fa fa-user"></i>
 				<input type="text" class="inputVal" name="userID" placeholder="user account" value = "<?php if(isset($userID)){echo $userID; }?>"></input>
