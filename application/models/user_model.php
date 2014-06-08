@@ -7,7 +7,7 @@ class User_model extends CI_Model {
 	}
 	
 	public function getUser($account,$password){
-		$this->db->select("account");
+		$this->db->select('userid, account');
 		$query = $this->db->get_where("user", Array(
 				"account" => $account,
 				"password" => $password ));

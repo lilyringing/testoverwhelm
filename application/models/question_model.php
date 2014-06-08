@@ -7,12 +7,35 @@ class Question_model extends CI_Model {
 	}
 	
 	public function getQuestion($fileID){
-		$this->db->select('question, number');
+		$this->db->select('questionid, question, number');
 		$this->db->order_by('number', 'asc');
 		$query = $this->db->get_where('question', Array(
 								'fileid' => $fileID));
 		if($query->num_rows > 0){
 			return $query->result();
+		}else{
+			return null;
+		}
+	}
+	
+	public function getQuestionID($fileID){
+		$this->db->select('questionid');
+		$query = $this->db->get_where('question', Array(
+									'fileid' => $fileID));
+		
+		if($query->num_rows > 0){
+			return $query->result();
+		}else{
+			return null;
+		}
+	}
+	
+	public function getFileID($questionID){
+		$this->db->select('fileid');
+		$query = $this->db->get_where('question', Array('questionid' => $questionID));
+		
+		if($query->num_rows >0){
+			return $query->row();
 		}else{
 			return null;
 		}
