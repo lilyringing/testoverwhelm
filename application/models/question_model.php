@@ -11,7 +11,7 @@ class Question_model extends CI_Model {
 		$this->db->order_by('number', 'asc');
 		$query = $this->db->get_where('question', Array(
 								'fileid' => $fileID));
-		if($query->num_rows > 0){
+		if($query->num_rows() > 0){
 			return $query->result();
 		}else{
 			return null;
@@ -34,7 +34,7 @@ class Question_model extends CI_Model {
 		$this->db->select('fileid');
 		$query = $this->db->get_where('question', Array('questionid' => $questionID));
 		
-		if($query->num_rows >0){
+		if($query->num_rows() >0){
 			return $query->row();
 		}else{
 			return null;
