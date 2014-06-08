@@ -30,17 +30,17 @@
     width:200px;
 }
 .left-inner-addon input {
-    
+
     width: 200px;
-	height: 34px; 
-	padding: 6px 30px; 
-	font-size: 14px; 
-	line-height: 1.42857143; 
-	color: #555; 
-	background-color: #fff; 
-	background-image: none; 
-	border: 1px solid #ccc; 
- 	border-radius: 4px;  
+	height: 34px;
+	padding: 6px 30px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+ 	border-radius: 4px;
 }
 .left-inner-addon i {
     position: absolute;
@@ -56,6 +56,7 @@
 }
 .left-inner-submit input{
 	width: 100px;
+
 	height: 34px; 
 	padding: 6px 30px; 
 	font-size: 14px; 
@@ -66,75 +67,9 @@
 	border: 1px solid #ccc; 
  	border-radius: 4px; 
  	
+
 }
 </style>
-
-
-<script>
-	//these script code appear in DOM if user has been loggedin
-$(".navbar").on("click","#logoutAnch", function(){
-	var oldNav = $(".navbar");
-	
-	$.ajax({
-         url: '<?=site_url("user/logout")?>',
-         cache: true,
-         dataType: 'html',
-             type:'POST',
-         data: {},
-         error: function(xhr) {
-           //alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
-         },
-         success: function(response) {
-           //alert("與伺服器連線成功");//the same with 'error' block above
-           //create a new node to be responese's parent node
-            var newNav = document.createElement("div");
-            newNav.innerHTML = response;
-            //update navbar content
-			oldNav.html($(newNav).children().html());
-         }
-        });//end ajax
-
-});//end bind logoutAnch
-
-
-
-// Logged out 狀態時的SCRIPT
-
-$(".navbar").on("click",".loginBut", function(){
-	$('.navbar-a').slideUp(100); 
-	$('.loginDiv').animate({top:"10"},200);
-
-});
-
-
-$("body").on("click","#loginBtn", function(){
-	var userID = $(".inputVal")[0].value;
-	var password = $(".inputVal")[1].value;
-	var oldNav = $(".navbar");
-	
-	$.ajax({
-         url: '<?=site_url("user/authenticate")?>',
-         cache: true,
-         dataType: 'html',
-             type:'POST',
-         data: { userID: userID, password: password},
-         error: function(xhr) {
-         	//wrong password (or account) message belongs 'success' block below
-           //alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
-         },
-         success: function(response) {
-           //alert("與伺服器連線成功");//the same with 'error' block above
-           //create a new node to be responese's parent node
-            var newNav = document.createElement("div");
-            newNav.innerHTML = response;
-            //update navbar content
-			oldNav.html($(newNav).children().html());
-         }
-        });//end ajax
-
-});//end bind loginBtn
-</script>
-
 
 <?php if($session_account){?>
 <img src="<?= base_url('images/lulu.jpg') ?>" width="60px" height="60px"  class="img-circle">
@@ -157,12 +92,11 @@ $("body").on("click","#loginBtn", function(){
 	<div class="loginDiv">
 		<form id="loginForm" method="post">
 			<?php if(isset($wrong)) {echo "帳號或密碼錯誤";} ?>
-			
 			<div class="left-inner-addon">
 				<i class="fa fa-user"></i>
 				<input type="text" class="inputVal" name="userID" placeholder="user account" value = "<?php if(isset($userID)){echo $userID; }?>"></input>
 			</div>
-			
+
 			<div class="left-inner-addon">
 				<i class="fa fa-lock"></i>
 
@@ -171,15 +105,77 @@ $("body").on("click","#loginBtn", function(){
 			<div class="left-inner-submit">
 				<input type="button" id="loginBtn" value="Login"></input>
 			</div>
-			
-		
+
+
 		</form>
 	</div>
-
-
-
-
 <?php }?>
+
+
+<script>
+
+    //these script code appear in DOM if user has been loggedin
+$("#logoutAnch").bind("click", function(){
+    var oldNav = $(".navbar");
+
+    $.ajax({
+         url: '<?=site_url("user/logout")?>',
+         cache: true,
+         dataType: 'html',
+             type:'POST',
+         data: {},
+         error: function(xhr) {
+           //alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
+         },
+         success: function(response) {
+           //alert("與伺服器連線成功");//the same with 'error' block above
+           //create a new node to be responese's parent node
+            var newNav = document.createElement("div");
+            newNav.innerHTML = response;
+            //update navbar content
+            oldNav.html($(newNav).children().html());
+            //alert($(newNav).children().html());
+         }
+        });//end ajax
+
+});//end bind logoutAnch
+
+
+
+// Logged out 狀態時的SCRIPT
+$(".loginBut").bind("click", function(){
+    $('.navbar-a').slideUp(100);
+    $('.loginDiv').animate({top:"10"},200);
+});
+
+
+$("#loginBtn").bind("click", function(){
+    var userID = $(".inputVal")[0].value;
+    var password = $(".inputVal")[1].value;
+    var oldNav = $(".navbar");
+
+    $.ajax({
+         url: '<?=site_url("user/authenticate")?>',
+         cache: true,
+         dataType: 'html',
+             type:'POST',
+         data: { userID: userID, password: password},
+         error: function(xhr) {
+            //wrong password (or account) message belongs 'success' block below
+           //alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
+         },
+         success: function(response) {
+           //alert("與伺服器連線成功");//the same with 'error' block above
+           //create a new node to be responese's parent node
+            var newNav = document.createElement("div");
+            newNav.innerHTML = response;
+            //update navbar content
+             oldNav.html($(newNav).children().html());
+         }
+        });//end ajax
+
+});//end bind loginBtn
+</script>
 </div>
 
 

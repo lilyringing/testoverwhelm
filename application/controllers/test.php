@@ -5,6 +5,7 @@ class Test extends CI_Controller{
 	}
 	
 	public function testing(){
+		$session_account = $this->session->userdata('user');
 		$fileID = $this->uri->segment(3);
 		
 		$this->load->model('question_model');
@@ -12,9 +13,11 @@ class Test extends CI_Controller{
 		$id = $this->question_model->getQuestionID($fileID);
 		
 		$this->load->model('answer_model');
+		$this->load->model('vote_model');
 		foreach($id as $rows){
 			$qid = $rows->questionid;
 			$data['answer'][$qid] = $this->answer_model->getAnswer($qid);
+			$data['vote'][$qid] = $this->vote_model->checkVote($session_account->userid, $qid);
 		}
 		
 		$this->load->model('comment_model');
@@ -24,6 +27,39 @@ class Test extends CI_Controller{
 						'pageTitle' => "Test starts"));
 		$this->load->view('_navbar');		
 		$this->load->view('testsheet', $data);
+		
+	}
+	
+	public function upload_page(){
+		$this->load->view('_header', Array(
+								'pageTitle' => "Upload question"));
+		$this->load->view('_navbar');
+		$this->load->view('upload_question');
+	}
+	
+	public function upload_question(){
+		$config['upload_path'] = './upload/';
+		$config['allowed_types'] = 'png|gif|jpg';
+		$config['max_size']	= '1024';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+		$confing['filename'] = 'userfile';
+		$this->load->library('upload',$config);
+		
+		if (!$this->upload->do_upload()){
+			$error = $this->upload->display_errors();
+			$this->load->view('_header', Array(
+											'pageTitle' => "Upload error"));
+			$this->load->view('_navbar');
+			$this->load->view('testsheet', $error);
+				
+		}else{
+			require_once './tesseract-ocr-for-php/TesseractOCR/TesseractOCR.php';
+			$picture = $this->upload->data();
+			$tesseract = new TesseractOCR($picture['full_path']);
+			$text = $tesseract->recognize();
+			echo $text;
+		}
 		
 	}
 	
@@ -89,5 +125,26 @@ class Test extends CI_Controller{
 		$this->comment_model->givecomment($data);
 		
 		redirect(site_url("test/testing/".$fileID));
+	}
+	
+	public function add_good_bad($questionID, $gb){
+		$session_account = $this->session->userdata('user');
+		
+		$this->load->model('vote_model');
+		$vote = $this->vote_model->checkVote($session_account->userid, $questionID);
+		
+		if($vote == null){	// add a new vote
+			$data = Array('userid' => $session_account->userid,
+						  'questionid' => $questionID,
+						  'gb' => $gb);
+			$this->vote_model->vote();
+		}else{
+			if($vote->gb == $gb){	// cancel the vote
+				$this->vote_model->deleteVote($session_account->userid, $questionID);
+			}else{
+				$data = Array('gb' => $gb);	// change the vote
+				$this->vote_model->changeVote($session_account->userid, $questionID, $data);
+			}
+		}
 	}
 }

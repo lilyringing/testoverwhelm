@@ -1,19 +1,21 @@
 <?php include ("_header.php");
-	  include ("_navbar.php"); 
+	  include ("_navbar.php");
 	  if(!isset($_SESSION)){
 	  	session_start();
 	  }?>
 <style type="text/css">
-	
+
 	body{
+
 		background-image: url(<?= base_url("images/TSAY.png") ?>);
 		background-position: top left;
 		background-repeat: no-repeat;
 		
 
+
 	}
 	.icon{
-		
+
 	}
 	.ac_child{
 		color: #4f4e4d;
@@ -22,19 +24,19 @@
 		width: 800px;
 		height: 450px;
 		margin-top: 170px;
-		
+
 		float :right;
 		border-top-left-radius: 5px;
 		border-bottom-left-radius: 5px;
 		overflow: hidden;
-		background: rgba(255, 200,141 , 0.5);	
+		background: rgba(255, 200,141 , 0.5);
 
 
 	}
 	.action_set .ac_child{
 		height: 200px;
 		width:800px;
-				/*#73f3cd;*/ 
+				/*#73f3cd;*/
 
 
 	}
@@ -42,10 +44,10 @@
 		height:50px;
 		line-height: 50px;
 		vertical-align: middle;
-		
+
 		float:left;
 		
-			}
+	}
 
 
 	.search-icon{
@@ -143,11 +145,12 @@
 
 <div class="action_set">
 	<div class="ac_child ac-search">
-		
+
 		<div class="ac-search-div">
 			<form method="post">
 
 				<div class="search search-icon"><i class="fa fa-search" ></i></div>
+
 				<div class="search-all">
 					<div class="search"><input type="text" class="search-input" name="subject" placeholder="Subject" ></div>
 					<div class="search">/</div>
@@ -161,12 +164,12 @@
 				</div>
 				
 				
-			
+	
 			</form>
 		</div>
 
-		
-		
+
+
 	</div>
 
 
@@ -176,7 +179,7 @@
 		<div class="action action-archive"><i class="icon fa fa-archive"></i></div>
 
 		<div class="action action-upload"><i class="icon fa fa-upload"></i></div>
-	
+
 		<div class="action action-users"><i class="icon fa fa-users"></i></div>
 	</div>
 
