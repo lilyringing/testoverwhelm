@@ -1,4 +1,4 @@
-`<?php $session_account = $this->session->userdata('user');?>
+<?php $session_account = $this->session->userdata('user');?>
 
 <div class="navbar">
 
@@ -26,7 +26,7 @@
 	//these script code appear in DOM if user has been loggedin
 $("body").on("click","#logoutAnch", function(){
 	var oldNav = $(".navbar");
-	
+
 	$.ajax({
          url: '<?=site_url("user/logout")?>',
          cache: true,
@@ -43,6 +43,7 @@ $("body").on("click","#logoutAnch", function(){
             newNav.innerHTML = response;
             //update navbar content
 			oldNav.html($(newNav).children().html());
+            //alert($(newNav).children().html());
          }
         });//end ajax
 
@@ -53,7 +54,7 @@ $("body").on("click","#logoutAnch", function(){
 // Logged out 狀態時的SCRIPT
 
 $("body").on("click",".loginBut", function(){
-	$('.navbar-a').slideToggle(100); 
+	$('.navbar-a').slideUp(100);
 	$('.loginDiv').animate({top:"10"},200);
 
 });
@@ -63,7 +64,7 @@ $("body").on("click","#loginBtn", function(){
 	var userID = $(".inputVal")[0].value;
 	var password = $(".inputVal")[1].value;
 	var oldNav = $(".navbar");
-	
+
 	$.ajax({
          url: '<?=site_url("user/authenticate")?>',
          cache: true,
@@ -81,6 +82,9 @@ $("body").on("click","#loginBtn", function(){
             newNav.innerHTML = response;
             //update navbar content
 			oldNav.html($(newNav).children().html());
+            alert(newNav.innerHTML);
+            newNav.innerHTML="";
+            alert(newNav.innerHTML);
          }
         });//end ajax
 
@@ -112,11 +116,11 @@ $("body").on("click","#loginBtn", function(){
 											echo $userID; }?>"></input>
 			登入密碼<input class="inputVal" name="password"></input>
 			<input type="button" id="loginBtn" value="Login"></input>
-		
+
 		</form>
 	</div>
 
-	
+
 
 <?php }?>
 
