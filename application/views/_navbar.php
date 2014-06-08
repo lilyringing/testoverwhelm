@@ -1,4 +1,4 @@
-<?php $session_account = $this->session->userdata('user');?>
+`<?php $session_account = $this->session->userdata('user');?>
 
 <div class="navbar">
 
@@ -12,16 +12,19 @@
 	top:10px;
 	font-size: 2em;
 }
+
+.loginDiv{
+	position:absolute;
+	top:-60px;
+	right:10px;
+	height:60px;
+}
 </style>
 
-<?php if($session_account){?>
-	<img src="<?= base_url('images/lulu.jpg') ?>" width="60px" height="60px"  class="img-circle">
-	<?php echo $session_account->account;?>
-	<a id="logoutAnch" href="#">登出</a>
-	
-	<script>
+
+<script>
 	//these script code appear in DOM if user has been loggedin
-$("#logoutAnch").bind("click", function(){
+$("body").on("click","#logoutAnch", function(){
 	var oldNav = $(".navbar");
 	
 	$.ajax({
@@ -45,23 +48,18 @@ $("#logoutAnch").bind("click", function(){
 
 });//end bind logoutAnch
 
-</script>
-	
-<?php }else{?>
-	<a href="<?=site_url("user/login")?>">登入</a>
-	<a href="<?=site_url("user/register")?>">註冊</a>
 
-	<form id="loginForm" method="post">
-		<?php if(isset($wrong)) {echo "帳號或密碼錯誤";} ?>
-		登入帳號<input class="inputVal" name="userID" value = "<?php if(isset($userID)){
-										echo $userID; }?>"></input>
-		登入密碼<input class="inputVal" name="password"></input>
-		<input type="button" id="loginBtn" value="Login"></input>
-	
-	</form>
-	<script>
-	//these script code appear in DOM if user hasn't been loggedin
-$("#loginBtn").bind("click", function(){
+
+// Logged out 狀態時的SCRIPT
+
+$("body").on("click",".loginBut", function(){
+	$('.navbar-a').slideToggle(100); 
+	$('.loginDiv').animate({top:"10"},200);
+
+});
+
+
+$("body").on("click","#loginBtn", function(){
 	var userID = $(".inputVal")[0].value;
 	var password = $(".inputVal")[1].value;
 	var oldNav = $(".navbar");
@@ -87,8 +85,39 @@ $("#loginBtn").bind("click", function(){
         });//end ajax
 
 });//end bind loginBtn
-
 </script>
+
+
+<?php if($session_account){?>
+<img src="<?= base_url('images/lulu.jpg') ?>" width="60px" height="60px"  class="img-circle">
+<?php echo $session_account->account;?>
+<div class="navbar-a">
+	<a id="logoutAnch" href="#">登出</a>
+</div>
+
+
+
+
+
+<?php }else{?>
+<div class="navbar-a">
+	<a href="#" class="loginBut">登入</a>
+	<a href="<?=site_url("user/register")?>">註冊</a>
+</div>
+
+	<div class="loginDiv">
+		<form id="loginForm" method="post">
+			<?php if(isset($wrong)) {echo "帳號或密碼錯誤";} ?>
+			登入帳號<input class="inputVal" name="userID" value = "<?php if(isset($userID)){
+											echo $userID; }?>"></input>
+			登入密碼<input class="inputVal" name="password"></input>
+			<input type="button" id="loginBtn" value="Login"></input>
+		
+		</form>
+	</div>
+
+	
+
 <?php }?>
 
 </div>
