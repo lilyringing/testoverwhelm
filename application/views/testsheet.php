@@ -97,20 +97,21 @@ $(".icon").bind("click", function(){
 	var index = $(".icon").index(this);
 	var ansId = $(".ansId:eq("+index+")").html();
 	//1 is good, 0 is bad
-	index = (index + 1)/2
-	/*
+	index = (index+1)%2;
+
 	$.ajax({
          url: '<?=site_url("test/add_good_bad")?>',
          cache: true,
          dataType: 'html',
              type:'POST',
-         data: {questionID:ansId, gb:index},
+         data: {answerID:ansId, gb:index},
          error: function(xhr) {
-           //alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
+           alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
          },
          success: function(response) {
+         	alert(response);
          }
         });//end ajax
-*/
+
 });
 </script>

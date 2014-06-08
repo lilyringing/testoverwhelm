@@ -125,7 +125,10 @@ class Test extends CI_Controller{
 
 		redirect(site_url("test/testing/".$fileID));
 	}
-	public function add_good_bad($answerID, $gb){
+	public function add_good_bad(){
+
+		$answerID = trim($this->input->post("answerID"));
+		$gb = trim($this->input->post("gb"));
 		$session_account = $this->session->userdata('user');
 
 		$this->load->model('vote_model');
