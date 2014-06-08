@@ -127,23 +127,23 @@ class Test extends CI_Controller{
 		redirect(site_url("test/testing/".$fileID));
 	}
 	
-	public function add_good_bad($questionID, $gb){
+	public function add_good_bad($answerID, $gb){
 		$session_account = $this->session->userdata('user');
 		
 		$this->load->model('vote_model');
-		$vote = $this->vote_model->checkVote($session_account->userid, $questionID);
+		$vote = $this->vote_model->checkVote($session_account->userid, $answerID);
 		
 		if($vote == null){	// add a new vote
 			$data = Array('userid' => $session_account->userid,
-						  'questionid' => $questionID,
+						  'answerid' => $answerID,
 						  'gb' => $gb);
 			$this->vote_model->vote();
 		}else{
 			if($vote->gb == $gb){	// cancel the vote
-				$this->vote_model->deleteVote($session_account->userid, $questionID);
+				$this->vote_model->deleteVote($session_account->userid, $answerID);
 			}else{
 				$data = Array('gb' => $gb);	// change the vote
-				$this->vote_model->changeVote($session_account->userid, $questionID, $data);
+				$this->vote_model->changeVote($session_account->userid, $answerID, $data);
 			}
 		}
 	}
