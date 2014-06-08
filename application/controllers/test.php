@@ -63,8 +63,11 @@ class Test extends CI_Controller{
 			$tesseract = new TesseractOCR($picture['full_path']);
 			$text = $tesseract->recognize();
 			echo $text;
+			//this line is used to delete the upload picture
+			//haven't test if there's some problem delete it.
+			delete_files($picture['full_path']);
+			$this->load->view('ocr_text', $text);		
 		}
-
 	}
 	public function upload_text_ans(){
 		$session_account = $this->session->userdata('user');
