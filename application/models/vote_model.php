@@ -10,7 +10,7 @@ class Vote_model extends CI_Model {
 		$query = $this->db->get_where('vote', Array('userid' => $userID,
 								'answerid' => $answerID));
 		if($query->num_rows() > 0){
-			return $query->result();
+			return $query->row();
 		}else{
 			return null;
 		}
@@ -20,10 +20,10 @@ class Vote_model extends CI_Model {
 		$this->db->insert('vote', $data);
 	}
 	public function deleteVote($userID, $answerID){
-		$this->db->delete('vote', Array('userid' => $userid, 'answerid' => $answerID));
+		$this->db->delete('vote', Array('userid' => $userID, 'answerid' => $answerID));
 	}
 
-	public function changeVote($userID, $answerID){
+	public function changeVote($userID, $answerID, $data){
 		$this->db->where('userid', $userID);
 		$this->db->where('answerid', $answerID);
 		$this->db->update('vote', $data);
