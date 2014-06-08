@@ -17,7 +17,7 @@ class Test extends CI_Controller{
 		foreach($id as $rows){
 			$qid = $rows->questionid;
 			$data['answer'][$qid] = $this->answer_model->getAnswer($qid);
-			$data['vote'][$qid] = $this->vote_model->checkVote($session_account->userid, $qid);
+			@$data['vote'][$qid] = $this->vote_model->checkVote($session_account->userid, $qid);
 		}
 
 		$this->load->model('comment_model');
@@ -125,7 +125,10 @@ class Test extends CI_Controller{
 
 		redirect(site_url("test/testing/".$fileID));
 	}
-	public function add_good_bad($answerID, $gb){
+	public function add_good_bad(){
+
+		$answerID = trim($this->input->post("answerID"));
+		$gb = trim($this->input->post("gb"));
 		$session_account = $this->session->userdata('user');
 
 		$this->load->model('vote_model');
