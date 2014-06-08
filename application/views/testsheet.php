@@ -16,7 +16,8 @@
 				    foreach($answer[$rows->questionid] as $ans){?>
 				  		<li><?php echo $ans->answer;?><br>
 				  			<?php echo "good: ".$ans->good;?>
-							<?php echo "bad: ".$ans->bad;?></li>
+							<?php echo "bad: ".$ans->bad;?>
+							<?php echo "user:".$ans->account;?></li>
 			<?php   }
 				  }?>
 		</ul>
@@ -35,4 +36,20 @@
 						
 		<?php }?>
 	
+		<!-- print comments of this testsheet -->
+		<?php if($comment != null){
+				echo "Comment:";
+				foreach($comment as $com){?>
+				<ul>
+					<li><?php echo $com->comment;?></li>
+				</ul>
+		<?php   }
+		 	  }?>
+		
+		<!-- a form for upload answer with text -->
+		<form action="<?=site_url("test/upload_comment")?>/<?php echo $this->uri->segment(3);?>" method="post">
+			<textarea name="comment"></textarea>
+			<button type="submit">Send comment</button>
+		</form> 	  
+		
 </body>

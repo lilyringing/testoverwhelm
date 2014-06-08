@@ -5,11 +5,13 @@ class Answer_model extends CI_Model{
 	}
 	
 	public function getAnswer($questionID){
-		$this->db->select('answer, good, bad, userid');
-		$query = $this->db->get_where('answer', Array(
-							'questionid' => $questionID));
+		$this->db->select('*');
+		$this->db->from('answer');
+		$this->db->where('questionid', $questionID);
+		$this->db->join('user', 'user.userid = answer.userid');
+		$query = $this->db->get();
 		
-		if($query->num_rows >0){
+		if($query->num_rows() >0){
 			return $query->result();
 		}else{
 			return null;

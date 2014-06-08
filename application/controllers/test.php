@@ -17,6 +17,9 @@ class Test extends CI_Controller{
 			$data['answer'][$qid] = $this->answer_model->getAnswer($qid);
 		}
 		
+		$this->load->model('comment_model');
+		$data['comment'] = $this->comment_model->getComment($fileID);
+		
 		$this->load->view('_header', Array(
 						'pageTitle' => "Test starts"));
 		$this->load->view('_navbar');		
@@ -73,5 +76,18 @@ class Test extends CI_Controller{
 			
 			redirect(site_url("test/testing/".$fileID->fileid));
 		}	
+	}
+	
+	public function upload_comment(){
+		$session_account = $this->session->userdata('user');
+		$fileID = trim($this->uri->segment(3));
+		$comment = trim($this->input->post("comment"));
+		$data = Array('fileid' => $fileID, 'comment' => $comment,
+							  'userid' => $session_account->userid);
+		
+		$this->load->model('comment_model');
+		$this->comment_model->givecomment($data);
+		
+		redirect(site_url("test/testing/".$fileID));
 	}
 }
