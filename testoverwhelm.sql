@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: 127.0.0.1
--- 產生日期: 2014 年 06 月 08 日 11:32
+-- 產生日期: 2014 年 06 月 08 日 18:33
 -- 伺服器版本: 5.5.32
 -- PHP 版本: 5.4.16
 
@@ -45,12 +45,12 @@ CREATE TABLE IF NOT EXISTS `answer` (
 --
 
 INSERT INTO `answer` (`answerid`, `questionid`, `answer`, `good`, `bad`, `userid`) VALUES
-(2, 3, 'R0 → ε | 0R1 | 1R2\r\nR1 → ε | 0R1 | 1R3\r\nR2 → ε | 0R4 | 1R2\r\nR3 → ε | 1R4\r\nR4 → ε | 0R3\r\n(Note: useless production rules have been removed.)', 0, 0, 1),
-(3, 3, 'test', 0, 0, 2),
+(2, 3, 'R0 → ε | 0R1 | 1R2\r\nR1 → ε | 0R1 | 1R3\r\nR2 → ε | 0R4 | 1R2\r\nR3 → ε | 1R4\r\nR4 → ε | 0R3\r\n(Note: useless production rules have been removed.)', 0, 1, 1),
+(3, 3, 'test', 0, 1, 2),
 (4, 1, 'D:/xampp/htdocs/Github/testoverwhelm/upload/TC20131A1.PNG', 0, 0, 1),
 (5, 1, 'This is a test for the text answer of problem 1.', 0, 0, 1),
 (6, 1, 'D:/xampp/htdocs/Github/testoverwhelm/upload/TC20131A2.PNG', 0, 0, 1),
-(7, 2, '<h1> hack </h1>', 0, 0, 1);
+(7, 2, '<h1> hack </h1>', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -161,6 +161,15 @@ CREATE TABLE IF NOT EXISTS `vote` (
   KEY `userid` (`userid`),
   KEY `answerid` (`answerid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 轉存資料表中的資料 `vote`
+--
+
+INSERT INTO `vote` (`userid`, `answerid`, `gb`) VALUES
+(1, 2, 0),
+(1, 3, 0),
+(1, 7, 0);
 
 --
 -- 匯出資料表的 Constraints

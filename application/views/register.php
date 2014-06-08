@@ -3,14 +3,28 @@
 	  if(!isset($_SESSION)){
 	  	session_start();
 	  }?>
-	  
-<!DOCTYPE html>
 
-<body>
-	<form action="<?=site_url("user/createUser")?>" method="post">
-		帳號<input name="userID" value="<?php if(isset($alert)){
-										echo $alert; }?>"></input>
-		密碼<input name="password"></input>
-		<button type="submit">Regist</button>
-	</form>
-</body>
+
+
+ 
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/register.css'); ?> ">
+
+
+<div class="container">
+	<section id="content">
+		<form action="<?php echo site_url('user/createUser') ?>" method="post">
+			<h1>Register</h1>
+			<div>
+				<input type="text" id="username" name="userID" value="<?php if(isset($alert)){
+										echo $alert; }?>" placeholder="UserID"></input>
+			</div>
+			<div>
+				<input type="password" id="password" name="password" placeholder="Password"></input>
+			</div>
+			<div>
+				<input type="submit" value="Register" />
+			</div>
+		</form><!-- form -->
+	</section><!-- content -->
+</div><!-- container -->
+<?php include('_footer.php'); ?>
