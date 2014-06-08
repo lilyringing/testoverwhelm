@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: 127.0.0.1
--- 產生日期: 2014 年 06 月 08 日 10:04
+-- 產生日期: 2014 年 06 月 08 日 11:32
 -- 伺服器版本: 5.5.32
 -- PHP 版本: 5.4.16
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `answer` (
   PRIMARY KEY (`answerid`),
   KEY `question_id` (`questionid`),
   KEY `userid` (`userid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- 轉存資料表中的資料 `answer`
@@ -48,7 +48,9 @@ INSERT INTO `answer` (`answerid`, `questionid`, `answer`, `good`, `bad`, `userid
 (2, 3, 'R0 → ε | 0R1 | 1R2\r\nR1 → ε | 0R1 | 1R3\r\nR2 → ε | 0R4 | 1R2\r\nR3 → ε | 1R4\r\nR4 → ε | 0R3\r\n(Note: useless production rules have been removed.)', 0, 0, 1),
 (3, 3, 'test', 0, 0, 2),
 (4, 1, 'D:/xampp/htdocs/Github/testoverwhelm/upload/TC20131A1.PNG', 0, 0, 1),
-(5, 1, 'This is a test for the text answer of problem 1.', 0, 0, 1);
+(5, 1, 'This is a test for the text answer of problem 1.', 0, 0, 1),
+(6, 1, 'D:/xampp/htdocs/Github/testoverwhelm/upload/TC20131A2.PNG', 0, 0, 1),
+(7, 2, '<h1> hack </h1>', 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -153,11 +155,11 @@ INSERT INTO `user` (`userid`, `account`, `password`) VALUES
 
 CREATE TABLE IF NOT EXISTS `vote` (
   `userid` int(11) NOT NULL,
-  `questionid` int(11) NOT NULL,
+  `answerid` int(11) NOT NULL,
   `gb` tinyint(1) NOT NULL,
-  PRIMARY KEY (`questionid`,`userid`),
+  PRIMARY KEY (`userid`,`answerid`),
   KEY `userid` (`userid`),
-  KEY `questionid` (`questionid`)
+  KEY `answerid` (`answerid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -195,7 +197,7 @@ ALTER TABLE `question`
 --
 ALTER TABLE `vote`
   ADD CONSTRAINT `vote_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `vote_ibfk_2` FOREIGN KEY (`questionid`) REFERENCES `question` (`questionid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `vote_ibfk_2` FOREIGN KEY (`answerid`) REFERENCES `answer` (`answerid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

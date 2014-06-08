@@ -1,6 +1,7 @@
 <div class="navbar">
 
 <?php $session_account = $this->session->userdata('user');?>
+<link rel="stylesheet" type="text/css" href="">
 
 
 <style type="text/css">
@@ -55,15 +56,17 @@
 }
 .left-inner-submit input{
 	width: 100px;
-	height: 34px;
-	padding: 6px 30px;
-	font-size: 14px;
-	line-height: 1.42857143;
-	color: #555;
-	background-color: rgba(0,0,0,0.5);
-	background-image: none;
-	border: 1px solid #ccc;
- 	border-radius: 4px;
+
+	height: 34px; 
+	padding: 6px 30px; 
+	font-size: 14px; 
+	line-height: 1.42857143; 
+	color: #555; 
+	background-color: #fff;
+	background-image: none; 
+	border: 1px solid #ccc; 
+ 	border-radius: 4px; 
+ 	
 
 }
 </style>

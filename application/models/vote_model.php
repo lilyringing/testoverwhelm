@@ -5,10 +5,10 @@ class Vote_model extends CI_Model {
 		parent::__construct();
 	}
 
-	public function checkVote($userID, $questionID){
+	public function checkVote($userID, $answerID){
 		$this->db->select('gb');
 		$query = $this->db->get_where('vote', Array('userid' => $userID,
-								'questionid' => $questionID));
+								'answerid' => $answerID));
 		if($query->num_rows() > 0){
 			return $query->result();
 		}else{
@@ -19,14 +19,13 @@ class Vote_model extends CI_Model {
 	public function vote($data){
 		$this->db->insert('vote', $data);
 	}
-
-	public function deleteVote($userID, $questionID){
-		$this->db->delete('vote', Array('userid' => $userid, 'questionid' => $questionID));
+	public function deleteVote($userID, $answerID){
+		$this->db->delete('vote', Array('userid' => $userid, 'answerid' => $answerID));
 	}
 
-	public function changeVote($userID, $questionID){
+	public function changeVote($userID, $answerID){
 		$this->db->where('userid', $userID);
-		$this->db->where('questionid', $questionID);
+		$this->db->where('answerid', $answerID);
 		$this->db->update('vote', $data);
 	}
 }
