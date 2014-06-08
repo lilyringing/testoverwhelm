@@ -1,6 +1,7 @@
 <div class="navbar">
 
 <?php $session_account = $this->session->userdata('user');?>
+<link rel="stylesheet" type="text/css" href="">
 
 
 <style type="text/css">
@@ -60,11 +61,11 @@
 	font-size: 14px; 
 	line-height: 1.42857143; 
 	color: #555; 
-	background-color: rgba(0,0,0,0.5); 
+	background-color: #fff;
 	background-image: none; 
 	border: 1px solid #ccc; 
  	border-radius: 4px; 
-
+ 	
 }
 </style>
 
@@ -156,7 +157,7 @@ $("body").on("click","#loginBtn", function(){
 	<div class="loginDiv">
 		<form id="loginForm" method="post">
 			<?php if(isset($wrong)) {echo "帳號或密碼錯誤";} ?>
-
+			
 			<div class="left-inner-addon">
 				<i class="fa fa-user"></i>
 				<input type="text" class="inputVal" name="userID" placeholder="user account" value = "<?php if(isset($userID)){echo $userID; }?>"></input>

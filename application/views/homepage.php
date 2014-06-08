@@ -26,7 +26,7 @@
 		border-top-left-radius: 5px;
 		border-bottom-left-radius: 5px;
 		overflow: hidden;
-		background: rgba(255, 200,141 , 0.5);	
+		background: rgba(154, 227,159 , 0.7);	
 
 
 	}
@@ -38,17 +38,18 @@
 
 	}
 	.search{
-		height:200px;
-		line-height: 200px;
+		height:50px;
+		line-height: 50px;
 		vertical-align: middle;
-
 		
 		float:left;
-		width:100px;
+		
 			}
+
+
 	.search-icon{
-		line-height: 60px;
-		height:60px;
+		line-height: 100px;
+		height:100px;
 		font-size: 100px;
 
 
@@ -60,8 +61,27 @@
 	.search .search-input{
 		line-height: 20px;
 		vertical-align: middle;
-		height:50px;
+		height: 30px;
 		width:100px;
+		border:0;
+	}
+	.search #searchBtn{
+		height:52px;
+		width: 100px;
+		margin-top:0px; 
+		padding: 6px 30px; 
+		font-size: 14px; 
+		line-height: 30px;
+		vertical-align: middle; 
+		color: #555; 
+		background-color: #fff;
+		background-image: none; 
+		border: 0; 
+		margin-left: 50px;
+	}
+	.search #searchBtn:hover{
+		background: rgba(30,30,30,0.2);
+		
 	}
 	.ac-other .action{
 		height:200px;
@@ -71,6 +91,13 @@
 	}
 	.ac-search .ac-search-div{
 		margin-left:100px;
+		height:200px;
+		line-height: 200px;
+		vertical-align: middle;
+
+		
+		float:left;
+		width:500px;
 	}
 
 	.action.action-archive{
@@ -85,6 +112,20 @@
 	}
 	.action:hover{
 		opacity: 0.5;
+	}
+	.ac-search-div .search-all{
+		position:absolute;
+		margin-top:60px;
+		margin-left:130px;
+		background-color:white;
+		height:50px;
+		width:500px;
+		border-radius: 25px;
+		text-align: center;
+		padding-left:40px;
+		overflow: hidden;
+
+
 	}
 
 
@@ -106,13 +147,18 @@
 			<form method="post">
 
 				<div class="search search-icon"><i class="fa fa-search" ></i></div>
-				<div class="search" ><input type="text" class="search-input" name="subject" placeholder="Subject" ></div>
-				<div class="search" ><input type="text" class="search-input" name="teacher" placeholder="Teacher"></div>
-				<div class="search" ><input type="text" class="search-input" name="year" placeholder="Year"></div>
-				
-				<div class="search">
-					<input id="searchBtn" type="button" class="search-input btn btn-default btn-lg" value="搜尋"></input>
+				<div class="search-all">
+					<div class="search"><input type="text" class="search-input" name="subject" placeholder="Subject" ></div>
+					<div class="search">/</div>
+					<div class="search"><input type="text" class="search-input" name="teacher" placeholder="Teacher"></div>
+					<div class="search">/</div>
+					<div class="search"><input type="text" class="search-input" name="year" placeholder="Year"></div>
+					
+					<div class="search">
+						<input id="searchBtn" type="button" class="search-input" value="搜尋"></input>
+					</div>
 				</div>
+				
 				
 			
 			</form>

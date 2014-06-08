@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
 <!-- CSS -->
-    
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('') ?>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     
     <!-- Latest compiled and minified CSS -->
