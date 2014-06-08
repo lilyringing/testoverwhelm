@@ -10,7 +10,7 @@
 <style type="text/css">
 .navbar-logo{
 	position:absolute;
-	top:-10px;
+	top:-20px;
 	left:40px;
 }
 .navbar-a{
@@ -36,10 +36,10 @@
 	height:60px;
 	text-align: right;
 	padding-right: 20px;
-	position: absolute;
 	top:10px;
 	font-size: 15px;
 	z-index: 101;
+	position: fixed;
 }
 
 .loginDiv{
@@ -96,13 +96,43 @@
  	
 
 }
+.navbar-loggedin{
+	float:left;
+	margin:10px;
+	
+
+
+}
+.navbar-a .navbar-inner{
+	right:0px;
+	width:150px;
+	height:30px;
+	line-height: 30px;
+	vertical-align: middle;
+	font-size: 20px;
+
+	position: absolute;
+}
 </style>
 
 <?php if($session_account){?>
-<img src="<?= base_url('images/lulu.jpg') ?>" width="60px" height="60px"  class="img-circle">
-<?php echo $session_account->account;?>
+
+
+
 <div class="navbar-a">
-	<a id="logoutAnch" href="#">登出</a>
+	<div class="navbar-inner">
+		<div class="navbar-loggedin">
+			<img src="<?= base_url('images/lulu.jpg') ?>" width="30px" height="30px"  class="img-circle">
+		</div>
+		<div class="navbar-loggedin">
+			<?php echo $session_account->account;?>
+		</div>
+		
+		<div class="navbar-loggedin">
+			<a id="logoutAnch" href="#">登出</a>
+		</div>
+	</div>
+	
 </div>
 
 
