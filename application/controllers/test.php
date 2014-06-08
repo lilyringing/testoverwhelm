@@ -30,6 +30,39 @@ class Test extends CI_Controller{
 		
 	}
 	
+	public function upload_page(){
+		$this->load->view('_header', Array(
+								'pageTitle' => "Upload question"));
+		$this->load->view('_navbar');
+		$this->load->view('upload_question');
+	}
+	
+	public function upload_question(){
+		$config['upload_path'] = './upload/';
+		$config['allowed_types'] = 'png|gif|jpg';
+		$config['max_size']	= '1024';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+		$confing['filename'] = 'userfile';
+		$this->load->library('upload',$config);
+		
+		if (!$this->upload->do_upload()){
+			$error = $this->upload->display_errors();
+			$this->load->view('_header', Array(
+											'pageTitle' => "Upload error"));
+			$this->load->view('_navbar');
+			$this->load->view('testsheet', $error);
+				
+		}else{
+			require_once './tesseract-ocr-for-php/TesseractOCR/TesseractOCR.php';
+			$picture = $this->upload->data();
+			$tesseract = new TesseractOCR($picture['full_path']);
+			$text = $tesseract->recognize();
+			echo $text;
+		}
+		
+	}
+	
 	public function upload_text_ans(){
 		$session_account = $this->session->userdata('user');
 		$questionID = trim($this->uri->segment(3));
