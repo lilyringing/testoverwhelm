@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: 127.0.0.1
--- 產生日期: 2014 年 06 月 05 日 10:05
+-- 產生日期: 2014 年 06 月 08 日 10:04
 -- 伺服器版本: 5.5.32
 -- PHP 版本: 5.4.16
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `answer` (
   PRIMARY KEY (`answerid`),
   KEY `question_id` (`questionid`),
   KEY `userid` (`userid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- 轉存資料表中的資料 `answer`
@@ -46,7 +46,9 @@ CREATE TABLE IF NOT EXISTS `answer` (
 
 INSERT INTO `answer` (`answerid`, `questionid`, `answer`, `good`, `bad`, `userid`) VALUES
 (2, 3, 'R0 → ε | 0R1 | 1R2\r\nR1 → ε | 0R1 | 1R3\r\nR2 → ε | 0R4 | 1R2\r\nR3 → ε | 1R4\r\nR4 → ε | 0R3\r\n(Note: useless production rules have been removed.)', 0, 0, 1),
-(3, 3, 'test', 0, 0, 2);
+(3, 3, 'test', 0, 0, 2),
+(4, 1, 'D:/xampp/htdocs/Github/testoverwhelm/upload/TC20131A1.PNG', 0, 0, 1),
+(5, 1, 'This is a test for the text answer of problem 1.', 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -62,7 +64,14 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`commentid`),
   KEY `fileid` (`fileid`),
   KEY `userid` (`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- 轉存資料表中的資料 `comment`
+--
+
+INSERT INTO `comment` (`commentid`, `fileid`, `userid`, `comment`) VALUES
+(1, 1, 1, 'Theroy of computing is really hard!!!');
 
 -- --------------------------------------------------------
 
@@ -101,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `question` (
   `number` int(11) NOT NULL,
   PRIMARY KEY (`questionid`),
   KEY `fileid` (`fileid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- 轉存資料表中的資料 `question`
@@ -110,7 +119,8 @@ CREATE TABLE IF NOT EXISTS `question` (
 INSERT INTO `question` (`questionid`, `fileid`, `question`, `number`) VALUES
 (1, 1, 'Let A = {a, b, c, d, e, f} and R = {(a, c), (b, c), (d, e)} (which is a binary relation on A).\r\n(a) Give a symmetric and transitive but not reﬂexive binary relation on A that includes\r\nR. Please present the relation using a directed graph.\r\n(b) Find the smallest equivalence relation on A that includes R. Please present the\r\nrelation using a directed graph.', 1),
 (2, 1, 'Let L = {w ∈ {0, 1}∗ | w contains 011 as a substring or ends with a 0}.\n(a) Draw the state diagram of an NFA, with as few states as possible, that recognizes\nL. The fewer states your NFA has, the more points you will be credited for this\nproblem.\n(b) Convert the preceding NFA systematically into an equivalent DFA (using the proce-\ndure discussed in class). Do not attempt to optimize the number of states, though\nyou may omit the unreachable states.', 2),
-(3, 1, 'Let L = {w ∈ {0, 1}∗ | w does not contain 011 or 100 as a substring}.\r\n(a) Draw the state diagram of a DFA, with as few states as possible, that recognizes\r\nL. The fewer states your DFA has, the more points you will be credited for this\r\nproblem.\r\n(b) Translate the DFA in (a) systematically to an equivalent context-free grammar (using\r\nthe procedure discussed in class).', 3);
+(3, 1, 'Let L = {w ∈ {0, 1}∗ | w does not contain 011 or 100 as a substring}.\r\n(a) Draw the state diagram of a DFA, with as few states as possible, that recognizes\r\nL. The fewer states your DFA has, the more points you will be credited for this\r\nproblem.\r\n(b) Translate the DFA in (a) systematically to an equivalent context-free grammar (using\r\nthe procedure discussed in class).', 3),
+(4, 1, 'test whether delete', 4);
 
 -- --------------------------------------------------------
 
@@ -134,6 +144,21 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`userid`, `account`, `password`) VALUES
 (1, 'Lily', '0000'),
 (2, 'Johnny', 'johnny');
+
+-- --------------------------------------------------------
+
+--
+-- 表的結構 `vote`
+--
+
+CREATE TABLE IF NOT EXISTS `vote` (
+  `userid` int(11) NOT NULL,
+  `questionid` int(11) NOT NULL,
+  `gb` tinyint(1) NOT NULL,
+  PRIMARY KEY (`questionid`,`userid`),
+  KEY `userid` (`userid`),
+  KEY `questionid` (`questionid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- 匯出資料表的 Constraints
@@ -164,6 +189,13 @@ ALTER TABLE `file`
 --
 ALTER TABLE `question`
   ADD CONSTRAINT `file_id2` FOREIGN KEY (`fileid`) REFERENCES `file` (`fileid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- 資料表的 Constraints `vote`
+--
+ALTER TABLE `vote`
+  ADD CONSTRAINT `vote_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `vote_ibfk_2` FOREIGN KEY (`questionid`) REFERENCES `question` (`questionid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
