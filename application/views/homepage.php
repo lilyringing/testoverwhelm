@@ -3,6 +3,7 @@
 	  if(!isset($_SESSION)){
 	  	session_start();
 	  }?>
+
 <style type="text/css">
 
 	.background-div{
@@ -35,7 +36,7 @@
 
 	}
 	.action_set .ac_child{
-		height: 200px;
+		height: 225px;
 		width:800px;
 				/*#73f3cd;*/
 
@@ -88,15 +89,15 @@
 		
 	}
 	.ac-other .action{
-		height:200px;
+		height:225px;
 		width:200px;
 		font-size: 130px;
 		position:absolute;
 	}
 	.ac-search .ac-search-div{
 		margin-left:100px;
-		height:200px;
-		line-height: 200px;
+		height:225px;
+		line-height: 225px;
 		vertical-align: middle;
 
 		
@@ -189,8 +190,12 @@
 
 
 <script>
+	
+	$("#searchBtn").blur(function(){
+		$(".search-result").fadeOut(100);
+	})
+
 	var lock = 0;//unlocked
-	$(".action-archive").click()
 	$("#searchBtn").bind("click", function(){
 		if(lock == 0)
 		{

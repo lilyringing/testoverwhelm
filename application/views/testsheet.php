@@ -2,7 +2,8 @@
 	.sheet{
 		position: relative;
 		width: 80%;
-		top: 10%;
+		height:80%;
+		margin-top: 10%;
 		margin-left: auto;
 		margin-right: auto;
 		border: 1px solid;
@@ -20,6 +21,9 @@
 	}
 	.ansBlock{
 		display: none;
+	}
+	.formBlock{
+		width: 100%;
 	}
 </style>
 
@@ -51,20 +55,25 @@
 				  	} ?>
 				</div>
 			</div>
-		</div>
+
 
 				<!-- a form for upload answer with text -->
+				<div class="formBlock">
+				<div class="sendAns">
 				<form action="<?=site_url("test/upload_text_ans")?>/<?php echo $rows->questionid?>" method="post">
 					<textarea name="content"></textarea>
 					<button type="submit">Send answer</button>
 				</form>
-
+				</div>
+				<div class="upload">
 				<!-- a form for upload answer with picture -->
 				<?php echo form_open_multipart('test/upload_picture_ans/'.$rows->questionid);
 		  		  	  echo form_upload('userfile');?>
 		  			<input type="submit" value="upload" />
 				<?php echo form_close();?>
-
+				</div>
+				</div>
+</div>
 		<?php }?>
 
 		<!-- print comments of this testsheet -->

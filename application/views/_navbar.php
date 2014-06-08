@@ -10,7 +10,7 @@
 <style type="text/css">
 .navbar-logo{
 	position:absolute;
-	top:-10px;
+	top:-20px;
 	left:40px;
 }
 .navbar-a{
@@ -36,10 +36,10 @@
 	height:60px;
 	text-align: right;
 	padding-right: 20px;
-	position: absolute;
 	top:10px;
 	font-size: 15px;
 	z-index: 101;
+	position: fixed;
 }
 
 .loginDiv{
@@ -84,25 +84,55 @@
 .left-inner-submit input{
 	width: 100px;
 
-	height: 34px; 
-	padding: 6px 30px; 
-	font-size: 14px; 
-	line-height: 1.42857143; 
-	color: #555; 
+	height: 34px;
+	padding: 6px 30px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
 	background-color: #fff;
-	background-image: none; 
-	border: 1px solid #ccc; 
- 	border-radius: 4px; 
- 	
+	background-image: none;
+	border: 1px solid #ccc;
+ 	border-radius: 4px;
 
+
+}
+.navbar-loggedin{
+	float:left;
+	margin:10px;
+	
+
+
+}
+.navbar-a .navbar-inner{
+	right:0px;
+	width:150px;
+	height:30px;
+	line-height: 30px;
+	vertical-align: middle;
+	font-size: 20px;
+
+	position: absolute;
 }
 </style>
 
 <?php if($session_account){?>
-<img src="<?= base_url('images/lulu.jpg') ?>" width="60px" height="60px"  class="img-circle">
-<?php echo $session_account->account;?>
+
+
+
 <div class="navbar-a">
-	<a id="logoutAnch" href="#">登出</a>
+	<div class="navbar-inner">
+		<div class="navbar-loggedin">
+			<img src="<?= base_url('images/lulu.jpg') ?>" width="30px" height="30px"  class="img-circle">
+		</div>
+		<div class="navbar-loggedin">
+			<?php echo $session_account->account;?>
+		</div>
+		
+		<div class="navbar-loggedin">
+			<a id="logoutAnch" href="#">登出</a>
+		</div>
+	</div>
+	
 </div>
 
 
@@ -112,14 +142,14 @@
 <?php }else{?>
 <div class="navbar-a">
 	<div class="navbar-link"><a href="#" class="loginBut">登入</a></div>
-	
+
 	<div class="navbar-link"><a href="<?=site_url("user/register")?>">註冊</a></div>
 </div>
 
 
 	<div class="loginDiv">
 		<form id="loginForm" method="post">
-			<?php if(isset($wrong)) {echo "帳號或密碼錯誤";} ?>
+			<?php if(isset($wrong)) {?><script>alert("一定是密碼錯誤")</script><?php } ?>
 			<div class="left-inner-addon">
 				<i class="fa fa-user"></i>
 				<input type="text" class="inputVal" name="userID" placeholder="user account" value = "<?php if(isset($userID)){echo $userID; }?>"></input>

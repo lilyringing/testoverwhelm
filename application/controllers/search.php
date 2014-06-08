@@ -43,6 +43,8 @@ class Search extends CI_Controller {
 	
 	public function search_all(){
 		$this->load->model('file_model');
+		$this->load->view('_header.php');
+		$this->load->view('_navbar.php');
 		$data = $this->file_model->getAllFiles();
 		$this->load->view("testsheet_list", Array('pageTitle' => "List", 'info' => $data ));
 	}
