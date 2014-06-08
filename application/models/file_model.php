@@ -52,4 +52,9 @@ class File_model extends CI_Model {
 		}
 	}
 	
+	public function uploadFile($data)
+	{
+		$this->db->insert("file", $data);
+		return $this->db->insert_id();
+	}
 }

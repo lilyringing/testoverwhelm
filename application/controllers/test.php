@@ -62,13 +62,46 @@ class Test extends CI_Controller{
 			$picture = $this->upload->data();
 			$tesseract = new TesseractOCR($picture['full_path']);
 			$text = $tesseract->recognize();
-			echo $text;
+			//echo $text;
 			//this line is used to delete the upload picture
 			//haven't test if there's some problem delete it.
 			delete_files($picture['full_path']);
-			$this->load->view('ocr_text', $text);		
+			$this->load->view('ocr_text', array('text' => $text));		
 		}
 	}
+	
+	public function upload_test()
+	{
+		$subject = trim($this->input->post("subject"));
+		$professor = trim($this->input->post("professor"));
+		$year = trim($this->input->post("year"));
+		$semester = trim($this->input->post("semester"));
+		$times = trim($this->input->post("times"));
+		
+		$timeid = 100 * $year + 10 * $semester + $times;
+		$session_account = $this->session->userdata('user');
+		//upload file
+		$this->load->model('file_model');
+		$fileid = $this->file_model->uploadFile(array( 'timeid' => $timeid, 'subject' => $subject, 'professor' => $professor, 'userid' => $session_account->userid));
+		
+		//upload question
+		$i=0;
+		$this->load->model('question_model');
+		while(true)
+		{
+			$number = trim($this->input->post("number".$i));
+			if($number == NULL)
+			{
+				break;
+			}
+			//input number and question into database
+			$question = trim($this->input->post("question".$i));
+			$this->question_model->uploadQuestion(array( 'fileid' => $fileid, 'question' => $question, 'number' => $number ));
+			$i++;
+		}
+		//$this->load->view('testing');
+	}
+	
 	public function upload_text_ans(){
 		$session_account = $this->session->userdata('user');
 		$questionID = trim($this->uri->segment(3));
