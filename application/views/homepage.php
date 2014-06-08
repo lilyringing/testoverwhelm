@@ -1,18 +1,19 @@
 <?php include ("_header.php");
-	  include ("_navbar.php"); 
+	  include ("_navbar.php");
 	  if(!isset($_SESSION)){
 	  	session_start();
 	  }?>
 <style type="text/css">
-	
+
 	body{
 		background-image: url(<?= base_url("images/frontface.jpg") ?>);
-		background-position: top left;
+		background-position: bottom left;
 		background-size: 100%;
-
+		background-repeat: no-repeat;
+		height: 100%;
 	}
 	.icon{
-		
+
 	}
 	.ac_child{
 		color: #4f4e4d;
@@ -21,19 +22,19 @@
 		width: 800px;
 		height: 450px;
 		margin-top: 170px;
-		
+
 		float :right;
 		border-top-left-radius: 5px;
 		border-bottom-left-radius: 5px;
 		overflow: hidden;
-		background: rgba(255, 200,141 , 0.5);	
+		background: rgba(255, 200,141 , 0.5);
 
 
 	}
 	.action_set .ac_child{
 		height: 200px;
 		width:800px;
-				/*#73f3cd;*/ 
+				/*#73f3cd;*/
 
 
 	}
@@ -42,7 +43,7 @@
 		line-height: 200px;
 		vertical-align: middle;
 
-		
+
 		float:left;
 		width:100px;
 			}
@@ -101,7 +102,7 @@
 
 <div class="action_set">
 	<div class="ac_child ac-search">
-		
+
 		<div class="ac-search-div">
 			<form method="post">
 
@@ -109,17 +110,17 @@
 				<div class="search" ><input type="text" class="search-input" name="subject" placeholder="Subject" ></div>
 				<div class="search" ><input type="text" class="search-input" name="teacher" placeholder="Teacher"></div>
 				<div class="search" ><input type="text" class="search-input" name="year" placeholder="Year"></div>
-				
+
 				<div class="search">
 					<input id="searchBtn" type="button" class="search-input btn btn-default btn-lg" value="搜尋"></input>
 				</div>
-				
-			
+
+
 			</form>
 		</div>
 
-		
-		
+
+
 	</div>
 
 
@@ -129,7 +130,7 @@
 		<div class="action action-archive"><i class="icon fa fa-archive"></i></div>
 
 		<div class="action action-upload"><i class="icon fa fa-upload"></i></div>
-	
+
 		<div class="action action-users"><i class="icon fa fa-users"></i></div>
 	</div>
 
