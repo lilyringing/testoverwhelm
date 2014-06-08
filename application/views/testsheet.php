@@ -1,10 +1,22 @@
 <style>
+	.sheet{
+		position: relative;
+		width: 80%;
+		top: 10%;
+		margin-left: auto;
+		margin-right: auto;
+		border: 1px solid;
+		padding: 2em;
+	}
 	.icon{
 		font-size: 2em;
 		color: gray;
 	}
 	.icon:hover{
 		color: black;
+	}
+	.ansId{
+		display: none;
 	}
 	.ansBlock{
 		display: none;
@@ -15,30 +27,31 @@
 		session_start();
 	  }?>
 <?php $session_account = $this->session->userdata('user');?>
-<div>
+<div class="sheet">
 		<?php foreach($quest as $rows){?>
-		<ul>
-			<li><?php echo $rows->number;?></li>
-			<li><?php echo $rows->question;?></li>
+		<div class="question">
+			<div><?php echo $rows->number; echo "."; ?></div>
+			<div><?php echo $rows->question;?></div>
 
 			<!-- print the answers of this question -->
 			<div>
-				<div class="ansBtn">Answer</div>
-			<?php if($answer[$rows->questionid] != null){ ?>
+				<div class="ansBtn">Show answer</div>
 				<div class="ansBlock">
+			<?php if($answer[$rows->questionid] != null){ ?>
+
 
 				   <?php foreach($answer[$rows->questionid] as $ans){?>
-				  		<li><?php echo $ans->answer;?><br>
-				  			<?php echo "<div class='fa fa-thumbs-o-up icon'></div>: ".$ans->good;?>
-							<?php echo "<div class='fa fa-thumbs-o-down icon'></div>: ".$ans->bad;?>
-							<?php echo "user:".$ans->account;?></li>
+				  		<div><?php echo $ans->answer;?><br>
+				  			<?php echo "<div class='fa fa-thumbs-o-up icon'><div class='ansId'>".$ans->answerid."</div></div>: ".$ans->good;?>
+							<?php echo "<div class='fa fa-thumbs-o-down icon'><div class='ansId'>".$ans->answerid."</div></div>: ".$ans->bad;?>
+							<?php echo "user:".$ans->account;?></div>
 			<?php   }
 				  }else{
 				  	echo "no anwser";
 				  	} ?>
 				</div>
 			</div>
-		</ul>
+		</div>
 
 				<!-- a form for upload answer with text -->
 				<form action="<?=site_url("test/upload_text_ans")?>/<?php echo $rows->questionid?>" method="post">
@@ -72,11 +85,32 @@
 </div>
 
 <script>
-alert(1)
 $(".ansBtn").bind("click", function(){
 	var index = $(".ansBtn").index(this);
-	$(".ansBlock:eq("+index+")").show();
-	var aaa =  $(".ansBlock:eq("+index+")").html();
-	alert(a)
+	//$(".ansBlock:eq("+index+")").show();
+	var aaa = $(".ansBlock:eq("+index+")").html();
+	//alert(aaa)
+	$(".ansBlock:eq("+index+")").toggle(200);
+});
+
+$(".icon").bind("click", function(){
+	var index = $(".icon").index(this);
+	var ansId = $(".ansId:eq("+index+")").html();
+	//1 is good, 0 is bad
+	index = (index + 1)/2
+	/*
+	$.ajax({
+         url: '<?=site_url("test/add_good_bad")?>',
+         cache: true,
+         dataType: 'html',
+             type:'POST',
+         data: {questionID:ansId, gb:index},
+         error: function(xhr) {
+           //alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
+         },
+         success: function(response) {
+         }
+        });//end ajax
+*/
 });
 </script>
