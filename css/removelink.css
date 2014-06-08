@@ -1,0 +1,23 @@
+/* unvisited link */
+a:link {
+	 text-decoration: none;
+	 color: rgba(0,167,172,1);
+}
+
+/* visited link */
+a:visited {
+ 	text-decoration: none;	
+ 	 color: rgba(0,167,172,1);
+}
+
+/* mouse over link */
+a:hover {
+	 text-decoration: none;
+	 color: rgba(0,167,172,1);
+}
+
+/* selected link */
+a:active {
+	 text-decoration: none;
+	 color: rgba(0,167,172,1);
+}

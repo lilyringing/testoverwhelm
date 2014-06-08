@@ -5,14 +5,15 @@
 	  }?>
 <style type="text/css">
 
-	body{
-
+	.background-div{
+		position:absolute;
+		width:100%;
+		height:100%;
 		background-image: url(<?= base_url("images/TSAY.png") ?>);
-		background-position: top left;
+		background-position:bottom left;
 		background-repeat: no-repeat;
-		
-
-
+		background-size: 40%;
+	
 	}
 	.icon{
 
@@ -142,6 +143,7 @@
 		display: none;
 	}
 </style>
+<div class="background-div"></div>
 
 <div class="action_set">
 	<div class="ac_child ac-search">

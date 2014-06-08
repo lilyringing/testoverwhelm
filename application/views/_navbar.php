@@ -1,10 +1,36 @@
 <div class="navbar">
+	<div class="navbar-logo">
+		<img src="<?php echo base_url('/images/logo.png'); ?> ">
+	</div>
 
 <?php $session_account = $this->session->userdata('user');?>
 <link rel="stylesheet" type="text/css" href="">
 
 
 <style type="text/css">
+.navbar-logo{
+	position:absolute;
+	top:-10px;
+	left:40px;
+}
+.navbar-a{
+	height:50px;
+}
+.navbar-link{
+	border-radius:5px;
+	font-size: 20px;
+	width:60px;
+	height:40px;
+	line-height: 40px;
+	vertical-align: middle;
+	text-align: center;
+	float:right;
+}
+.navbar-link:hover{
+
+	background: rgba(25,203,208,0.1);
+}
+
 .navbar{
 	width: 100%;
 	height:60px;
@@ -13,14 +39,15 @@
 	position: absolute;
 	top:10px;
 	font-size: 15px;
+	z-index: 101;
 }
 
 .loginDiv{
 	position:absolute;
 	top:-60px;
-	right:10px;
+	right:0px;
 	height:60px;
-	width:700px;
+	width:530px;
 }
 
 .left-inner-addon {
@@ -84,8 +111,9 @@
 
 <?php }else{?>
 <div class="navbar-a">
-	<a href="#" class="loginBut">登入</a>
-	<a href="<?=site_url("user/register")?>">註冊</a>
+	<div class="navbar-link"><a href="#" class="loginBut">登入</a></div>
+	
+	<div class="navbar-link"><a href="<?=site_url("user/register")?>">註冊</a></div>
 </div>
 
 
