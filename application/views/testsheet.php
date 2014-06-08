@@ -25,6 +25,11 @@
 	.formBlock{
 		width: 100%;
 	}
+	textarea{
+		resize: none;
+		width:20em;
+		height:9em;
+	}
 </style>
 
 <?php if(!isset($_SESSION)){
