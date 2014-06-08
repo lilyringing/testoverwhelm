@@ -5,6 +5,7 @@ class Test extends CI_Controller{
 	}
 	
 	public function testing(){
+		$session_account = $this->session->userdata('user');
 		$fileID = $this->uri->segment(3);
 		
 		$this->load->model('question_model');
@@ -12,9 +13,11 @@ class Test extends CI_Controller{
 		$id = $this->question_model->getQuestionID($fileID);
 		
 		$this->load->model('answer_model');
+		$this->load->model('vote_model');
 		foreach($id as $rows){
 			$qid = $rows->questionid;
 			$data['answer'][$qid] = $this->answer_model->getAnswer($qid);
+			$data['vote'][$qid] = $this->vote_model->checkVote($session_account->userid, $qid);
 		}
 		
 		$this->load->model('comment_model');
@@ -89,5 +92,26 @@ class Test extends CI_Controller{
 		$this->comment_model->givecomment($data);
 		
 		redirect(site_url("test/testing/".$fileID));
+	}
+	
+	public function add_good_bad($questionID, $gb){
+		$session_account = $this->session->userdata('user');
+		
+		$this->load->model('vote_model');
+		$vote = $this->vote_model->checkVote($session_account->userid, $questionID);
+		
+		if($vote == null){	// add a new vote
+			$data = Array('userid' => $session_account->userid,
+						  'questionid' => $questionID,
+						  'gb' => $gb);
+			$this->vote_model->vote();
+		}else{
+			if($vote->gb == $gb){	// cancel the vote
+				$this->vote_model->deleteVote($session_account->userid, $questionID);
+			}else{
+				$data = Array('gb' => $gb);	// change the vote
+				$this->vote_model->changeVote($session_account->userid, $questionID, $data);
+			}
+		}
 	}
 }
