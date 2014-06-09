@@ -14,13 +14,15 @@ class Search extends CI_Controller {
 	public function searching(){
 		$this->load->model('file_model');
 		
-		$subject = trim($this->input->post("subject"));
+		$keyword = trim($this->input->post("subject"));
 		$teacher = trim($this->input->post("teacher"));
 		$year = trim($this->input->post("year"));
 		$data;
-		if( $subject != NULL )
+		if( $keyword != NULL )
 		{
-			$data['subject'] = trim($this->input->post("subject"));
+			$this->load->model('keyword_model');
+			$subject = $this->keyword_model->getSubject($keyword);
+			$data['subject'] = $subject->subject;
 		}
 		if( $teacher != NULL )
 		{

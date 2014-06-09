@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: 127.0.0.1
--- 產生日期: 2014 年 06 月 09 日 19:40
+-- 產生日期: 2014 年 06 月 09 日 20:32
 -- 伺服器版本: 5.5.32
 -- PHP 版本: 5.4.27
 
@@ -86,24 +86,50 @@ INSERT INTO `comment` (`commentid`, `fileid`, `userid`, `comment`, `updatetime`)
 CREATE TABLE IF NOT EXISTS `file` (
   `fileid` int(11) NOT NULL AUTO_INCREMENT,
   `timeid` int(5) NOT NULL,
-  `subjectid` int(11) NOT NULL,
+  `subject` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `professor` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `userid` int(11) NOT NULL,
   `updatetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`fileid`),
   KEY `fileid` (`fileid`),
   KEY `userid` (`userid`),
-  KEY `subjectid` (`subjectid`)
+  KEY `subject` (`subject`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- 轉存資料表中的資料 `file`
 --
 
-INSERT INTO `file` (`fileid`, `timeid`, `subjectid`, `professor`, `userid`, `updatetime`) VALUES
-(1, 10121, 1, '蔡益坤', 1, '0000-00-00 00:00:00'),
-(2, 10021, 2, '蔡益坤', 1, '0000-00-00 00:00:00'),
-(3, 9211, 3, '陳炳宇', 1, '2014-06-09 03:59:21');
+INSERT INTO `file` (`fileid`, `timeid`, `subject`, `professor`, `userid`, `updatetime`) VALUES
+(1, 10121, '計算理論', '蔡益坤', 1, '0000-00-00 00:00:00'),
+(2, 10021, '演算法', '蔡益坤', 1, '0000-00-00 00:00:00'),
+(3, 9211, '計算機組織與結構', '陳炳宇', 1, '2014-06-09 03:59:21');
+
+-- --------------------------------------------------------
+
+--
+-- 表的結構 `keyword`
+--
+
+CREATE TABLE IF NOT EXISTS `keyword` (
+  `subject` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `subject_nickname` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`subject`,`subject_nickname`),
+  KEY `subject` (`subject`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 轉存資料表中的資料 `keyword`
+--
+
+INSERT INTO `keyword` (`subject`, `subject_nickname`) VALUES
+('演算法', 'Algorithm'),
+('演算法', '演算法'),
+('計算機組織與結構', '計算機組織與結構'),
+('計算機組織與結構', '計組'),
+('計算理論', 'Theory of computing'),
+('計算理論', '計理'),
+('計算理論', '計算理論');
 
 -- --------------------------------------------------------
 
@@ -150,31 +176,6 @@ INSERT INTO `question` (`questionid`, `fileid`, `question`, `number`) VALUES
 (24, 3, '(10%) Consider the following fragment of C code:\r\nfor (i = 0; i <= 200; i = i + 1) { a[i] = b[i] + c[i]; }\r\nAssume that a and b are arrays of words and the base address of a is in $a0, the base address of b is in $a1, and the base address of c is in $a2. Register $t0 is associated with the variable i.\r\na. (6%) Please write the code for MIPS and write the comment for each MIPS statement.\r\nb. (2%) How many instructions are executed during the running of this code?\r\nc. (2%) How many memory data references will be made during the execution?\r\n', 6),
 (25, 3, '(10%) IEEE 754 is a floating-point standard.\r\na. (5%) Please show the IEEE 754 binary representation for the floating-point number\r\n-0.4375ten in single precision.\r\nb. (5%) Please convert the following IEEE 754 binary representation in single\r\nprecision to the decimal number: 1011 1111 1100 0000 0000 0000 0000 0000.\r\n', 7),
 (26, 3, '(10%) The ALU supported set on less than (slt) using just the sign bit of the adder. Let’s try a set on less than operation using the values -7ten and 6ten. To make it simpler to follow the example, let’s limit the binary representations to 4 bits: 1001two and 0110two.\r\n1001two – 0110two = 1001two + 1010two = 0011two\r\nThis result would suggest that -7ten > 6ten, which is clearly wrong. Hence we must factor in overflow in the decision. Modify the 1-bit ALU in the following figures to handle slt correctly. (You can just write on the next page and deliver it with your answer papers.)\r\n0\r\n1\r\na\r\nb\r\nresult\r\noperation\r\n+ 2\r\ncin\r\ncout\r\n0\r\n1\r\nbinvert\r\nless 3\r\nFigure 1: A 1-bit ALU that performs AND, OR, and addition on a and b or b’.\r\n0\r\n1\r\na\r\nb\r\nresult\r\noperation\r\n+ 2\r\ncin\r\n0\r\n1\r\nbinvert\r\nless 3\r\noverflow\r\ndetection\r\noverflow\r\nset\r\nFigure 2: A 1-bit ALU for the most significant bit.', 8);
-
--- --------------------------------------------------------
-
---
--- 表的結構 `subject`
---
-
-CREATE TABLE IF NOT EXISTS `subject` (
-  `subjectid` int(11) NOT NULL,
-  `subject` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`subjectid`,`subject`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- 轉存資料表中的資料 `subject`
---
-
-INSERT INTO `subject` (`subjectid`, `subject`) VALUES
-(1, 'Theory of computing'),
-(1, '計理'),
-(1, '計算理論'),
-(2, 'Algorithm'),
-(2, '演算法'),
-(3, '計算機組織與結構'),
-(3, '計組');
 
 -- --------------------------------------------------------
 
