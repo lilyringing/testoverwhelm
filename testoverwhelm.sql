@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- 主機: 127.0.0.1
--- 產生日期: 2014 年 06 月 09 日 06:11
+-- 產生日期: 2014 年 06 月 09 日 19:40
 -- 伺服器版本: 5.5.32
--- PHP 版本: 5.4.16
+-- PHP 版本: 5.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `answer` (
 INSERT INTO `answer` (`answerid`, `questionid`, `answer`, `good`, `bad`, `userid`, `updatetime`) VALUES
 (2, 3, 'R0 → ε | 0R1 | 1R2\r\nR1 → ε | 0R1 | 1R3\r\nR2 → ε | 0R4 | 1R2\r\nR3 → ε | 1R4\r\nR4 → ε | 0R3\r\n(Note: useless production rules have been removed.)', 0, 1, 1, '2014-06-07 01:13:25'),
 (3, 3, 'test', 0, 1, 2, '2014-06-07 05:20:44'),
-(4, 1, 'D:/xampp/htdocs/Github/testoverwhelm/upload/TC20131A1.PNG', 0, 0, 1, '2014-06-07 10:15:46'),
+(4, 1, 'D:/xampp/htdocs/Github/testoverwhelm/upload/TC20131A1.PNG', 1, 0, 1, '2014-06-07 10:15:46'),
 (5, 1, 'This is a test for the text answer of problem 1.', 0, 0, 1, '2014-06-08 04:38:20'),
 (6, 1, 'D:/xampp/htdocs/Github/testoverwhelm/upload/TC20131A2.PNG', 0, 0, 1, '0000-00-00 00:00:00'),
 (7, 2, '<h1> hack </h1>', 0, 1, 1, '0000-00-00 00:00:00');
@@ -86,23 +86,24 @@ INSERT INTO `comment` (`commentid`, `fileid`, `userid`, `comment`, `updatetime`)
 CREATE TABLE IF NOT EXISTS `file` (
   `fileid` int(11) NOT NULL AUTO_INCREMENT,
   `timeid` int(5) NOT NULL,
-  `subject` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `subjectid` int(11) NOT NULL,
   `professor` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `userid` int(11) NOT NULL,
   `updatetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`fileid`),
   KEY `fileid` (`fileid`),
-  KEY `userid` (`userid`)
+  KEY `userid` (`userid`),
+  KEY `subjectid` (`subjectid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- 轉存資料表中的資料 `file`
 --
 
-INSERT INTO `file` (`fileid`, `timeid`, `subject`, `professor`, `userid`, `updatetime`) VALUES
-(1, 10121, '計算理論', '蔡益坤', 1, '0000-00-00 00:00:00'),
-(2, 10021, '演算法', '蔡益坤', 1, '0000-00-00 00:00:00'),
-(3, 9211, '計算機組織與結構', '陳炳宇', 1, '2014-06-09 03:59:21');
+INSERT INTO `file` (`fileid`, `timeid`, `subjectid`, `professor`, `userid`, `updatetime`) VALUES
+(1, 10121, 1, '蔡益坤', 1, '0000-00-00 00:00:00'),
+(2, 10021, 2, '蔡益坤', 1, '0000-00-00 00:00:00'),
+(3, 9211, 3, '陳炳宇', 1, '2014-06-09 03:59:21');
 
 -- --------------------------------------------------------
 
@@ -153,6 +154,31 @@ INSERT INTO `question` (`questionid`, `fileid`, `question`, `number`) VALUES
 -- --------------------------------------------------------
 
 --
+-- 表的結構 `subject`
+--
+
+CREATE TABLE IF NOT EXISTS `subject` (
+  `subjectid` int(11) NOT NULL,
+  `subject` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`subjectid`,`subject`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 轉存資料表中的資料 `subject`
+--
+
+INSERT INTO `subject` (`subjectid`, `subject`) VALUES
+(1, 'Theory of computing'),
+(1, '計理'),
+(1, '計算理論'),
+(2, 'Algorithm'),
+(2, '演算法'),
+(3, '計算機組織與結構'),
+(3, '計組');
+
+-- --------------------------------------------------------
+
+--
 -- 表的結構 `user`
 --
 
@@ -196,6 +222,7 @@ CREATE TABLE IF NOT EXISTS `vote` (
 INSERT INTO `vote` (`userid`, `answerid`, `gb`, `updatetime`) VALUES
 (1, 2, 0, '0000-00-00 00:00:00'),
 (1, 3, 0, '0000-00-00 00:00:00'),
+(1, 4, 1, '2014-06-09 07:02:01'),
 (1, 7, 0, '0000-00-00 00:00:00');
 
 --
