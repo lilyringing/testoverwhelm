@@ -40,4 +40,10 @@ class Question_model extends CI_Model {
 			return null;
 		}
 	}
+	
+	public function uploadQuestion($data)
+	{
+		$this->db->insert("question", $data);
+		return $this->db->insert_id();
+	}
 }
