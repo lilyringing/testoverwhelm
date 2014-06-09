@@ -35,12 +35,12 @@
 				</div>
 				
 				
-				<div>
-					<input type = "submit" value ="送出">
-				</div>
+				
 			</div>
 		<?php }?>		
-		
+			<div>
+					<input type = "submit" value ="送出">
+				</div>
 	</form>
 	</div>
 
