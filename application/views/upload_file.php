@@ -1,28 +1,46 @@
 <?php if(!isset($_SESSION)){
 		session_start();
 }?>
+<style type="text/css">
+.quesForm{
+	margin-top:100px;
+}
+.questionList{
+	vertical-align: text-bottom;
+}
+</style>
 
 <body>
-	<div>
+	<div class="quesForm container">
 	<form action="<?=site_url("test/upload_test")?>" method = "post" name = "upload_file">
-		<br>
-		<br>
-		<br>
-		<div>
+		
+		<div class="well">
 			科目：<input type="text" name = "subject">
-			教授：<input type="text" name = "professor"><br>
+			教授：<input type="text" name = "professor">
 			<input type="text" name = "year">年
 			<select name = "semester"><option value = "1">上</option><option value = "2">下</option></select>學期
-			第<input type="text" name = "times" value="幾">次考試<br>
+			第<input type="text" name = "times" value="幾">次考試
+			<a href="<?=site_url(("test/upload_file/".($size+1)))?>">新增題目</a>
 		</div>
-		<a href="<?=site_url(("test/upload_file/".($size+1)))?>">新增題目</a>
+
 		<?php for($i = 0; $i < $size; $i++){?>
-		<div>
-			第<input type="text" name = "number<?php echo $i;?>" value="幾">題<br>
-			<textarea name = "question<?php echo $i;?>"></textarea>
-		</div>
+			<div class="well questionList">
+				<div style="float:left;">
+					第<input type="text" name = "number<?php echo $i;?>" value="">題
+				</div>
+				
+
+				<div>
+					<textarea style="margin-left:20px; width:600px;" name = "question<?php echo $i;?>"></textarea>
+				</div>
+				
+				
+				<div>
+					<input type = "submit" value ="送出">
+				</div>
+			</div>
 		<?php }?>		
-		<input type = "submit" value ="送出">
+		
 	</form>
 	</div>
 

@@ -14,6 +14,7 @@
 		background-position:bottom left;
 		background-repeat: no-repeat;
 		background-size: 40%;
+		opacity: 0.5;
 	
 	}
 	.icon{
@@ -243,6 +244,10 @@
 
 $(".action-archive").click(function(event){
     window.location.href = '<?php echo site_url("/search/search_all") ; ?>';
+});
+
+$(".action-upload").click(function(event){
+    window.location.href = '<?php echo site_url("/test/upload_file") ; ?>';
 });
 </script>
 
