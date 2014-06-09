@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4.1
+-- version 4.1.12
 -- http://www.phpmyadmin.net
 --
--- 主機: 127.0.0.1
--- 產生日期: 2014 年 06 月 09 日 06:11
--- 伺服器版本: 5.5.32
--- PHP 版本: 5.4.16
+-- 主機: localhost
+-- 產生時間： 2014 年 06 月 09 日 15:32
+-- 伺服器版本: 5.6.16
+-- PHP 版本： 5.5.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,15 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- 資料庫: `testoverwhelm`
+-- 資料庫： `testoverwhelm`
 --
-CREATE DATABASE IF NOT EXISTS `testoverwhelm` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `testoverwhelm`;
 
 -- --------------------------------------------------------
 
 --
--- 表的結構 `answer`
+-- 資料表結構 `answer`
 --
 
 CREATE TABLE IF NOT EXISTS `answer` (
@@ -42,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `answer` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
--- 轉存資料表中的資料 `answer`
+-- 資料表的匯出資料 `answer`
 --
 
 INSERT INTO `answer` (`answerid`, `questionid`, `answer`, `good`, `bad`, `userid`, `updatetime`) VALUES
@@ -56,7 +54,7 @@ INSERT INTO `answer` (`answerid`, `questionid`, `answer`, `good`, `bad`, `userid
 -- --------------------------------------------------------
 
 --
--- 表的結構 `comment`
+-- 資料表結構 `comment`
 --
 
 CREATE TABLE IF NOT EXISTS `comment` (
@@ -71,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
--- 轉存資料表中的資料 `comment`
+-- 資料表的匯出資料 `comment`
 --
 
 INSERT INTO `comment` (`commentid`, `fileid`, `userid`, `comment`, `updatetime`) VALUES
@@ -80,7 +78,7 @@ INSERT INTO `comment` (`commentid`, `fileid`, `userid`, `comment`, `updatetime`)
 -- --------------------------------------------------------
 
 --
--- 表的結構 `file`
+-- 資料表結構 `file`
 --
 
 CREATE TABLE IF NOT EXISTS `file` (
@@ -96,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `file` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- 轉存資料表中的資料 `file`
+-- 資料表的匯出資料 `file`
 --
 
 INSERT INTO `file` (`fileid`, `timeid`, `subject`, `professor`, `userid`, `updatetime`) VALUES
@@ -107,7 +105,7 @@ INSERT INTO `file` (`fileid`, `timeid`, `subject`, `professor`, `userid`, `updat
 -- --------------------------------------------------------
 
 --
--- 表的結構 `question`
+-- 資料表結構 `question`
 --
 
 CREATE TABLE IF NOT EXISTS `question` (
@@ -120,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `question` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
--- 轉存資料表中的資料 `question`
+-- 資料表的匯出資料 `question`
 --
 
 INSERT INTO `question` (`questionid`, `fileid`, `question`, `number`) VALUES
@@ -153,20 +151,20 @@ INSERT INTO `question` (`questionid`, `fileid`, `question`, `number`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的結構 `user`
+-- 資料表結構 `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
   `userid` int(11) NOT NULL AUTO_INCREMENT,
   `account` varchar(25) NOT NULL,
-  `password` varchar(25) NOT NULL,
+  `password` varchar(200) NOT NULL,
   PRIMARY KEY (`userid`),
   KEY `userid` (`userid`),
   KEY `userid_2` (`userid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- 轉存資料表中的資料 `user`
+-- 資料表的匯出資料 `user`
 --
 
 INSERT INTO `user` (`userid`, `account`, `password`) VALUES
@@ -176,7 +174,7 @@ INSERT INTO `user` (`userid`, `account`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的結構 `vote`
+-- 資料表結構 `vote`
 --
 
 CREATE TABLE IF NOT EXISTS `vote` (
@@ -190,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `vote` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- 轉存資料表中的資料 `vote`
+-- 資料表的匯出資料 `vote`
 --
 
 INSERT INTO `vote` (`userid`, `answerid`, `gb`, `updatetime`) VALUES
@@ -199,7 +197,7 @@ INSERT INTO `vote` (`userid`, `answerid`, `gb`, `updatetime`) VALUES
 (1, 7, 0, '0000-00-00 00:00:00');
 
 --
--- 匯出資料表的 Constraints
+-- 已匯出資料表的限制(Constraint)
 --
 
 --
