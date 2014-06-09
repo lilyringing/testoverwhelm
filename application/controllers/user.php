@@ -16,21 +16,34 @@ class User extends CI_Controller {
 	}
 	
 	public function authenticate(){
+
+
+////////// Load validation library ///////////////
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('userID', 'Username', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|matches[passconf]|md5');
+				
+		
+//////////////////////////////////////////////////
+
+
 		$wrong = 0;//init => account and password are not wrong
 		$account = trim($this->input->post("userID"));
 		$password = trim($this->input->post("password"));
 		
 		$this->load->model('user_model');
-		$user = $this->user_model->getUser($account, $password);
-		if($user != NULL){
-			$this->session->set_userdata('user', $user);
-			$this->load->view('_navbar');
-		}else{
+		$user = $this->user_model->getUser($account, md5($password));
+
+		if ($this->form_validation->run() == FALSE){
 			$wrong = 1; //In view: _navbar, tell user something wrong 
 			$this->load->view('_navbar', Array(
 						'userID' => $account,
-						"wrong" => $wrong));
-
+						"wrong" => validation_errors()));
+		}
+		else if($user != NULL){
+			$this->session->set_userdata('user', $user);
+			$this->load->view('_navbar');
 		}
 		
 	}

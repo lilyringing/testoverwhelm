@@ -141,6 +141,7 @@
 
 
 <?php }else{?>
+
 <div class="navbar-a">
 	<div class="navbar-link"><a href="#" class="loginBut">登入</a></div>
 
@@ -150,7 +151,12 @@
 
 	<div class="loginDiv">
 		<form id="loginForm" method="post">
-			<?php if(isset($wrong)) {?><script>alert("一定是密碼錯誤")</script><?php } ?>
+
+			<?php if(isset($wrong)) {?>
+
+			<script>alert("登入資訊有誤")</script>
+
+			<?php } ?>
 			<div class="left-inner-addon">
 				<i class="fa fa-user"></i>
 				<input type="text" class="inputVal" name="userID" placeholder="user account" value = "<?php if(isset($userID)){echo $userID; }?>"></input>
@@ -267,6 +273,7 @@ $("#loginBtn").bind("click", function(){
 
 /*
 */
+
 
 </script>
 </div>
