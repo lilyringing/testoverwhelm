@@ -21,6 +21,7 @@
 			<select name = "semester"><option value = "1">上</option><option value = "2">下</option></select>學期
 			第<input type="text" name = "times" value="幾">次考試
 			<a href="<?=site_url(("test/upload_file/".($size+1)))?>">新增題目</a>
+			<a href="<?=site_url("test/upload_page/")?>" target="_blank">OCR</a>
 		</div>
 
 		<?php for($i = 0; $i < $size; $i++){?>
