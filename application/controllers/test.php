@@ -73,6 +73,15 @@ class Test extends CI_Controller{
 		}
 	}
 	
+	public function upload_file()
+	{
+		$this->load->view('_header', Array(
+				'pageTitle' => "Upload file"));
+		$this->load->view('_navbar');
+		$size = $this->uri->segment(3, 1);
+		$this->load->view('upload_file', array('size'=>$size));
+	}
+	
 	public function upload_test()
 	{
 		$subject = trim($this->input->post("subject"));
