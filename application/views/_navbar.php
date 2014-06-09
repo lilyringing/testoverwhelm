@@ -1,6 +1,6 @@
 <div class="navbar">
 	<div class="navbar-logo">
-		<img src="<?php echo base_url('/images/logo.png'); ?> ">
+		<a href="<?php echo site_url('/'); ?>"><img src="<?php echo base_url('/images/logo.png'); ?> "></a>
 	</div>
 
 <?php $session_account = $this->session->userdata('user');?>
@@ -36,10 +36,11 @@
 	height:60px;
 	text-align: right;
 	padding-right: 20px;
-	top:10px;
+	top:0px;
 	font-size: 15px;
 	z-index: 101;
 	position: fixed;
+	background-color: white;
 }
 
 .loginDiv{

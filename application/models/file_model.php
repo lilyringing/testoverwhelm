@@ -38,8 +38,20 @@ class File_model extends CI_Model {
 		}
 	}
 	
+	public function getFileInfo($fileID){
+		$this->db->select('*');
+		$query = $this->db->get_where('file', Array('fileid' => $fileID));
+		if($query->num_rows() > 0){
+			return $query->row();
+		}
+		else{
+			return -1;
+		}
+		
+	}
+	
 	public function getAllFiles(){
-		$this->db->select('timeid, subject, professor');
+		$this->db->select('fileid, timeid, subject, professor');
 		$this->db->from('file');
 		$this->db->order_by('subject', 'asc');
 		$this->db->order_by('timeid', 'asc');
@@ -52,4 +64,9 @@ class File_model extends CI_Model {
 		}
 	}
 	
+	public function uploadFile($data)
+	{
+		$this->db->insert("file", $data);
+		return $this->db->insert_id();
+	}
 }

@@ -10,10 +10,11 @@
 		position:absolute;
 		width:100%;
 		height:100%;
-		background-image: url(<?= base_url("images/TSAY.png") ?>);
+		background-image: url(<?= base_url("images/TSAY.jpg") ?>);
 		background-position:bottom left;
 		background-repeat: no-repeat;
 		background-size: 40%;
+		opacity: 0.5;
 	
 	}
 	.icon{
@@ -236,6 +237,18 @@
 
 		}//end if lock
 	})//end bind searchBtn
+
+
+
+//////icon link click js
+
+$(".action-archive").click(function(event){
+    window.location.href = '<?php echo site_url("/search/search_all") ; ?>';
+});
+
+$(".action-upload").click(function(event){
+    window.location.href = '<?php echo site_url("/test/upload_file") ; ?>';
+});
 </script>
 
 
