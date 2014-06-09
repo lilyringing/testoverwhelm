@@ -10,7 +10,7 @@
 		position:absolute;
 		width:100%;
 		height:100%;
-		background-image: url(<?= base_url("images/TSAY.png") ?>);
+		background-image: url(<?= base_url("images/TSAY.jpg") ?>);
 		background-position:bottom left;
 		background-repeat: no-repeat;
 		background-size: 40%;

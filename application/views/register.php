@@ -10,13 +10,16 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/register.css'); ?> ">
 
 
+
+
 <div class="container">
+	<div class="alert alert-danger"><?php if(isset($alert)){echo $alert; }?></div>
+
 	<section id="content">
 		<form action="<?php echo site_url('user/createUser') ?>" method="post">
 			<h1>Register</h1>
 			<div>
-				<input type="text" id="username" name="userID" value="<?php if(isset($alert)){
-										echo $alert; }?>" placeholder="UserID"></input>
+				<input type="text" id="username" name="userID" value="" placeholder="UserID"></input>
 			</div>
 			<div>
 				<input type="password" id="password" name="password" placeholder="Password"></input>
