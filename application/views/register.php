@@ -13,7 +13,11 @@
 
 
 <div class="container">
-	<div class="alert alert-danger"><?php if(isset($alert)){echo $alert; }?></div>
+	<?php if(isset($alert)){?> 
+	<div class="alert alert-danger"><?php echo $alert; ?></div>
+	
+	<?php  }?>
+	
 
 	<section id="content">
 		<form action="<?php echo site_url('user/createUser') ?>" method="post">

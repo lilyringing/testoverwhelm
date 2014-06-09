@@ -2,10 +2,29 @@
 		session_start();
 
 	  }?>
+<script type="text/javascript" src="<?php echo base_url('/js/masonry.pkgd.min.js') ; ?>"></script>
+<script>
+$(document).ready(function(){
+	var container = document.querySelector('#container');
+	var msnry = new Masonry( container, {
+	  // options
+	  columnWidth: 50,
+	  itemSelector: '.item'
+	});
+})
+
+
+</script>
 
 <style type="text/css">
+.item{
+	margin-left:10px;
+	padding-left: 0px;
+	padding-right: 0px;
+
+}
 .subject{
-	margin: 20px auto; 
+	margin: 0px auto; 
 }
 .list{
 	margin-top:10%;
@@ -16,7 +35,7 @@ tr:hover{
 }
 </style>
 <body>
-	<div class="container list">
+	<div id="container" class="container list">
 		<div class="row">
 	<?php $cur = NULL;?>
 	<?php for($i=0, $size = count($info); $i<$size; $i++){ ?>
@@ -24,12 +43,7 @@ tr:hover{
 	
 	<?php if( $cur != $info[$i]->subject ) { ?>
 	
-
-
-	
-		
-			<!--  -->
-			<div class="panel panel-default col-lg-3 col-lg-offset-1">
+			<div class="panel panel-default col-lg-3 item">
 			  <div class="panel-heading">
 			    <h3 class="panel-title"><?php echo ($cur = $info[$i]->subject);?></h3>
 			  </div>

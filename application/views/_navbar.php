@@ -1,6 +1,6 @@
 <div class="navbar">
 	<div class="navbar-logo">
-		<img src="<?php echo base_url('/images/logo.png'); ?> ">
+		<a href="<?php echo site_url('/'); ?>"><img src="<?php echo base_url('/images/logo.png'); ?> "></a>
 	</div>
 
 <?php $session_account = $this->session->userdata('user');?>
