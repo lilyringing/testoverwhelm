@@ -14,7 +14,7 @@
 
 <div class="container">
 	<?php if(isset($alert)){?> 
-	<div class="alert alert-danger"><?php echo $alert; ?></div>
+	<div class="alert alert-danger"><?php echo validation_errors(); ?></div>
 	
 	<?php  }?>
 	
@@ -28,8 +28,12 @@
 			<div>
 				<input type="password" id="password" name="password" placeholder="Password"></input>
 			</div>
+			
 			<div>
-				<input type="submit" value="Register" />
+				<input type="password" id="password" name="passconf" placeholder="Password Again"></input>
+			</div>
+			<div>
+				<input class="regSubmit" type="submit" value="Register" />
 			</div>
 		</form><!-- form -->
 	</section><!-- content -->
