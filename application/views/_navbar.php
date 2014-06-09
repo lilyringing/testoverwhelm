@@ -79,7 +79,7 @@
 	float:left;
 	position:relative;
 	margin-left:1px;
-	width:100;
+	width:100px;
 }
 .left-inner-submit input{
 	width: 100px;
@@ -99,7 +99,7 @@
 .navbar-loggedin{
 	float:left;
 	margin:10px;
-	
+
 
 
 }
@@ -127,12 +127,12 @@
 		<div class="navbar-loggedin">
 			<?php echo $session_account->account;?>
 		</div>
-		
+
 		<div class="navbar-loggedin">
 			<a id="logoutAnch" href="#">登出</a>
 		</div>
 	</div>
-	
+
 </div>
 
 
@@ -229,10 +229,44 @@ $("#loginBtn").bind("click", function(){
             newNav.innerHTML = response;
             //update navbar content
              oldNav.html($(newNav).children().html());
+
+             if(  $(".sheet").html() !==undefined )
+             {
+
+                    var sheet = window.location.pathname;
+                    while( sheet.search("/") != -1 )
+                    {
+                        sheet = sheet.slice(sheet.search("/")+1, sheet.length);
+                    }
+
+                    $.ajax({
+                     url: '<?=site_url("test/testing")?>'+'/'+sheet,
+                     cache: true,
+                     dataType: 'html',
+                         type:'POST',
+                     data: {},
+                     error: function(xhr) {
+                        //wrong password (or account) message belongs 'success' block below
+                       //alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
+                     },
+                     success: function(response) {
+                       //alert("與伺服器連線成功");//the same with 'error' block above
+
+                        var newSheet = document.createElement("div");
+                        newSheet.innerHTML = response;
+                        $(".sheet").html($(newSheet).children(".sheet").html() );
+
+                     }
+                    });//end ajax
+            }
          }
         });//end ajax
 
 });//end bind loginBtn
+
+/*
+*/
+
 </script>
 </div>
 
