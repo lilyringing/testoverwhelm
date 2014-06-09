@@ -27,6 +27,9 @@ class Test extends CI_Controller{
 		$this->load->model('comment_model');
 		$data['comment'] = $this->comment_model->getComment($fileID);
 
+		$this->load->model('file_model');
+		$data['info'] = $this->file_model->getFileInfo($fileID);
+		
 		$this->load->view('_header', Array(
 						'pageTitle' => "Test starts"));
 		$this->load->view('_navbar');

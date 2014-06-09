@@ -38,6 +38,18 @@ class File_model extends CI_Model {
 		}
 	}
 	
+	public function getFileInfo($fileID){
+		$this->db->select('*');
+		$query = $this->db->get_where('file', Array('fileid' => $fileID));
+		if($query->num_rows() > 0){
+			return $query->row();
+		}
+		else{
+			return -1;
+		}
+		
+	}
+	
 	public function getAllFiles(){
 		$this->db->select('fileid, timeid, subject, professor');
 		$this->db->from('file');
