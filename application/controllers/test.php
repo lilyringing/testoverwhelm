@@ -28,7 +28,7 @@ class Test extends CI_Controller{
 
 		$this->load->model('file_model');
 		$data['info'] = $this->file_model->getFileInfo($fileID);
-		
+
 		$this->load->view('_header', Array(
 						'pageTitle' => "Test starts"));
 		$this->load->view('_navbar');
@@ -68,10 +68,10 @@ class Test extends CI_Controller{
 			//this line is used to delete the upload picture
 			//haven't test if there's some problem delete it.
 			delete_files($picture['full_path']);
-			$this->load->view('ocr_text', array('text' => $text));		
+			$this->load->view('ocr_text', array('text' => $text));
 		}
 	}
-	
+
 	public function upload_file()
 	{
 		$this->load->view('_header', Array(
@@ -80,7 +80,7 @@ class Test extends CI_Controller{
 		$size = $this->uri->segment(3, 1);
 		$this->load->view('upload_file', array('size'=>$size));
 	}
-	
+
 	public function upload_test()
 	{
 		$subject = trim($this->input->post("subject"));
@@ -88,13 +88,13 @@ class Test extends CI_Controller{
 		$year = trim($this->input->post("year"));
 		$semester = trim($this->input->post("semester"));
 		$times = trim($this->input->post("times"));
-		
+
 		$timeid = 100 * $year + 10 * $semester + $times;
 		$session_account = $this->session->userdata('user');
 		//upload file
 		$this->load->model('file_model');
 		$fileid = $this->file_model->uploadFile(array( 'timeid' => $timeid, 'subject' => $subject, 'professor' => $professor, 'userid' => $session_account->userid));
-		
+
 		//upload question
 		$i=0;
 		$this->load->model('question_model');
@@ -112,11 +112,12 @@ class Test extends CI_Controller{
 		}
 		redirect(site_url("test/testing/".$fileid));
 	}
-	
+
 	public function upload_text_ans(){
 		$session_account = $this->session->userdata('user');
 		$questionID = trim($this->uri->segment(3));
 		$answer = trim($this->input->post("content"));
+		$answer = html_escape($answer);
 		$data = Array('questionid' => $questionID, 'answer' => $answer,
 					  'userid' => $session_account->userid);
 

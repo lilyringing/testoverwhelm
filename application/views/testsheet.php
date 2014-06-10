@@ -4,7 +4,6 @@
 	  }?>
 <?php $session_account = $this->session->userdata('user');?>
 <div class="sheet">
-
 <style>
 	.sheet{
 		position: relative;
@@ -28,16 +27,17 @@
 		float: left;
 		margin-top: 0.4em;
 	}
-	.ansBtn, .sendBtn, .uploadBtn{
+	.ansBtn, .sendBtn, .uploadBtn, .showSendBtn{
 		position: relative;
 		float: left;
 		width: 10em;
+		margin-right: 2em;
 	}
 	.sendBtn{
 		top:92px;
 		margin-left: 1em;
 	}
-	.ansBtn input, .sendBtn button, .uploadBtn input{
+	.ansBtn input, .sendBtn button, .uploadBtn input, .showSendBtn input{
 		height: 34px;
 		padding: 6px 30px;
 		font-size: 14px;
@@ -48,12 +48,8 @@
 		border: 1px solid #ccc;
  		border-radius: 4px;
 	}
-	.ansId{
+	.ansId, .ansParent, .formBlock{
 		display: none;
-	}
-	.ansParent{
-		display: none;
-
 	}
 	.ansChild, .commentChild{
 		margin-left: 1em;
@@ -96,13 +92,27 @@
 			<!-- print the answers of this question -->
 		<?php if($session_account){ ?>
 			<div  class="ansBlock">
-				<div class="ansBlock"><div class="ansBtn"><input type="button" value="Show answer"></div></div>
+				<div class="ansBlock">
+					<div class="ansBtn"><input type="button" value="Show answer"></div>
+					<div class="showSendBtn"><input type="button" value="Write answer"></div>
+				</div>
 				<div  class="ansParent">
 
 			<?php if($answer[$rows->questionid] != null){ ?>
 				   <?php foreach($answer[$rows->questionid] as $ans){?>
 				  		<div class="ansChild">
-				  			<div class="ansContent"><?php echo $ans->answer;?></div>
+				  			<div class="ansContent">
+				  				<?php
+				  				//$check = site_url("../upload")."/".$ans->answer;
+				  				//$check = "http://localhost/sa_project/testoverwhelm/upload/TC20131A1.PNG";
+				  				if( file_exists($ans->answer) )
+				  				{ ?>
+				  				<img src="<?php echo $ans->answer;?>">
+				  			<?php }
+				  				else{
+				  					echo $ans->answer;
+				  				} ?>
+				  			</div>
 				  			<div class="iconBlock">
 				  				<?php echo "<div class='author'><div class='fa fa-user author_icon'></div>: ".$ans->account."</div>";?>
 				  				<?php echo "<div class='thumb'><div class='fa fa-thumbs-o-up thumb_icon'><div class='ansId'>".$ans->answerid."</div></div>: <div class='gb'>".$ans->good."</div></div>";?>
@@ -164,7 +174,6 @@
 <script>
 $(".ansBtn").bind("click", function(){
 	var index = $(".ansBtn").index(this);
-	var aaa = $(".ansParent:eq("+index+")").html();
 	if( $(".ansParent:eq("+index+")").css("display") == "none" )
 	{
 		$(".ansParent:eq("+index+")").fadeIn(200);
@@ -172,6 +181,19 @@ $(".ansBtn").bind("click", function(){
 	else
 	{
 		$(".ansParent:eq("+index+")").fadeOut(200);
+	}
+});
+
+
+$(".showSendBtn").bind("click", function(){
+	var index = $(".showSendBtn").index(this);
+	if( $(".formBlock:eq("+index+")").css("display") == "none" )
+	{
+		$(".formBlock:eq("+index+")").fadeIn(200);
+	}
+	else
+	{
+		$(".formBlock:eq("+index+")").fadeOut(200);
 	}
 });
 
@@ -206,19 +228,19 @@ $(".thumb_icon").bind("click", function(){
          	if(response==0)
          	{
          		//add new
-         	   thisGb.html( parseInt(thisGb.html()+1, 10) );
+         	   thisGb.html( parseInt(thisGb.html(), 10)+1 );
          	}
          	else if(response==1)
          	{
          		//cancel vote
-         	   thisGb.html( parseInt(thisGb.html()-1, 10)  );
+         	   thisGb.html( parseInt(thisGb.html(), 10)-1  );
          	}
          	else if( response==2 )
          	{
          		//change vote
 
-         	   thisGb.html( parseInt(thisGb.html()+1, 10)  );
-         	   anotherGb.html( parseInt(anotherGb.html()-1, 10)  );
+         	   thisGb.html( parseInt(thisGb.html(), 10)+1  );
+         	   anotherGb.html( parseInt(anotherGb.html(), 10)-1  );
          	}//end if
 
          }
