@@ -219,6 +219,9 @@ $(".thumb_icon").bind("click", function(){
 
          	   thisGb.html( parseInt(thisGb.html()+1, 10)  );
          	   anotherGb.html( parseInt(anotherGb.html()-1, 10)  );
+         	}
+         	else{
+         		alert("喔啊不就直接尻網址好棒棒！去資種練練吧！")
          	}//end if
 
          }

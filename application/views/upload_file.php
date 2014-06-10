@@ -11,15 +11,18 @@
 </style>
 
 <body>
+
 	<div class="quesForm container">
 	<form action="<?=site_url("test/upload_test")?>" method = "post" name = "upload_file">
-		
+		<?php if(isset($error)){ ?>
+		<div><?php echo $error; ?> </div>
+		<?php } ?>
 		<div class="well">
 			科目：<input type="text" name = "subject">
 			教授：<input type="text" name = "professor">
 			<input type="text" name = "year">年
 			<select name = "semester"><option value = "1">上</option><option value = "2">下</option></select>學期
-			第<input type="text" name = "times" value="幾">次考試
+			第<input type="text" name = "times">次考試
 			<a class="addQuestion">新增題目</a>
 			<a href="<?=site_url("test/upload_page/")?>" target="_blank">OCR</a>
 		</div>

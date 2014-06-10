@@ -130,7 +130,7 @@
 		</div>
 
 		<div class="navbar-loggedin">
-			<a id="logoutAnch" href="#">登出</a>
+			<a id="logoutAnch" href='<?=site_url("user/logout")?>'>登出</a>
 		</div>
 	</div>
 
@@ -178,34 +178,6 @@
 
 
 <script>
-
-    //these script code appear in DOM if user has been loggedin
-$("#logoutAnch").bind("click", function(){
-    var oldNav = $(".navbar");
-
-    $.ajax({
-         url: '<?=site_url("user/logout")?>',
-         cache: true,
-         dataType: 'html',
-             type:'POST',
-         data: {},
-         error: function(xhr) {
-           //alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
-         },
-         success: function(response) {
-           //alert("與伺服器連線成功");//the same with 'error' block above
-           //create a new node to be responese's parent node
-            var newNav = document.createElement("div");
-            newNav.innerHTML = response;
-            //update navbar content
-            oldNav.html($(newNav).children().html());
-            //alert($(newNav).children().html());
-         }
-        });//end ajax
-
-});//end bind logoutAnch
-
-
 
 // Logged out 狀態時的SCRIPT
 $(".loginBut").bind("click", function(){

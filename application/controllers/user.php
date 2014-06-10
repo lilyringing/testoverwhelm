@@ -12,7 +12,7 @@ class User extends CI_Controller {
 	
 	public function logout(){
 		$this->session->unset_userdata('user');
-		$this->load->view('_navbar');
+		redirect(site_url('/welcome/index'));
 	}
 	
 	public function authenticate(){
@@ -22,7 +22,7 @@ class User extends CI_Controller {
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('userID', 'Username', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|matches[passconf]|md5');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|md5');
 				
 		
 //////////////////////////////////////////////////
