@@ -2,12 +2,10 @@
 -- version 4.1.12
 -- http://www.phpmyadmin.net
 --
-
--- 主機: 127.0.0.1
--- 產生日期: 2014 年 06 月 09 日 20:32
--- 伺服器版本: 5.5.32
--- PHP 版本: 5.4.27
-
+-- 主機: localhost
+-- 產生時間： 2014 年 06 月 10 日 14:35
+-- 伺服器版本: 5.6.16
+-- PHP 版本： 5.5.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -108,10 +106,7 @@ INSERT INTO `file` (`fileid`, `timeid`, `subject`, `professor`, `userid`, `updat
 -- --------------------------------------------------------
 
 --
-<<<<<<< HEAD
--- 資料表結構 `question`
-=======
--- 表的結構 `keyword`
+-- 資料表結構 `keyword`
 --
 
 CREATE TABLE IF NOT EXISTS `keyword` (
@@ -122,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `keyword` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- 轉存資料表中的資料 `keyword`
+-- 資料表的匯出資料 `keyword`
 --
 
 INSERT INTO `keyword` (`subject`, `subject_nickname`) VALUES
@@ -137,8 +132,7 @@ INSERT INTO `keyword` (`subject`, `subject_nickname`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的結構 `question`
->>>>>>> 5ca172de1b1ffd62f4737583c9f06ec8f4d5abe4
+-- 資料表結構 `question`
 --
 
 CREATE TABLE IF NOT EXISTS `question` (
@@ -190,7 +184,7 @@ INSERT INTO `question` (`questionid`, `fileid`, `question`, `number`) VALUES
 CREATE TABLE IF NOT EXISTS `user` (
   `userid` int(11) NOT NULL AUTO_INCREMENT,
   `account` varchar(25) NOT NULL,
-  `password` varchar(200) NOT NULL,
+  `password` varchar(25) NOT NULL,
   PRIMARY KEY (`userid`),
   KEY `userid` (`userid`),
   KEY `userid_2` (`userid`)
