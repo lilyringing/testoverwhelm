@@ -15,7 +15,7 @@
 		background-repeat: no-repeat;
 		background-size: 40%;
 		opacity: 0.5;
-	
+
 	}
 	.icon{
 
@@ -49,7 +49,7 @@
 		vertical-align: middle;
 
 		float:left;
-		
+
 	}
 
 
@@ -74,20 +74,20 @@
 	.search #searchBtn{
 		height:52px;
 		width: 100px;
-		margin-top:0px; 
-		padding: 6px 30px; 
-		font-size: 14px; 
+		margin-top:0px;
+		padding: 6px 30px;
+		font-size: 14px;
 		line-height: 30px;
-		vertical-align: middle; 
-		color: #555; 
+		vertical-align: middle;
+		color: #555;
 		background-color: #fff;
-		background-image: none; 
-		border: 0; 
+		background-image: none;
+		border: 0;
 		margin-left: 50px;
 	}
 	.search #searchBtn:hover{
 		background: rgba(30,30,30,0.2);
-		
+
 	}
 	.ac-other .action{
 		height:225px;
@@ -101,7 +101,7 @@
 		line-height: 225px;
 		vertical-align: middle;
 
-		
+
 		float:left;
 		width:500px;
 	}
@@ -161,14 +161,14 @@
 					<div class="search"><input type="text" class="search-input" name="teacher" placeholder="Teacher"></div>
 					<div class="search">/</div>
 					<div class="search"><input type="text" class="search-input" name="year" placeholder="Year"></div>
-					
+
 					<div class="search">
 						<input id="searchBtn" type="button" class="search-input" value="搜尋"></input>
 					</div>
 				</div>
-				
-				
-	
+
+
+
 			</form>
 		</div>
 
@@ -191,7 +191,7 @@
 
 
 <script>
-	
+
 	$("#searchBtn").blur(function(){
 		$(".search-result").fadeOut(100);
 	})

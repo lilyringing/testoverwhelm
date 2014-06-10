@@ -14,40 +14,61 @@ if(!isset($_SESSION)){
 </head>
 
 <body>
+	<div class="search-result">
+	<?php // Don't change this class 'search-result' unless you understand what it means ?>
+	<style>
+	.collection{
+		width:100%;
+		height: 100%;
+		overflow: scroll;
+	}
+	.collection a:link, .collection a:visited{
+		color:gray;
+	}
+	.collection a:hover{
+		color:black;
+	}
+	.rect{
+		position: relative;
+		float: left;
+		margin: 2em;
+		border: 1px solid;
+		padding: 3px;
+	}
+	</style>
+		<div class="collection">
 
-	<div class="search-result"><?php 
-	// Don't change this class 'search-result' unless you understand what it means ?>
-		<?php if( isset($files) ) {?>
-			<?php if( $files != -1 ){?>
-		<table>
-			<tr>
-				<td> 學年度 </td>
-				<td> 學期 </td>
-				<td> 次段考 </td>
-				<td> 科目 </td>
-				<td> 教授 </td>
-				<td> 上傳者</td>
-			</tr>	
-			<?php foreach ( $files as $element ):?>
-			<?php  $year = floor($element->timeid/ 100);
-				   $semester = floor($element->timeid / 10 - $year*10);
-				   $times = floor($element->timeid - $year*100 - $semester * 10 );?>
-			<tr>
-				<td><?php echo $year;?></td>
-				<td><?php echo $semester;?></td>
-				<td><?php echo $times;?></td>
-				<td><?php echo $element->subject?></td>
-				<td><?php echo $element->professor?></td>
-				<td><?php echo $element->account?></td>
-				<td><a href="<?=site_url("/test/testing")?>/<?php echo $element->fileid?>">Go!</a></td>
-				
-			</tr>
-			<?php endforeach;?>
-		</table>		
+
+			<?php if( isset($files) ) {?>
+				<?php if( $files != -1 ){?>
+				<?php foreach ( $files as $element ):?>
+				<a href="<?=site_url("/test/testing")?>/<?php echo $element->fileid?>">
+					<div class="rect">
+					<div  class="line">
+						<?php echo intval($element->timeid/100)."年";
+							if( intval($element->timeid%10) == 1){
+								echo "上學期";
+							}
+							else{
+								echo "下學期";
+							}
+						?>
+					</div>
+					<div  class="line">
+						<?php
+							echo "第".intval($element->timeid%100/10)."段考";
+						?>
+					</div>
+					<div class="line"><?php echo $element->subject?></div>
+					<div class="line"><?php echo $element->professor?></div>
+					</div>
+				</a>
+				<?php endforeach;?>
 			<?php }
-			else 
-				echo "nothing found"?>
-		<?php }?>
+			else
+				echo "<div class='rect'><div class='line'><h2>nothing found</h2></div></div>"?>
+			<?php }?>
+		</div>
 	</div>
 </body>
 </html>
