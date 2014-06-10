@@ -102,7 +102,7 @@ class Test extends CI_Controller{
 		$this->form_validation->set_rules('times', 'Times', 'required|xss_clean');
 		
 		
-//////////////////////////////////////////////////
+		//////////////////////////////////////////////////
 
 		if ($this->form_validation->run() == FALSE){
 			$this->load->view('_header', Array(
