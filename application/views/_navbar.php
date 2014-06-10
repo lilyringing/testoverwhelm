@@ -202,13 +202,14 @@ $("#loginBtn").bind("click", function(){
            alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
          },
          success: function(response) {
+            //alert(oldNav.html());//the same with 'error' block above
            //create a new node to be responese's parent node
             var newNav = document.createElement("div");
             newNav.innerHTML = response;
             //update navbar content
              oldNav.html($(newNav).children().html());
 
-           alert(oldNav.html());//the same with 'error' block above
+
 
              if(  $(".sheet").html() !==undefined )
              {

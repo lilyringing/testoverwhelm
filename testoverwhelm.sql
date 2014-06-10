@@ -108,9 +108,6 @@ INSERT INTO `file` (`fileid`, `timeid`, `subject`, `professor`, `userid`, `updat
 -- --------------------------------------------------------
 
 --
-<<<<<<< HEAD
--- 資料表結構 `question`
-=======
 -- 表的結構 `keyword`
 --
 
@@ -138,7 +135,6 @@ INSERT INTO `keyword` (`subject`, `subject_nickname`) VALUES
 
 --
 -- 表的結構 `question`
->>>>>>> 5ca172de1b1ffd62f4737583c9f06ec8f4d5abe4
 --
 
 CREATE TABLE IF NOT EXISTS `question` (
