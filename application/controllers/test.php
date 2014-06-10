@@ -88,27 +88,6 @@ class Test extends CI_Controller{
 
 	public function upload_test()
 	{
-<<<<<<< HEAD
-		$subject = trim($this->input->post("subject"));
-		$professor = trim($this->input->post("professor"));
-		$year = trim($this->input->post("year"));
-		$semester = trim($this->input->post("semester"));
-		$times = trim($this->input->post("times"));
-
-		$timeid = 100 * $year + 10 * $semester + $times;
-		$session_account = $this->session->userdata('user');
-		//upload file
-		$this->load->model('file_model');
-		$fileid = $this->file_model->uploadFile(array( 'timeid' => $timeid, 'subject' => $subject, 'professor' => $professor, 'userid' => $session_account->userid));
-
-		//upload question
-		$i=0;
-		$this->load->model('question_model');
-		while(true)
-		{
-			$number = trim($this->input->post("number".$i));
-			if($number == NULL)
-=======
 		if(!($this->session->userdata('user'))){
 			redirect(site_url('/welcome/loginerror'));
 		}
@@ -123,7 +102,7 @@ class Test extends CI_Controller{
 		$this->form_validation->set_rules('times', 'Times', 'required|xss_clean');
 		
 		
-//////////////////////////////////////////////////
+		//////////////////////////////////////////////////
 
 		if ($this->form_validation->run() == FALSE){
 			$this->load->view('_header', Array(
@@ -150,7 +129,7 @@ class Test extends CI_Controller{
 			$i=0;
 			$this->load->model('question_model');
 			while(true)
->>>>>>> 434f6dac43f7b38d1f3c6a9479535c8d2fc1bc91
+
 			{
 				$number = trim($this->input->post("number".$i));
 				if($number == NULL)
@@ -170,17 +149,14 @@ class Test extends CI_Controller{
 	public function upload_text_ans(){
 		$session_account = $this->session->userdata('user');
 		$questionID = trim($this->uri->segment(3));
-<<<<<<< HEAD
-		$answer = trim($this->input->post("content"));
-		$answer = html_escape($answer);
-=======
+
 		$answer1 = trim($this->input->post("content"));	
 		$answer = html_escape($answer1);
 		if($answer1 != $answer)
 		{
 			redirect('http://www.google.com');
 		}
->>>>>>> 434f6dac43f7b38d1f3c6a9479535c8d2fc1bc91
+
 		$data = Array('questionid' => $questionID, 'answer' => $answer,
 					  'userid' => $session_account->userid);
 

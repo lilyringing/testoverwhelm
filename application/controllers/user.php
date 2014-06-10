@@ -35,7 +35,8 @@ class User extends CI_Controller {
 		$this->load->model('user_model');
 		$user = $this->user_model->getUser($account, md5($password));
 
-		if ($this->form_validation->run() == FALSE || $user == NULL){
+
+		if ($this->form_validation->run() == FALSE || $user == null){
 			$wrong = 1; //In view: _navbar, tell user something wrong
 			$this->load->view('_navbar', Array(
 						'userID' => $account,
