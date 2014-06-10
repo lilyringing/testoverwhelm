@@ -28,7 +28,7 @@ class Test extends CI_Controller{
 
 		$this->load->model('file_model');
 		$data['info'] = $this->file_model->getFileInfo($fileID);
-		
+
 		$this->load->view('_header', Array(
 						'pageTitle' => "Test starts"));
 		$this->load->view('_navbar');
@@ -68,10 +68,10 @@ class Test extends CI_Controller{
 			//this line is used to delete the upload picture
 			//haven't test if there's some problem delete it.
 			delete_files($picture['full_path']);
-			$this->load->view('ocr_text', array('text' => $text));		
+			$this->load->view('ocr_text', array('text' => $text));
 		}
 	}
-	
+
 	public function upload_file()
 
 	{
@@ -85,7 +85,7 @@ class Test extends CI_Controller{
 		$size = $this->uri->segment(3, 1);
 		$this->load->view('upload_file', array('size'=>$size));
 	}
-	
+
 	public function upload_test()
 	{
 		if(!($this->session->userdata('user'))){
@@ -129,6 +129,7 @@ class Test extends CI_Controller{
 			$i=0;
 			$this->load->model('question_model');
 			while(true)
+
 			{
 				$number = trim($this->input->post("number".$i));
 				if($number == NULL)
@@ -144,16 +145,18 @@ class Test extends CI_Controller{
 		}
 		
 	}
-	
+
 	public function upload_text_ans(){
 		$session_account = $this->session->userdata('user');
 		$questionID = trim($this->uri->segment(3));
+
 		$answer1 = trim($this->input->post("content"));	
 		$answer = html_escape($answer1);
 		if($answer1 != $answer)
 		{
 			redirect('http://www.google.com');
 		}
+
 		$data = Array('questionid' => $questionID, 'answer' => $answer,
 					  'userid' => $session_account->userid);
 
