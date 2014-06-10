@@ -10,6 +10,11 @@ class Welcome extends CI_Controller {
 		$this->load->view('homepage', Array(
 				"pageTitle" => "Welcome to testoverwhelm" ));
 	}
+
+	public function loginerror(){
+		$this->load->view('loginerror',Array(
+				"pageTitle" => "Sorry" ));
+	}
 }
 
 /* End of file welcome.php */

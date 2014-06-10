@@ -73,7 +73,12 @@ class Test extends CI_Controller{
 	}
 
 	public function upload_file()
+
 	{
+		if(!($this->session->userdata('user'))){
+			redirect(site_url('/welcome/loginerror'));
+		}
+
 		$this->load->view('_header', Array(
 				'pageTitle' => "Upload file"));
 		$this->load->view('_navbar');
@@ -83,6 +88,7 @@ class Test extends CI_Controller{
 
 	public function upload_test()
 	{
+<<<<<<< HEAD
 		$subject = trim($this->input->post("subject"));
 		$professor = trim($this->input->post("professor"));
 		$year = trim($this->input->post("year"));
@@ -102,22 +108,79 @@ class Test extends CI_Controller{
 		{
 			$number = trim($this->input->post("number".$i));
 			if($number == NULL)
-			{
-				break;
-			}
-			//input number and question into database
-			$question = trim($this->input->post("question".$i));
-			$this->question_model->uploadQuestion(array( 'fileid' => $fileid, 'question' => $question, 'number' => $number ));
-			$i++;
+=======
+		if(!($this->session->userdata('user'))){
+			redirect(site_url('/welcome/loginerror'));
 		}
-		redirect(site_url("test/testing/".$fileid));
+
+		////////// Load validation library ///////////////
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('subject', 'Subject', 'required|xss_clean');
+		$this->form_validation->set_rules('professor', 'Professor', 'required|xss_clean');
+		$this->form_validation->set_rules('year', 'Year', 'required|xss_clean');
+		$this->form_validation->set_rules('semester', 'Semester', 'required|xss_clean');
+		$this->form_validation->set_rules('times', 'Times', 'required|xss_clean');
+		
+		
+//////////////////////////////////////////////////
+
+		if ($this->form_validation->run() == FALSE){
+			$this->load->view('_header', Array(
+				'pageTitle' => "Upload file"));
+			$this->load->view('_navbar');
+			$this->load->view('upload_file',array('error'=>validation_errors()));
+			$this->load->view('_footer');
+		}
+
+		else{
+			$subject = trim($this->input->post("subject"));
+			$professor = trim($this->input->post("professor"));
+			$year = trim($this->input->post("year"));
+			$semester = trim($this->input->post("semester"));
+			$times = trim($this->input->post("times"));
+			
+			$timeid = 100 * $year + 10 * $semester + $times;
+			$session_account = $this->session->userdata('user');
+			//upload file
+			$this->load->model('file_model');
+			$fileid = $this->file_model->uploadFile(array( 'timeid' => $timeid, 'subject' => $subject, 'professor' => $professor, 'userid' => $session_account->userid));
+			
+			//upload question
+			$i=0;
+			$this->load->model('question_model');
+			while(true)
+>>>>>>> 434f6dac43f7b38d1f3c6a9479535c8d2fc1bc91
+			{
+				$number = trim($this->input->post("number".$i));
+				if($number == NULL)
+				{
+					break;
+				}
+				//input number and question into database
+				$question = trim($this->input->post("question".$i));
+				$this->question_model->uploadQuestion(array( 'fileid' => $fileid, 'question' => $question, 'number' => $number ));
+				$i++;
+			}
+			redirect(site_url("test/testing/".$fileid));
+		}
+		
 	}
 
 	public function upload_text_ans(){
 		$session_account = $this->session->userdata('user');
 		$questionID = trim($this->uri->segment(3));
+<<<<<<< HEAD
 		$answer = trim($this->input->post("content"));
 		$answer = html_escape($answer);
+=======
+		$answer1 = trim($this->input->post("content"));	
+		$answer = html_escape($answer1);
+		if($answer1 != $answer)
+		{
+			redirect('http://www.google.com');
+		}
+>>>>>>> 434f6dac43f7b38d1f3c6a9479535c8d2fc1bc91
 		$data = Array('questionid' => $questionID, 'answer' => $answer,
 					  'userid' => $session_account->userid);
 
@@ -169,6 +232,7 @@ class Test extends CI_Controller{
 		$session_account = $this->session->userdata('user');
 		$fileID = trim($this->uri->segment(3));
 		$comment = trim($this->input->post("comment"));
+		$comment = html_escape($comment);
 		$data = Array('fileid' => $fileID, 'comment' => $comment,
 							  'userid' => $session_account->userid);
 
@@ -186,7 +250,11 @@ class Test extends CI_Controller{
 		$this->load->model('vote_model');
 		$this->load->model('answer_model');
 		$vote = $this->vote_model->checkVote($session_account->userid, $answerID);
-		if($vote == null){	// add a new vote
+		if($gb!=0 && $gb!=1)
+		{
+			echo "3";
+		}
+		else if($vote == null){	// add a new vote
 			$data = Array('userid' => $session_account->userid,
 						  'answerid' => $answerID,
 						  'gb' => $gb);

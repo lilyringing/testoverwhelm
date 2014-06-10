@@ -12,25 +12,38 @@ class User extends CI_Controller {
 	
 	public function logout(){
 		$this->session->unset_userdata('user');
-		$this->load->view('_navbar');
+		redirect(site_url('/welcome/index'));
 	}
 	
 	public function authenticate(){
+
+
+////////// Load validation library ///////////////
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('userID', 'Username', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|md5');
+				
+		
+//////////////////////////////////////////////////
+
+
 		$wrong = 0;//init => account and password are not wrong
 		$account = trim($this->input->post("userID"));
 		$password = trim($this->input->post("password"));
 		
 		$this->load->model('user_model');
-		$user = $this->user_model->getUser($account, $password);
-		if($user != NULL){
-			$this->session->set_userdata('user', $user);
-			$this->load->view('_navbar');
-		}else{
+		$user = $this->user_model->getUser($account, md5($password));
+
+		if ($this->form_validation->run() == FALSE){
 			$wrong = 1; //In view: _navbar, tell user something wrong 
 			$this->load->view('_navbar', Array(
 						'userID' => $account,
-						"wrong" => $wrong));
-
+						"wrong" => validation_errors()));
+		}
+		else if($user != NULL){
+			$this->session->set_userdata('user', $user);
+			$this->load->view('_navbar');
 		}
 		
 	}
@@ -41,18 +54,32 @@ class User extends CI_Controller {
 	}
 	
 	public function createUser(){
+////////// Load validation library ///////////////
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('userID', 'Username', 'trim|required|min_length[5]|max_length[12]|is_unique[user.account]|xss_clean');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|matches[passconf]|md5');
+		$this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim|required');
+		
+		
+//////////////////////////////////////////////////
 		$account = trim($this->input->post("userID"));
 		$password = trim($this->input->post("password"));
 		
 		$this->load->model('user_model');
 		$answer =  $this->user_model->checkUser($account);
-		
-		if($answer == true){
+
+		if ($this->form_validation->run() == FALSE){
 			$this->load->view('register', Array(
-							"pageTitle" => "Regist a new account",
-							"alert" => $account." has been registerd"));
-		}else{
-			$info = Array('account' => $account, 'password' => $password);
+								"pageTitle" => "Regist a new account",
+								"alert" => "TROLL has been registered"));
+		}
+			
+		else{
+			/////////////////PASSWORD以 MD5 加密存進資料庫//////////////////
+			$info = Array('account' => $account, 'password' => md5($password));
+
+
 		
 			$this->user_model->newUser($info);
 			redirect(site_url("/"));	// redirect to homepage

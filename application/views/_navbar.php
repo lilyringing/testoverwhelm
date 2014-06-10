@@ -130,7 +130,7 @@
 		</div>
 
 		<div class="navbar-loggedin">
-			<a id="logoutAnch" href="#">登出</a>
+			<a id="logoutAnch" href='<?=site_url("user/logout")?>'>登出</a>
 		</div>
 	</div>
 
@@ -141,6 +141,7 @@
 
 
 <?php }else{?>
+
 <div class="navbar-a">
 	<div class="navbar-link"><a href="#" class="loginBut">登入</a></div>
 
@@ -150,7 +151,12 @@
 
 	<div class="loginDiv">
 		<form id="loginForm" method="post">
-			<?php if(isset($wrong)) {?><script>alert("一定是密碼錯誤")</script><?php } ?>
+
+			<?php if(isset($wrong)) {?>
+
+			<script>alert("登入資訊有誤")</script>
+
+			<?php } ?>
 			<div class="left-inner-addon">
 				<i class="fa fa-user"></i>
 				<input type="text" class="inputVal" name="userID" placeholder="user account" value = "<?php if(isset($userID)){echo $userID; }?>"></input>
@@ -172,34 +178,6 @@
 
 
 <script>
-
-    //these script code appear in DOM if user has been loggedin
-$("#logoutAnch").bind("click", function(){
-    var oldNav = $(".navbar");
-
-    $.ajax({
-         url: '<?=site_url("user/logout")?>',
-         cache: true,
-         dataType: 'html',
-             type:'POST',
-         data: {},
-         error: function(xhr) {
-           //alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
-         },
-         success: function(response) {
-           //alert("與伺服器連線成功");//the same with 'error' block above
-           //create a new node to be responese's parent node
-            var newNav = document.createElement("div");
-            newNav.innerHTML = response;
-            //update navbar content
-            oldNav.html($(newNav).children().html());
-            //alert($(newNav).children().html());
-         }
-        });//end ajax
-
-});//end bind logoutAnch
-
-
 
 // Logged out 狀態時的SCRIPT
 $(".loginBut").bind("click", function(){
@@ -267,6 +245,7 @@ $("#loginBtn").bind("click", function(){
 
 /*
 */
+
 
 </script>
 </div>
