@@ -21,19 +21,26 @@ if(!isset($_SESSION)){
 			<?php if( $files != -1 ){?>
 		<table>
 			<tr>
-				<td> FilesID </td>
-				<td> timeID </td>
-				<td> Subject </td>
-				<td> Professor </td>
-				<td> UserID </td>
+				<td> 學年度 </td>
+				<td> 學期 </td>
+				<td> 次段考 </td>
+				<td> 科目 </td>
+				<td> 教授 </td>
+				<td> 上傳者</td>
 			</tr>	
 			<?php foreach ( $files as $element ):?>
+			<?php  $year = floor($element->timeid/ 100);
+				   $semester = floor($element->timeid / 10 - $year*10);
+				   $times = floor($element->timeid - $year*100 - $semester * 10 );?>
 			<tr>
-				<td><a href="<?=site_url("/test/testing")?>/<?php echo $element->fileid?>"><?php echo $element->fileid?></a></td>
-				<td><?php echo $element->timeid?></td>
+				<td><?php echo $year;?></td>
+				<td><?php echo $semester;?></td>
+				<td><?php echo $times;?></td>
 				<td><?php echo $element->subject?></td>
 				<td><?php echo $element->professor?></td>
-				<td><?php echo $element->userid?></td>
+				<td><?php echo $element->account?></td>
+				<td><a href="<?=site_url("/test/testing")?>/<?php echo $element->fileid?>">Go!</a></td>
+				
 			</tr>
 			<?php endforeach;?>
 		</table>		

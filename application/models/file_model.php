@@ -29,6 +29,7 @@ class File_model extends CI_Model {
 			$this->db->where('file.timeid <', ($timeid+100));
 		}
 		
+		$this->db->join('user', 'user.userid = file.userid');
 		$query = $this->db->get();
 		if($query->num_rows() > 0){
 			return $query->result();
