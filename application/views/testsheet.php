@@ -238,17 +238,11 @@ $(".thumb_icon").bind("click", function(){
          	else if( response==2 )
          	{
          		//change vote
-
-<<<<<<< HEAD
          	   thisGb.html( parseInt(thisGb.html(), 10)+1  );
          	   anotherGb.html( parseInt(anotherGb.html(), 10)-1  );
-=======
-         	   thisGb.html( parseInt(thisGb.html()+1, 10)  );
-         	   anotherGb.html( parseInt(anotherGb.html()-1, 10)  );
          	}
          	else{
          		alert("喔啊不就直接尻網址好棒棒！去資種練練吧！")
->>>>>>> 434f6dac43f7b38d1f3c6a9479535c8d2fc1bc91
          	}//end if
 
          }
