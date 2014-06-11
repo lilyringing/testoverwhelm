@@ -218,6 +218,14 @@ class Test extends CI_Controller{
 		redirect(site_url("test/testing/".$fileID));
 	}
 
+	public function edit_test(){
+		$fileID = trim($this->uri->segment(3));
+		
+		$this->load->model('question_model');
+		$data['quest'] = $this->question_model->getQuestion($fileID);
+		
+	}
+	
 	public function add_good_bad(){
 		$answerID = trim($this->input->post("answerID"));
 		$gb = trim($this->input->post("gb"));

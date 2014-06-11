@@ -14,7 +14,6 @@ if(!isset($_SESSION)){
 </head>
 
 <body>
-
 	<div class="search-result">
 	<?php // Don't change this class 'search-result' unless you understand what it means ?>
 	<style>

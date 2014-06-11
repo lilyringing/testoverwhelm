@@ -6,9 +6,12 @@ class Comment_model extends CI_Model {
 	}
 	
 	public function getComment($fileID){
-		$this->db->select('comment');
+		$this->db->select('*');
+		$this->db->from('comment');
+		$this->db->where('fileid', $fileID);
 		$this->db->order_by('commentid', 'asc');
-		$query = $this->db->get_where('comment', Array('fileid' => $fileID));
+		$this->db->join('user','user.userid = comment.userid');
+		$query = $this->db->get();
 		
 		if($query->num_rows() > 0){
 			return $query->result();

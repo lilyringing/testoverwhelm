@@ -46,4 +46,11 @@ class Question_model extends CI_Model {
 		$this->db->insert("question", $data);
 		return $this->db->insert_id();
 	}
+	
+	public function editQuestion($fileID, $questionID, $number, $question){
+		$this->db->where('fileid', $fileID);
+		$this->db->where('questionid', $questionID);
+		$this->db->where('number', $number);
+		$this->db->update('question', Array('question' => $question));
+	}
 }
