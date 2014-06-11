@@ -2,7 +2,9 @@
 <?php if(!isset($_SESSION)){
 		session_start();
 	  }?>
-<?php $session_account = $this->session->userdata('user');?>
+<?php $session_account = $this->session->userdata('user');
+	$reg = '/[\n\r]+/';
+?>
 <div class="sheet">
 <style>
 	.sheet{
@@ -91,8 +93,12 @@
 		<?php foreach($quest as $rows){?>
 		<div class="question">
 			<div class="number"><?php echo $rows->number; echo "."; ?></div>
-			<div class="questContent"><?php echo $rows->question;?></div>
-
+			<div class="questContent">
+				<?php
+					$quest_modified = preg_replace($reg, '<br>', $rows->question);
+				  	echo $quest_modified;
+				?>
+			</div>
 			<!-- print the answers of this question -->
 		<?php if($session_account){ ?>
 			<div  class="ansBlock">
@@ -114,7 +120,6 @@
 				  				<img src="<?php echo $ans->answer;?>">
 				  			<?php }
 				  				else{
-				  					$reg = '/[\n\r]+/';
 									$ans_modified = preg_replace($reg, '<br>', $ans->answer);
 				  					echo $ans_modified;
 				  				} ?>
