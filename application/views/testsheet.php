@@ -26,6 +26,7 @@
 		position:relative;
 		float: left;
 		margin-top: 0.4em;
+		outline: none;
 	}
 	.ansBtn, .sendBtn, .uploadBtn, .showSendBtn{
 		position: relative;
@@ -82,12 +83,15 @@
 		position: relative;
 		float: left;
 	}
+	.editing{
+		background-color: #eee9e9;
+	}
 </style>
-
+<input type="button" value="edit" class="edit">
 		<?php foreach($quest as $rows){?>
 		<div class="question">
 			<div class="number"><?php echo $rows->number; echo "."; ?></div>
-			<div class="quesContent"><?php echo $rows->question;?></div>
+			<div class="questContent"><?php echo $rows->question;?></div>
 
 			<!-- print the answers of this question -->
 		<?php if($session_account){ ?>
@@ -110,7 +114,9 @@
 				  				<img src="<?php echo $ans->answer;?>">
 				  			<?php }
 				  				else{
-				  					echo $ans->answer;
+				  					$reg = '/[\n\r]+/';
+									$ans_modified = preg_replace($reg, '<br>', $ans->answer);
+				  					echo $ans_modified;
 				  				} ?>
 				  			</div>
 				  			<div class="iconBlock">
@@ -172,6 +178,7 @@
 		<?php }//end if($session_account){ ?>
 		<div style="opacity:0.01; width:1px">sad</div>
 <script>
+var editing =0;//0 = no, 1= yes
 $(".ansBtn").bind("click", function(){
 	var index = $(".ansBtn").index(this);
 	if( $(".ansParent:eq("+index+")").css("display") == "none" )
@@ -248,5 +255,27 @@ $(".thumb_icon").bind("click", function(){
          }
         });//end ajax
 });
+
+$(".edit").bind("click", function(){
+	//var sa = .html();
+	//var sa = document.getElementsByClassName("eee");
+	//var sa = document.getElementById("eee");
+	if(editing==0){
+		$(".questContent").each(function(){
+			$(this).attr("contentEditable", true);
+			$(this).addClass("editing");
+		})
+		editing=1;
+		alert("editing mode on")
+	}
+	else if (editing ==1 ){
+		$(".questContent").each(function(){
+			$(this).removeAttr("contentEditable");
+			$(this).removeClass("editing");
+		})
+		editing = 0;
+		alert("editing mode off")
+	}
+})
 </script>
 </div>
