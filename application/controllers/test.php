@@ -31,7 +31,8 @@ class Test extends CI_Controller{
 
 		$this->load->view('_header', Array(
 						'pageTitle' => "Test starts"));
-		$this->load->view('_navbar');
+		$this->load->view('_navbar', Array(
+						'fileID' => $fileID));
 		$this->load->view('testsheet', $data);
 
 	}
@@ -100,8 +101,8 @@ class Test extends CI_Controller{
 		$this->form_validation->set_rules('year', 'Year', 'required|xss_clean');
 		$this->form_validation->set_rules('semester', 'Semester', 'required|xss_clean');
 		$this->form_validation->set_rules('times', 'Times', 'required|xss_clean');
-		
-		
+
+
 		//////////////////////////////////////////////////
 
 		if ($this->form_validation->run() == FALSE){
@@ -118,13 +119,13 @@ class Test extends CI_Controller{
 			$year = trim($this->input->post("year"));
 			$semester = trim($this->input->post("semester"));
 			$times = trim($this->input->post("times"));
-			
+
 			$timeid = 100 * $year + 10 * $semester + $times;
 			$session_account = $this->session->userdata('user');
 			//upload file
 			$this->load->model('file_model');
 			$fileid = $this->file_model->uploadFile(array( 'timeid' => $timeid, 'subject' => $subject, 'professor' => $professor, 'userid' => $session_account->userid));
-			
+
 			//upload question
 			$i=0;
 			$this->load->model('question_model');
@@ -143,14 +144,14 @@ class Test extends CI_Controller{
 			}
 			redirect(site_url("test/testing/".$fileid));
 		}
-		
+
 	}
 
 	public function upload_text_ans(){
 		$session_account = $this->session->userdata('user');
 		$questionID = trim($this->uri->segment(3));
 
-		$answer1 = trim($this->input->post("content"));	
+		$answer1 = trim($this->input->post("content"));
 		$answer = html_escape($answer1);
 		if($answer1 != $answer)
 		{
@@ -220,12 +221,12 @@ class Test extends CI_Controller{
 
 	public function edit_test(){
 		$fileID = trim($this->uri->segment(3));
-		
+
 		$this->load->model('question_model');
 		$data['quest'] = $this->question_model->getQuestion($fileID);
-		
+
 	}
-	
+
 	public function add_good_bad(){
 		$answerID = trim($this->input->post("answerID"));
 		$gb = trim($this->input->post("gb"));
