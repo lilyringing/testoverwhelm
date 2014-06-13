@@ -91,9 +91,12 @@
 	}
 	.ac-other .action{
 		height:225px;
-		width:200px;
+		width:225px;
 		font-size: 130px;
+		line-height: 225px;
+		vertical-align: middle;
 		position:absolute;
+		text-align: center;
 	}
 	.ac-search .ac-search-div{
 		margin-left:100px;
@@ -116,9 +119,10 @@
 	.action.action-users{
 		margin-left:575px;
 	}
-	.action:hover{
+	.action .icon:hover{
 		opacity: 0.5;
 	}
+	
 	.ac-search-div .search-all{
 		position:absolute;
 		margin-top:60px;
@@ -144,6 +148,26 @@
 		background-color: white;
 		display: none;
 	}
+	.action .act-describe{
+		font-size: 30px;
+		position: absolute;
+		color: white;
+		z-index: 999;
+		height: 80%;
+		width: 80%;
+		background-color: rgba(0,0,0,0.5);
+		opacity: 0;
+		border-radius: 10px;
+		margin-left: 10%;
+		margin-top: 10%;
+		
+
+	}
+	.action .act-describe:hover{
+		opacity: 1;
+	}
+	
+
 </style>
 <div class="background-div"></div>
 
@@ -180,11 +204,20 @@
 
 	<div class="ac_child ac-other">
 		<div class="search-result"></div>
-		<div class="action action-archive"><i class="icon fa fa-archive"></i></div>
+		<div class="action action-archive">
+			<div class="act-describe">瀏覽題庫</div>
+			<i class="icon fa fa-archive"></i>
+		</div>
 
-		<div class="action action-upload"><i class="icon fa fa-upload"></i></div>
+		<div class="action action-upload">
+			<div class="act-describe">上傳題目</div>
+			<i class="icon fa fa-upload"></i>
+		</div>
 
-		<div class="action action-users"><i class="icon fa fa-users"></i></div>
+		<div class="action action-users">
+			<div class="act-describe">最新動態</div>
+			<i class="icon fa fa-users"></i>
+		</div>
 	</div>
 
 </div>
@@ -249,7 +282,10 @@ $(".action-archive").click(function(event){
 $(".action-upload").click(function(event){
     window.location.href = '<?php echo site_url("/test/upload_file") ; ?>';
 });
+
+
 </script>
+
 
 
 <?php include ("_footer.php"); ?>
