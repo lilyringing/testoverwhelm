@@ -10,7 +10,7 @@
 		position:absolute;
 		width:100%;
 		height:100%;
-		background-image: url(<?= base_url("images/TSAY.jpg") ?>);
+		background-image: url('images/TSAY.jpg');
 		background-position:bottom left;
 		background-repeat: no-repeat;
 		background-size: 40%;
@@ -152,7 +152,7 @@
 		font-size: 30px;
 		position: absolute;
 		color: white;
-		z-index: 999;
+		z-index: 101;
 		height: 80%;
 		width: 80%;
 		background-color: rgba(0,0,0,0.5);
