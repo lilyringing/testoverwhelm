@@ -19,8 +19,9 @@ class Hot extends CI_Controller{
 			} 
 		}
 		
-		
-		
+		$this->load->view('_header');
+		$this->load->view('_navbar');	
 		$this->load->view('hot_list_view', $data);
+		$this->load->view('_footer');
 	}
 }
