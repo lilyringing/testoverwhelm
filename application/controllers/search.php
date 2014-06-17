@@ -25,9 +25,11 @@ class Search extends CI_Controller {
 			$subject = $this->keyword_model->getSubject($keyword);
 			
 			if($subject == null){
+				echo "null";
 				$data['subject'] = $keyword;
 				$findsubject = 0;
 			}else{
+				echo $subject->subject;
 				$data['subject'] = $subject->subject;
 				$findsubject = 1;
 			}
