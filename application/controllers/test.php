@@ -165,7 +165,10 @@ class Test extends CI_Controller{
 		$fileID = $this->question_model->getFileID($questionID);
 
 		$this->load->model('answer_model');
-		$this->answer_model->upload($data);
+		$answerid = $this->answer_model->upload($data);
+		
+		$this->load->model('list_model');
+		$this->list_model->upload(array('answerid' => $answerid, 'fileid' => $fileID->fileid, 'account' => $session_account->account));
 
 		redirect(site_url("test/testing/".$fileID->fileid));
 	}
