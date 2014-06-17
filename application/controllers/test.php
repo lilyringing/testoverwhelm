@@ -219,11 +219,19 @@ class Test extends CI_Controller{
 	}
 
 	public function edit_test(){
+		$session_account = $this->session->userdata('user');
 		$fileID = trim($this->uri->segment(3));
 		
 		$this->load->model('question_model');
-		$data['quest'] = $this->question_model->getQuestion($fileID);
+		$question_number = $this->question_model->getQuestionNumber($fileID);
 		
+		// get question array
+		$questions = trim($this->input->post(""));
+		if($question_number == sizeof($array)){
+			// save the questions into database
+		}else{
+			// do nothing
+		}
 	}
 	
 	public function add_good_bad(){
