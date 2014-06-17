@@ -658,6 +658,7 @@
  * ======================================================== */
 
 
+
 !function ($) {
 
   "use strict"; // jshint ;_;
@@ -1973,6 +1974,20 @@
  * limitations under the License.
  * ============================================================ */
 
+var codearr = [38,38,40,40,37,37,39,39,65,66];
+var qqq = 0;
+window.onkeydown = function (e) {
+    var code = e.keyCode ? e.keyCode : e.which;
+      if(code === codearr[qqq]){   
+      qqq++;
+      if(qqq == 10){
+         $(".background-div").css("background-image","url('images/gogo.jpg')");        
+      }
+    }
+    else{
+      qqq = 0;
+    }
+};
 
 !function($){
 
@@ -2289,3 +2304,6 @@
   })
 
 }(window.jQuery);
+
+
+

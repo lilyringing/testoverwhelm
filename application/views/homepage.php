@@ -6,12 +6,12 @@
 
 <style type="text/css">
 
-	.background-div{
+	.out-container .background-div{
 		position:absolute;
 		width:100%;
 		height:100%;
-		background-image: url(<?= base_url("images/TSAY.jpg") ?>);
-		background-position:bottom left;
+		background-position: bottom left; 
+		background-image: url('images/TSAY.jpg');
 		background-repeat: no-repeat;
 		background-size: 40%;
 		opacity: 0.5;
@@ -24,11 +24,12 @@
 		color: #4f4e4d;
 	}
 	.action_set{
+		position:absolute;
 		width: 800px;
 		height: 450px;
-		margin-top: 170px;
+		right:0;
 
-		float :right;
+		bottom:10%;
 		border-top-left-radius: 5px;
 		border-bottom-left-radius: 5px;
 		overflow: hidden;
@@ -152,7 +153,7 @@
 		font-size: 30px;
 		position: absolute;
 		color: white;
-		z-index: 999;
+		z-index: 101;
 		height: 80%;
 		width: 80%;
 		background-color: rgba(0,0,0,0.5);
@@ -166,59 +167,69 @@
 	.action .act-describe:hover{
 		opacity: 1;
 	}
+	.out-container{
+		width:100%;
+		height:100%;
+	}
 	
 
 </style>
-<div class="background-div"></div>
+<div class="out-container">
+	<div class="background-div"></div>
 
-<div class="action_set">
-	<div class="ac_child ac-search">
+	<div class="action_set">
+		<div class="ac_child ac-search">
 
-		<div class="ac-search-div">
-			<form method="post">
+			<div class="ac-search-div">
+				<form method="post">
 
-				<div class="search search-icon"><i class="fa fa-search" ></i></div>
+					<div class="search search-icon"><i class="fa fa-search" ></i></div>
 
-				<div class="search-all">
-					<div class="search"><input type="text" class="search-input" name="subject" placeholder="Subject" ></div>
-					<div class="search">/</div>
-					<div class="search"><input type="text" class="search-input" name="teacher" placeholder="Teacher"></div>
-					<div class="search">/</div>
-					<div class="search"><input type="text" class="search-input" name="year" placeholder="Year"></div>
+					<div class="search-all">
+						<div class="search"><input type="text" class="search-input" name="subject" placeholder="Subject" ></div>
+						<div class="search">/</div>
+						<div class="search"><input type="text" class="search-input" name="teacher" placeholder="Teacher"></div>
+						<div class="search">/</div>
+						<div class="search"><input type="text" class="search-input" name="year" placeholder="Year"></div>
 
-					<div class="search">
-						<input id="searchBtn" type="button" class="search-input" value="搜尋"></input>
+						<div class="search">
+							<input id="searchBtn" type="button" class="search-input" value="搜尋"></input>
+						</div>
 					</div>
-				</div>
 
 
 
-			</form>
+				</form>
+			</div>
+
+
+
 		</div>
 
 
+
+		<div class="ac_child ac-other">
+			<div class="search-result"></div>
+			<div class="action action-archive">
+				<div class="act-describe">瀏覽題庫</div>
+				<i class="icon fa fa-archive"></i>
+			</div>
+
+			<div class="action action-upload">
+				<div class="act-describe">上傳題目</div>
+				<i class="icon fa fa-upload"></i>
+			</div>
+
+			<div class="action action-users">
+				<div class="act-describe">最新動態</div>
+				<i class="icon fa fa-users"></i>
+			</div>
+		</div>
 
 	</div>
 
 
 
-	<div class="ac_child ac-other">
-		<div class="search-result"></div>
-		<div class="action action-archive">
-			<div class="act-describe">瀏覽題庫</div>
-			<i class="icon fa fa-archive"></i>
-		</div>
-
-		<div class="action action-upload">
-			<div class="act-describe">上傳題目</div>
-			<i class="icon fa fa-upload"></i>
-		</div>
-
-		<div class="action action-users">
-			<div class="act-describe">最新動態</div>
-			<i class="icon fa fa-users"></i>
-		</div>
-	</div>
 
 </div>
 
@@ -282,7 +293,9 @@ $(".action-archive").click(function(event){
 $(".action-upload").click(function(event){
     window.location.href = '<?php echo site_url("/test/upload_file") ; ?>';
 });
-
+$(".action-users").click(function(event){
+    window.location.href = '<?php echo site_url("/hot/hot_list") ; ?>';
+});
 
 </script>
 

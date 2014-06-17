@@ -1,6 +1,6 @@
 <div class="navbar">
 	<div class="navbar-logo">
-		<a href="<?php echo site_url('/'); ?>"><img src="<?php echo base_url('/images/logo.png'); ?> "></a>
+		<a href="<?php echo site_url(''); ?>"><img src="<?php echo base_url('/images/logo.png'); ?> "></a>
 	</div>
 
 <?php $session_account = $this->session->userdata('user');?>
@@ -202,6 +202,39 @@ $("#loginBtn").bind("click", function(){
            alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
          },
          success: function(response) {
+            if(  $(".sheet").html() !==undefined )
+             {
+
+                    var sheet = "<?php
+                                        if( isset($fileID) )
+                                        {
+                                            echo site_url("test/testing")."/".$fileID;
+                                        }
+                                        else{
+                                            echo site_url();
+                                        }
+                                        ?>";
+
+                    $.ajax({
+                     url: sheet,
+                     cache: true,
+                     dataType: 'html',
+                         type:'POST',
+                     data: {},
+                     error: function(xhr) {
+                        //wrong password (or account) message belongs 'success' block below
+                       //alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
+                     },
+                     success: function(res) {
+                       //alert("與伺服器連線成功");//the same with 'error' block above
+
+                        var newSheet = document.createElement("div");
+                        newSheet.innerHTML = res;
+                        $(".sheet").html($(newSheet).children(".sheet").html() );
+
+                     }
+                    });//end ajax
+            }
             //alert(oldNav.html());//the same with 'error' block above
            //create a new node to be responese's parent node
             var newNav = document.createElement("div");
@@ -211,35 +244,7 @@ $("#loginBtn").bind("click", function(){
 
 
 
-             if(  $(".sheet").html() !==undefined )
-             {
 
-                    var sheet = window.location.pathname;
-                    while( sheet.search("/") != -1 )
-                    {
-                        sheet = sheet.slice(sheet.search("/")+1, sheet.length);
-                    }
-
-                    $.ajax({
-                     url: '<?=site_url("test/testing")?>'+'/'+sheet,
-                     cache: true,
-                     dataType: 'html',
-                         type:'POST',
-                     data: {},
-                     error: function(xhr) {
-                        //wrong password (or account) message belongs 'success' block below
-                       //alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
-                     },
-                     success: function(response) {
-                       //alert("與伺服器連線成功");//the same with 'error' block above
-
-                        var newSheet = document.createElement("div");
-                        newSheet.innerHTML = response;
-                        $(".sheet").html($(newSheet).children(".sheet").html() );
-
-                     }
-                    });//end ajax
-            }
          }
         });//end ajax
 

@@ -6,8 +6,10 @@ class Keyword_model extends CI_Model{
 	
 	public function getSubject($keyword){
 		$this->db->select('subject');
-		$query = $this->db->get_where('keyword', Array('subject_nickname' => $keyword));
+		$thid->db->from('keyword');
+		$this->db->like('keyword.subject_nickname', $keyword);
 		
+		$query = $this->db->get();
 		if($query->num_rows() > 0){
 			return $query->row();
 		}else{

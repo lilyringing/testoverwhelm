@@ -113,11 +113,15 @@
 				  		<div class="ansChild">
 				  			<div class="ansContent">
 				  				<?php
-				  				//$check = site_url("../upload")."/".$ans->answer;
-				  				//$check = "http://localhost/sa_project/testoverwhelm/upload/TC20131A1.PNG";
 				  				if( file_exists($ans->answer) )
-				  				{ ?>
-				  				<img src="<?php echo $ans->answer;?>">
+				  				{
+				  					$front_url = substr(site_url(), 0, strrpos(site_url(), "/") );
+
+				  					$pic_filename = strrchr($ans->answer, "/");
+				  					$pic_filename = substr($pic_filename, 1);
+				  					$pic_path = $front_url."/upload/".$pic_filename;
+				  				?>
+				  				<img src="<?php echo $pic_path;?>">
 				  			<?php }
 				  				else{
 									$ans_modified = preg_replace($reg, '<br>', $ans->answer);
@@ -266,6 +270,7 @@ $(".edit").bind("click", function(){
 	//var sa = document.getElementsByClassName("eee");
 	//var sa = document.getElementById("eee");
 	if(editing==0){
+		//document.designMode = 'on';
 		$(".questContent").each(function(){
 			$(this).attr("contentEditable", true);
 			$(this).addClass("editing");
@@ -274,6 +279,7 @@ $(".edit").bind("click", function(){
 		alert("editing mode on")
 	}
 	else if (editing ==1 ){
+		document.designMode = 'off';
 		$(".questContent").each(function(){
 			$(this).removeAttr("contentEditable");
 			$(this).removeClass("editing");

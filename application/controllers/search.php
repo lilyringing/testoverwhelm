@@ -18,11 +18,20 @@ class Search extends CI_Controller {
 		$teacher = trim($this->input->post("teacher"));
 		$year = trim($this->input->post("year"));
 		$data;
+		$findsubject;
 		if( $keyword != NULL )
 		{
 			$this->load->model('keyword_model');
 			$subject = $this->keyword_model->getSubject($keyword);
-			$data['subject'] = $subject->subject;
+			
+			if($subject == null){
+				$data['subject'] = $keyword;
+				$findsubject = 0;
+			}else{
+				$data['subject'] = $subject->subject;
+				$findsubject = 1;
+			}
+			
 		}
 		if( $teacher != NULL )
 		{
@@ -34,11 +43,10 @@ class Search extends CI_Controller {
 		}
 		
 	
-		$files = $this->file_model->getFile($data);
+		$files = $this->file_model->getFile($data, $findsubject);
 	
 		if( $files != NULL )
 		{
-			echo "yoyo";
 			$this->load->view("search_result", Array( 'files' => $files ));
 		}
 	}

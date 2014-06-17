@@ -8,19 +8,22 @@ class File_model extends CI_Model {
 	
 	//one should input an data array with subject, teacher, or year
 	//the function would return the result it gets
-	public function getFile( $data )
+	public function getFile( $data, $findsubject )
 	{
 		$this->db->select("*");
 		$this->db->from("file");
 		if( isset($data["subject"]) )
 		{
-			$this->db->like('file.subject', $data["subject"]);
-			echo "hi1";
+			if($findsubject == 0){
+				$this->db->like('file.subject', $data["subject"]);
+			}else{
+				$this->db->where('file.subject', $data['subject']);
+			}
+			
 		}
 		if( isset($data["teacher"]) )
 		{
 			$this->db->like('file.professor', $data["teacher"]);
-			echo "hi2";
 		}
 		if( isset($data["year"]) )
 		{
