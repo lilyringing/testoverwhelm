@@ -121,7 +121,8 @@
 			<div class="number"><?php echo $rows->number; echo "."; ?></div>
 			<div class="questContent">
 				<?php
-					$quest_modified = preg_replace($reg, '<br>', $rows->question);
+					$quest_modified = html_escape($rows->question);
+					$quest_modified = preg_replace($reg, '<br>', $quest_modified);
 				  	echo $quest_modified;
 				?>
 			</div>
