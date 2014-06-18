@@ -4,8 +4,8 @@ class File_model extends CI_Model {
 	{
 		parent::__construct();
 	}
-	
-	
+
+
 	//one should input an data array with subject, teacher, or year
 	//the function would return the result it gets
 	public function getFile( $data, $findsubject )
@@ -19,7 +19,7 @@ class File_model extends CI_Model {
 			}else{
 				$this->db->where('file.subject', $data['subject']);
 			}
-			
+
 		}
 		if( isset($data["teacher"]) )
 		{
@@ -31,7 +31,7 @@ class File_model extends CI_Model {
 			$this->db->where('file.timeid >', $timeid);
 			$this->db->where('file.timeid <', ($timeid+100));
 		}
-		
+
 		$this->db->join('user', 'user.userid = file.userid');
 		$query = $this->db->get();
 		if($query->num_rows() > 0){
@@ -41,7 +41,7 @@ class File_model extends CI_Model {
 			return -1;
 		}
 	}
-	
+
 	public function getFileInfo($fileID){
 		$this->db->select('*');
 		$query = $this->db->get_where('file', Array('fileid' => $fileID));
@@ -51,23 +51,23 @@ class File_model extends CI_Model {
 		else{
 			return -1;
 		}
-		
+
 	}
-	
+
 	public function getAllFiles(){
 		$this->db->select('fileid, timeid, subject, professor');
 		$this->db->from('file');
 		$this->db->order_by('subject', 'asc');
 		$this->db->order_by('timeid', 'asc');
 		$query = $this->db->get();
-		
+
 		if($query->num_rows() > 0){
 			return $query->result();
 		}else{
 			return null;
 		}
 	}
-	
+
 	public function uploadFile($data)
 	{
 		$this->db->insert("file", $data);

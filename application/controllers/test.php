@@ -12,19 +12,17 @@ class Test extends CI_Controller{
 		$data['quest'] = $this->question_model->getQuestion($fileID);
 		$id = $this->question_model->getQuestionID($fileID);
 
-		if($id == null)
-		{
-			redirect(site_url());
-		}
 
 		$this->load->model('answer_model');
 		$this->load->model('vote_model');
-		foreach($id as $rows){
-			$qid = $rows->questionid;
-			$data['answer'][$qid] = $this->answer_model->getAnswer($qid);
+		if($id[0] != null){
+			foreach($id as $rows){
+				$qid = $rows->questionid;
+				$data['answer'][$qid] = $this->answer_model->getAnswer($qid);
 
-			if($session_account){
-				$data['vote'][$qid] = $this->vote_model->checkVote($session_account->userid, $qid);
+				if($session_account){
+					$data['vote'][$qid] = $this->vote_model->checkVote($session_account->userid, $qid);
+				}
 			}
 		}
 
@@ -33,6 +31,12 @@ class Test extends CI_Controller{
 
 		$this->load->model('file_model');
 		$data['info'] = $this->file_model->getFileInfo($fileID);
+
+
+		if($data['info'] === -1)
+		{
+			redirect(site_url());
+		}
 
 		$this->load->view('_header', Array(
 						'pageTitle' => "Test starts"));

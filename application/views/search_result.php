@@ -56,7 +56,7 @@ if(!isset($_SESSION)){
 					</div>
 					<div  class="line">
 						<?php
-							echo "第".intval($element->timeid%100/10)."段考";
+							echo "第".intval($element->timeid%100/10)."次段考";
 						?>
 					</div>
 					<div class="line"><?php echo $element->subject?></div>

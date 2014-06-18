@@ -23,7 +23,7 @@
 		position: relative;
 		float:left;
 	}
-	.number, .questContent, .ansBlock, .ansMain, .ansChild, .ansContent, .iconBlock, .formBlock, .sendAns, .uploadParent, .commentBlock, .commentChild{
+	.info, .number, .questContent, .ansBlock, .ansMain, .ansChild, .ansContent, .iconBlock, .formBlock, .sendAns, .uploadParent, .commentBlock, .commentChild{
 		width: 100%;
 		position:relative;
 		float: left;
@@ -74,7 +74,8 @@
 		display: inline-block;
 	}
 	.uploadChild{
-		width: 10em;
+		width: 12em;
+		margin-right: 9em;
 		position: relative;
 		float: left;
 	}
@@ -88,9 +89,34 @@
 	.editing{
 		background-color: #eee9e9;
 	}
+	.title{
+		position: relative;
+    		text-align: center;
+    		font-size: 2em;
+	}
+	.detail{
+		position: relative;
+    		text-align: right;
+    		font-size: 1em;
+	}
 </style>
+<div class="info"><p class="title"><?php echo $info->subject."&nbsp;&nbsp;&nbsp;".$info->professor;?></p></div>
+<div class="info"><p class="detail">
+	<?php
+		echo intval($info->timeid/100)."年";
+		if( intval($info->timeid%10) == 1){
+			echo "上學期";
+		}
+		else{
+			echo "下學期";
+		}
+		echo "第".intval($info->timeid%100/10)."次段考";
+	?>
+		     </p></div>
 <input type="button" value="edit" class="edit">
-		<?php foreach($quest as $rows){?>
+		<?php
+		if($quest[0] != null){
+		 foreach($quest as $rows){?>
 		<div class="question">
 			<div class="number"><?php echo $rows->number; echo "."; ?></div>
 			<div class="questContent">
@@ -164,7 +190,10 @@
 				</div>
 		<?php }// end if($session_account) ?>
 		</div>
-		<?php }?>
+		<?php }//end foreach
+			}else {
+				echo "<div class='ansChild'><div class='fa  fa-times-circle noAns_icon'></div> no question</div>";
+				}?>
 
 		<?php if($session_account){ ?>
 		<div class="commentBlock">
