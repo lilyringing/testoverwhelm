@@ -210,7 +210,7 @@
 			<!-- a form for upload answer with text -->
 			<form action="<?=site_url("test/upload_comment")?>/<?php echo $this->uri->segment(3);?>" method="post">
 				<textarea name="comment"></textarea>
-				<div class="sendBtn"><button type="submit">Send comment</button></div>
+				<div class="sendBtn"><button type="submit">Send</button></div>
 			</form>
 		</div>
 		<?php }//end if($session_account){ ?>
