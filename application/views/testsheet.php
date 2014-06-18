@@ -266,11 +266,8 @@ $(".thumb_icon").bind("click", function(){
 });
 
 $(".edit").bind("click", function(){
-	//var sa = .html();
-	//var sa = document.getElementsByClassName("eee");
-	//var sa = document.getElementById("eee");
-	if(editing==0){
-		//document.designMode = 'on';
+	if(editing==0)
+	{
 		$(".questContent").each(function(){
 			$(this).attr("contentEditable", true);
 			$(this).addClass("editing");
@@ -278,13 +275,30 @@ $(".edit").bind("click", function(){
 		editing=1;
 		alert("editing mode on")
 	}
-	else if (editing ==1 ){
-		document.designMode = 'off';
+	else if (editing ==1 )
+	{
+		var questContent =[];
 		$(".questContent").each(function(){
-			$(this).removeAttr("contentEditable");
-			$(this).removeClass("editing");
+			questContent.push( $(this).html() );
 		})
-		editing = 0;
+		$.ajax({
+         		url: '<?=site_url()?>',//幫我成正確的controller function name
+         		cache: true,
+         		dataType: 'html',
+         		    type:'POST',
+         		data: {questionArray:questContent},
+         		error: function(xhr) {
+         		  alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
+         		},
+         		success: function(response) {
+         			//update question content
+			$(".questContent").each(function(){
+				$(this).removeAttr("contentEditable");
+				$(this).removeClass("editing");
+			})
+			editing = 0;
+         		}
+       		});//end ajax
 		alert("editing mode off")
 	}
 })
