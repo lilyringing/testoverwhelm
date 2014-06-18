@@ -179,6 +179,7 @@
 
 <script>
 
+document.body.spellcheck = false;
 // Logged out 狀態時的SCRIPT
 $(".loginBut").bind("click", function(){
     $('.navbar-a').slideUp(100);
