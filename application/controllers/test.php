@@ -12,6 +12,11 @@ class Test extends CI_Controller{
 		$data['quest'] = $this->question_model->getQuestion($fileID);
 		$id = $this->question_model->getQuestionID($fileID);
 
+		if($id == null)
+		{
+			redirect(site_url());
+		}
+
 		$this->load->model('answer_model');
 		$this->load->model('vote_model');
 		foreach($id as $rows){
@@ -34,7 +39,6 @@ class Test extends CI_Controller{
 		$this->load->view('_navbar', Array(
 						'fileID' => $fileID));
 		$this->load->view('testsheet', $data);
-
 	}
 
 	public function upload_page(){
@@ -166,7 +170,7 @@ class Test extends CI_Controller{
 
 		$this->load->model('answer_model');
 		$answerid = $this->answer_model->upload($data);
-		
+
 		$this->load->model('list_model');
 		$this->list_model->upload(array('answerid' => $answerid, 'fileid' => $fileID->fileid, 'account' => $session_account->account));
 
@@ -229,7 +233,7 @@ class Test extends CI_Controller{
 		$this->load->model('question_model');
 
 		$question_number = $this->question_model->getQuestionNumber($fileID);
-		
+
 		// get question array
 		$questions = trim($this->input->post(""));
 		if($question_number == sizeof($array)){
