@@ -21,6 +21,7 @@ class Answer_model extends CI_Model{
 	
 	public function upload($data){
 		$this->db->insert('answer', $data);
+		return $this->db->insert_id();
 	}
 	
 	public function add_gb($answerID, $gb){

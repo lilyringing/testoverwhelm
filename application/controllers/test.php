@@ -165,7 +165,10 @@ class Test extends CI_Controller{
 		$fileID = $this->question_model->getFileID($questionID);
 
 		$this->load->model('answer_model');
-		$this->answer_model->upload($data);
+		$answerid = $this->answer_model->upload($data);
+		
+		$this->load->model('list_model');
+		$this->list_model->upload(array('answerid' => $answerid, 'fileid' => $fileID->fileid, 'account' => $session_account->account));
 
 		redirect(site_url("test/testing/".$fileID->fileid));
 	}
@@ -220,9 +223,20 @@ class Test extends CI_Controller{
 	}
 
 	public function edit_test(){
+		$session_account = $this->session->userdata('user');
 		$fileID = trim($this->uri->segment(3));
 
 		$this->load->model('question_model');
+
+		$question_number = $this->question_model->getQuestionNumber($fileID);
+		
+		// get question array
+		$questions = trim($this->input->post(""));
+		if($question_number == sizeof($array)){
+			// save the questions into database
+		}else{
+			// do nothing
+		}
 		$data['quest'] = $this->question_model->getQuestion($fileID);
 
 	}

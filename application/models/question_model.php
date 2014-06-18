@@ -18,6 +18,13 @@ class Question_model extends CI_Model {
 		}
 	}
 	
+	public function getQuestionNumber($fileID){
+		$this->db->select('questionid');
+		$query = $this->db->get_where('question', Array(
+								'fileid' => $fileID));
+		return $query->num_rows();
+	}
+	
 	public function getQuestionID($fileID){
 		$this->db->select('questionid');
 		$query = $this->db->get_where('question', Array(

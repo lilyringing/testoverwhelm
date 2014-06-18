@@ -6,7 +6,7 @@ class List_model extends CI_Model{
 	
 	public function upload($data)
 	{
-		$this->db->insert($data);
+		$this->db->insert('newanswer',$data);
 	}
 	
 	public function getNewAnswer()
