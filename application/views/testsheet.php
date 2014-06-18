@@ -297,9 +297,9 @@ $(".edit").bind("click", function(){
 				$(this).removeClass("editing");
 			})
 			editing = 0;
+			alert("editing mode off")
          		}
        		});//end ajax
-		alert("editing mode off")
 	}
 })
 </script>
