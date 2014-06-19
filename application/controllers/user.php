@@ -12,7 +12,7 @@ class User extends CI_Controller {
 
 	public function logout(){
 		$this->session->unset_userdata('user');
-		redirect(site_url('/welcome/index'));
+		redirect(site_url());
 	}
 
 	public function authenticate(){

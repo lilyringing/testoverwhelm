@@ -87,7 +87,7 @@
 		float: left;
 	}
 	.editing{
-		background-color: #eee9e9;
+		background-color: rgba(255, 200,141 , 0.5);
 	}
 	.title{
 		position: relative;
