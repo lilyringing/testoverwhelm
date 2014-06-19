@@ -232,19 +232,25 @@ class Test extends CI_Controller{
 
 	public function edit_test(){
 		$session_account = $this->session->userdata('user');
-		$fileID = trim($this->uri->segment(3));
-
-		$this->load->model('question_model');
-
-		$question_number = $this->question_model->getQuestionNumber($fileID);
-
-		// get question array
-		$questions = trim($this->input->post(""));
-		if($question_number == sizeof($array)){
-			// save the questions into database
-		}else{
-			// do nothing
+		if($session_account){
+			$fileID = trim($this->uri->segment(3));
+			$this->load->model('question_model');
+			$question_number = $this->question_model->getQuestionNumber($fileID);
+				
+			// get question array
+			$question_arr = $_POST('questionArray');
+			// real question_number in arr is unknown
+			if($question_number == sizeof($question_arr)){
+				for($i = 0; $i < $question_number; $i++){
+				// the sequence of the content
+					$question_arr[$i];
+				}
+			}else{
+				// do nothing	
+			}
+			
 		}
+		
 		$data['quest'] = $this->question_model->getQuestion($fileID);
 
 	}
