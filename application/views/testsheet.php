@@ -99,6 +99,22 @@
     		text-align: right;
     		font-size: 1em;
 	}
+	.editPosition{
+		position: fixed;
+		bottom:5%;
+		right:3%;
+	}
+	.editPosition input{
+		height: 34px;
+		padding: 6px 1em;
+		font-size: 14px;
+		line-height: 1.42857143;
+		color: #555;
+		background-color: #c7c7c7;
+		background-image: none;
+		border: 1px solid #ccc;
+ 		border-radius: 4px;
+	}
 </style>
 <div class="info"><p class="title"><?php echo $info->subject."&nbsp;&nbsp;&nbsp;".$info->professor;?></p></div>
 <div class="info"><p class="detail">
@@ -112,8 +128,13 @@
 		}
 		echo "第".intval($info->timeid%100/10)."次段考";
 	?>
-		     </p></div>
-<input type="button" value="edit" class="edit">
+		     </p>
+</div>
+<?php if($session_account){ ?>
+<div class="editPosition">
+	<input type="button" value="edit" class="edit">
+</div>
+<?php }//end if ?>
 		<?php
 		if($quest[0] != null){
 		 foreach($quest as $rows){?>
@@ -296,6 +317,7 @@ $(".thumb_icon").bind("click", function(){
         });//end ajax
 });
 
+<?php if($session_account){ ?>
 $(".edit").bind("click", function(){
 	if(editing==0)
 	{
@@ -312,16 +334,16 @@ $(".edit").bind("click", function(){
 		var questId=[];
 		$(".questContent").each(function(){
 			questContent.push( $(this).html() );
-		})
+		});
 		$(".questId").each(function(){
 			questId.push( $(this).html() );
-		})
+		});
 		$.ajax({
          		url: '<?=site_url("test/edit_test")?>/<?php echo $this->uri->segment(3);?>',
          		cache: true,
          		dataType: 'html',
          		    type:'POST',
-         		data: {questionArray: questContent, questionid: questionid},
+         		data: {questionArray: questContent, questionid: questId},
          		error: function(xhr) {
          		  alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
          		},
@@ -337,5 +359,6 @@ $(".edit").bind("click", function(){
        		});//end ajax
 	}
 })
+<?php }//end if?>
 </script>
 </div>
