@@ -239,11 +239,12 @@ class Test extends CI_Controller{
 				
 			// get question array
 			$question_arr = $_POST('questionArray');
-			// real question_number in arr is unknown
-			if($question_number == sizeof($question_arr)){
+			$question_id = $_POST('questionid');
+			
+			if($question_number == sizeof($question_id)){
 				for($i = 0; $i < $question_number; $i++){
-				// the sequence of the content
-					$question_arr[$i];
+					$this->question_model->editQuestion($fileID, 
+									$question_id[$i], $i, $question_arr[$i]);
 				}
 			}else{
 				// do nothing	
