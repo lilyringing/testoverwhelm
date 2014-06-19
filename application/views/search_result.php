@@ -41,7 +41,7 @@ if(!isset($_SESSION)){
 
 			<?php if( isset($files) ) {?>
 				<?php if( $files != -1 ){?>
-				<?php foreach ( $files as $element ):?>
+				<?php foreach ( $files as $element ){?>
 				<a href="<?=site_url("/test/testing")?>/<?php echo $element->fileid?>">
 					<div class="rect">
 					<div  class="line">
@@ -63,7 +63,7 @@ if(!isset($_SESSION)){
 					<div class="line"><?php echo $element->professor?></div>
 					</div>
 				</a>
-				<?php endforeach;?>
+				<?php }//endforeach;?>
 			<?php }
 			else
 				echo "<div class='rect'><div class='line'><h2>nothing found</h2></div></div>"?>

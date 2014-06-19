@@ -51,7 +51,7 @@
 		border: 1px solid #ccc;
  		border-radius: 4px;
 	}
-	.ansId, .ansParent, .formBlock{
+	.questId, .ansId, .ansParent, .formBlock{
 		display: none;
 	}
 	.ansChild, .commentChild{
@@ -126,6 +126,7 @@
 				  	echo $quest_modified;
 				?>
 			</div>
+			<div class="questId"><?php echo $rows->questionid ?></div>
 			<!-- print the answers of this question -->
 		<?php if($session_account){ ?>
 			<div  class="ansBlock">
@@ -308,15 +309,19 @@ $(".edit").bind("click", function(){
 	else if (editing ==1 )
 	{
 		var questContent =[];
+		var questId=[];
 		$(".questContent").each(function(){
 			questContent.push( $(this).html() );
+		})
+		$(".questId").each(function(){
+			questId.push( $(this).html() );
 		})
 		$.ajax({
          		url: '<?=site_url()?>',//幫我成正確的controller function name
          		cache: true,
          		dataType: 'html',
          		    type:'POST',
-         		data: {questionArray:questContent},
+         		data: {questionArray: questContent, questionid: questionid},
          		error: function(xhr) {
          		  alert('與伺服器連線失敗');//can be replaced with <div> or whatever to tell user connection error occured
          		},
