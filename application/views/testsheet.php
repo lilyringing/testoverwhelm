@@ -317,7 +317,7 @@ $(".edit").bind("click", function(){
 			questId.push( $(this).html() );
 		})
 		$.ajax({
-         		url: '<?=site_url()?>',//幫我成正確的controller function name
+         		url: '<?=site_url("test/edit_test")?>/<?php echo $this->uri->segment(3);?>',
          		cache: true,
          		dataType: 'html',
          		    type:'POST',
