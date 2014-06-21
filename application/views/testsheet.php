@@ -3,7 +3,6 @@
 		session_start();
 	  }?>
 <?php $session_account = $this->session->userdata('user');
-	$reg = '/[\n\r]+/';
 ?>
 <div class="sheet">
 <style>
@@ -142,9 +141,7 @@
 			<div class="number"><?php echo $rows->number; echo "."; ?></div>
 			<div class="questContent">
 				<?php
-					$quest_modified = html_escape($rows->question);
-					$quest_modified = preg_replace($reg, '<br>', $quest_modified);
-				  	echo $quest_modified;
+					echo $rows->question;
 				?>
 			</div>
 			<div class="questId"><?php echo $rows->questionid ?></div>
@@ -173,8 +170,7 @@
 				  				<img src="<?php echo $pic_path;?>">
 				  			<?php }
 				  				else{
-									$ans_modified = preg_replace($reg, '<br>', $ans->answer);
-				  					echo $ans_modified;
+				  					echo $ans->answer;
 				  				} ?>
 				  			</div>
 				  			<div class="iconBlock">

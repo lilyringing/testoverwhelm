@@ -20,7 +20,7 @@ if(!isset($_SESSION)){
 	.collection{
 		width:100%;
 		height: 100%;
-		overflow: scroll;
+		overflow-y: scroll;
 	}
 	.collection a:link, .collection a:visited{
 		color:gray;

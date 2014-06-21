@@ -145,8 +145,12 @@ class Test extends CI_Controller{
 				{
 					break;
 				}
+
 				//input number and question into database
 				$question = trim($this->input->post("question".$i));
+				$reg = '/[\n\r]+/';//regular expression for 換行
+				$question = html_escape($question);//防止html tag, script
+				$question = preg_replace($reg, '<br>', $question);//換行
 				$this->question_model->uploadQuestion(array( 'fileid' => $fileid, 'question' => $question, 'number' => $number ));
 				$i++;
 			}
@@ -160,11 +164,14 @@ class Test extends CI_Controller{
 		$questionID = trim($this->uri->segment(3));
 
 		$answer1 = trim($this->input->post("content"));
-		$answer = html_escape($answer1);
+
+		$answer = html_escape($answer1);//防止html tag, script
 		if($answer1 != $answer)
 		{
 			redirect('http://www.google.com');
 		}
+		$reg = '/[\n\r]+/';//regular expression for 換行
+		$answer = preg_replace($reg, '<br>', $answer);//換行
 
 		$data = Array('questionid' => $questionID, 'answer' => $answer,
 					  'userid' => $session_account->userid);
@@ -236,22 +243,22 @@ class Test extends CI_Controller{
 			$fileID = trim($this->uri->segment(3));
 			$this->load->model('question_model');
 			$question_number = $this->question_model->getQuestionNumber($fileID);
-				
+
 			// get question array
-			$question_arr = $_POST('questionArray');
-			$question_id = $_POST('questionid');
-			
+			$question_arr = $_POST['questionArray'];
+			$question_id = $_POST['questionid'];
+
 			if($question_number == sizeof($question_id)){
 				for($i = 0; $i < $question_number; $i++){
-					$this->question_model->editQuestion($fileID, 
+					$this->question_model->editQuestion($fileID,
 									$question_id[$i], $i, $question_arr[$i]);
 				}
 			}else{
-				// do nothing	
+				// do nothing
 			}
-			
+
 		}
-		
+
 		$data['quest'] = $this->question_model->getQuestion($fileID);
 
 	}
